@@ -11,7 +11,7 @@
 more to come.
 
 ### Why this project?
-- what are we solving
+- what are we solving? The problem of the lonely online gamer (sorta)
 
 ### Project Methodologies
 - group project
