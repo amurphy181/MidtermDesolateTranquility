@@ -13,17 +13,11 @@ public class UserDAOImpl implements UserDAO {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("VideoStore");
 		EntityManager em = emf.createEntityManager();
 
-		// start the transaction
 		em.getTransaction().begin();
-		// write the customer to the database
 		em.persist(user);
-		// update the "local" Customer object
 		em.flush();
-		// commit the changes (actually perform the operation)
 		em.getTransaction().commit();
-//		em.close();
 		emf.close();
-		// return the Customer object
 		return user;
 	}
 
@@ -35,13 +29,13 @@ public class UserDAOImpl implements UserDAO {
 		em.getTransaction().begin();
 
 		User managed = em.find(User.class, id);
-//		managed.setFirstName(updatedUser.getFirstName());
-//		managed.setLastName(updatedUser.getLastName());
+		
+		managed.setUserName(updatedUser.getUserName());
+		managed.setPassword(updatedUser.getPassword());
 
 		em.flush();
 		em.getTransaction().commit();
 
-//		em.close();
 		emf.close();
 		return managed;
 	}
