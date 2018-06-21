@@ -51,5 +51,12 @@ public class UserDAOImpl implements UserDAO {
 			return false;
 		}
 	  }
+	
+//	@Override
+//	public User findUserByUsername(String userName) {
+//		String query = "select u from User where s.userName = :name";
+//		em
+//		
+//	}
 
 }
