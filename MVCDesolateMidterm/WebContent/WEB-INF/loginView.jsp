@@ -9,8 +9,8 @@
 <title>Who's Playing?</title>
 </head>
 <body>
-<c:if test="${registered != null}">You successfully registered </c:if>
-<form:form action="login.do" modelAttribute="user">
+<c:if test="${added == true}">You successfully registered </c:if>
+<form:form action="login.do" modelAttribute="user" method="POST">
 	<%-- Error messages --%>
 	Username:<form:input path="userName"/>
 	Password:<form:password path="password"/>

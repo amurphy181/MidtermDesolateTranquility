@@ -57,10 +57,10 @@ DROP TABLE IF EXISTS `event` ;
 CREATE TABLE IF NOT EXISTS `event` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `game_id` INT(11) NOT NULL,
-  `start_date` DATETIME NOT NULL,
+  `start_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `creator_id` INT(11) NOT NULL,
-  `status` TINYINT(4) NOT NULL,
-  `location` VARCHAR(45) NOT NULL,
+  `status` TINYINT(4) NOT NULL DEFAULT 1,
+  `location` VARCHAR(45) NULL,
   `visibility` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `FK_GAME_TO_EVENT_idx` (`game_id` ASC),
@@ -206,6 +206,7 @@ START TRANSACTION;
 USE `midtermproject`;
 INSERT INTO `platform` (`id`, `name`) VALUES (1, 'PC');
 INSERT INTO `platform` (`id`, `name`) VALUES (2, 'PS4');
+INSERT INTO `platform` (`id`, `name`) VALUES (3, 'in-Person');
 
 COMMIT;
 
@@ -217,6 +218,18 @@ START TRANSACTION;
 USE `midtermproject`;
 INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (1, 'League of Legends', 1, 5);
 INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (2, 'Call of Duty', 2, 6);
+INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (3, 'Magic the Gathering', 3, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `event`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `midtermproject`;
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, DEFAULT);
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', DEFAULT);
 
 COMMIT;
 

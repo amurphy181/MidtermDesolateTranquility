@@ -2,7 +2,7 @@ package com.skilldistillery.mvcdesolatemidterm.controllers;
 
 import javax.servlet.http.HttpSession;
 
-import org.junit.runner.Request;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -76,14 +76,18 @@ public class UserController {
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;
 	}
-	@RequestMapping(path = "registration.do")
-	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash) {
+	@RequestMapping(path = "registration.do", method = RequestMethod.POST)
+	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (dao.uniqueUsername(user.getUserName())) {
-			mv.addObject("user", user);
+		//	mv.addObject("user", user);
+			session.setAttribute("user", user);
 			dao.create(user);
-			flash.addFlashAttribute("registered", "registered");
-			mv.setViewName("WEB-INF/loginView.jsp");
+			
+			boolean added = true;
+			
+			flash.addFlashAttribute("added", added);
+			mv.setViewName("redirect:welcome.do");
 			
 		} else {
 			error.rejectValue("userName", "error.userName", "error message");

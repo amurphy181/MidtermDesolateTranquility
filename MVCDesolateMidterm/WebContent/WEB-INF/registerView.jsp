@@ -8,7 +8,7 @@
 <title>Registration</title>
 </head>
 <body>
-<form:form action="registration.do" modelAttribute="user">
+<form:form action="registration.do" modelAttribute="user" method="POST">
 	<%-- Error messages --%>
 	Username:<form:input path="userName"/>
 	Password:<form:password path="password"/>
