@@ -1,5 +1,6 @@
 package com.skilldistillery.jpadesolatemidterm.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -42,10 +43,23 @@ class UserTest {
 	public static void tearDownAll() throws Exception {
 		emf.close();
 	}
-
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_user_has_username_and_password() {
+		User user = em.find(User.class, 1);
+		assertEquals("PurpleFuzz", user.getUserName());
+		assertEquals("password", user.getPassword());
 	}
-
+	
+	@Test
+	void test_user_can_add_event() {
+		User user = em.find(User.class, 1);
+		Event event = new Event();
+		event.setGame(em.find(Game.class, 1));
+		user.addEvent(event);
+		
+		assertEquals(1, event.getUsers().size());
+		assertEquals("League of Legends", event.getGame().getTitle());
+	}
+	
 }
