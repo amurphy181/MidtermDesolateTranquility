@@ -45,6 +45,8 @@ public class UserController {
 				loggedIn = true;
 				session.setAttribute("loggedIn", loggedIn);
 				session.setAttribute("user", user);
+				List<Event> eventList = dao.listAllEvents();
+				session.setAttribute("events", eventList);
 				mv.setViewName("WEB-INF/landingPage.jsp");
 			} else {
 				error.rejectValue("password", "error.password", "error message");
@@ -76,6 +78,12 @@ public class UserController {
 		User user = new User();
 		List<Event> eventList = dao.listAllEvents();
 		mv.addObject("events", eventList);
+		if(eventList == null) {
+			System.out.println("event list is null");
+		} else {
+			System.out.println("it went on through");
+		}
+		System.out.println(eventList);
 		mv.addObject("user", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;

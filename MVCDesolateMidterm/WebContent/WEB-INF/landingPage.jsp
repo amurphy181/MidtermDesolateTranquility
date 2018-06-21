@@ -11,7 +11,7 @@
 <body>
 	<h1>Success</h1>
 
-	<c:forEach items="${events }" var="event">
+	<c:forEach items="${events }" var="events">
 		<br>
 		${event.location }<br>
 		${event.game.title}<br>
