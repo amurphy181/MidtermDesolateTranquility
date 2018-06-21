@@ -13,7 +13,8 @@
 	<form:input path="userName"/>
 	<form:password path="password"/>
 	<input type="submit" value="Log In" > <br>
-	<form:errors path="password">Incorrect Username or Password</form:errors>
+	<form:errors path="password">Incorrect Password</form:errors>
+	<form:errors path="userName">Username not found</form:errors>
 </form:form>
 
 <a href="register.do">Register</a>

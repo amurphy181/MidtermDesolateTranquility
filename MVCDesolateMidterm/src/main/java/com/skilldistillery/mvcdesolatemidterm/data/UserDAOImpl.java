@@ -1,14 +1,13 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
@@ -53,11 +52,16 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public User findUserByUsername(String userName) {
-		String query = "select u from User where s.userName = :name";
-		User user = em.createQuery(query, User.class).setParameter("name", userName).getSingleResult();
+		String query = "select u from User u";
+		User confirmed = null;
+		List<User> allUsers = em.createQuery(query, User.class).getResultList();
+		for (User user : allUsers) {
+			if (user.getUserName().equals(userName)) {
+				confirmed = user;
+			}
+		}
 		
-		
-		return user;
+		return confirmed;
 	}
 
 }
