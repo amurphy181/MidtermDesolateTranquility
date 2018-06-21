@@ -2,10 +2,12 @@ package com.skilldistillery.mvcdesolatemidterm.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpadesolatemidterm.entities.User;
@@ -29,7 +31,7 @@ public class UserController {
 		return mv;
 	}
 
-	@RequestMapping(path = "login.do")
+	@RequestMapping(path = "login.do", method= RequestMethod.POST)
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
 		ModelAndView mv = new ModelAndView();
 		if (dao.passwordConfirmation(user, user.getPassword())) {
@@ -42,10 +44,8 @@ public class UserController {
 
 			}
 		} else {
-			if (user == null) {
 				error.rejectValue("password", "error.password", "error message");
-			}
-			mv.setViewName("login.jsp");
+				mv.setViewName("login.jsp");
 		}
 
 		return mv;
