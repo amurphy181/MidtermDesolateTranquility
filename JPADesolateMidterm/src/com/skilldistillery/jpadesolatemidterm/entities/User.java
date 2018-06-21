@@ -1,17 +1,95 @@
 package com.skilldistillery.jpadesolatemidterm.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class User {
 	
+	
+	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private int id;
+	@Column(name="name")
+	private String userName;
+	private String password;
+	
+	@ManyToMany
+	@JoinTable(name = "user_game", 
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "game_id"))
+	private List<Game> games;
+	
+	@JoinTable(name = "user_event", 
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private List<Event> events;
+	
+	
+	
+	
+	
+	//add and remove methods
+	
+	public void addEvent(Event event) {
+		if(events == null) events = new ArrayList<>();
+		
+		if(!events.contains(event)) {
+			events.add(event);
+			event.addUser(this);
+		}
+	}
+	
+	public void removeEvent(Event event) {
+		if(events != null && events.contains(event)) {
+			events.remove(event);
+			event.removeUser(this);
+		}
+	}
+	
+	public void addGame(Game game) {
+		if(games == null) games = new ArrayList<>();
+		
+		if(!games.contains(game)) {
+			games.add(game);
+			game.addUser(this);
+		}
+	}
+	
+	public void removeGame(Game game) {
+		if(games != null && games.contains(game)) {
+			games.remove(game);
+			game.removeUser(this);
+		}
+	}
+	
+	
+	
+	
+	
+	
+
+	
+	// User entity getters and setters
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public int getId() {
+		return id;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,31 +123,21 @@ public class User {
 			return false;
 		return true;
 	}
-	@Column(name="name")
-	private String userName;
-	
-	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", games=");
+		builder.append(games);
+		builder.append("]");
+		return builder.toString();
 	}
+
 	
-	// User entity getters and setters
-	
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public int getId() {
-		return id;
-	}
-	private String password;
+
 }
