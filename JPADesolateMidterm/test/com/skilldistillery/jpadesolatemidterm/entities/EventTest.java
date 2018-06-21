@@ -28,7 +28,7 @@ class EventTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		em = emf.createEntityManager();
-		event = em.find(Event.class, 1);
+//		event = em.find(Event.class, 1);
 		
 	}
 
@@ -42,10 +42,52 @@ class EventTest {
 	public static void tearDownAll() throws Exception {
 		emf.close();
 	}
-
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_event_has_users_and_game() {
+		Event event = new Event();
+		User user = em.find(User.class, 1);
+		User user2 = em.find(User.class, 2);
+		Game game = em.find(Game.class, 1);
+		user.addEvent(event);
+		user.addGame(game);
+		event.addUser(user);
+		event.addUser(user2);
+		event.setGame(game);
+		assertEquals(2, event.getUsers().size());
+		assertEquals("League of Legends", event.getGame().getTitle());
+	}
+	
+	@Test
+	void test_event_has_location() {
+		Event event = new Event();
+		User user = em.find(User.class, 1);
+		User user2 = em.find(User.class, 2);
+		Game game = em.find(Game.class, 1);
+		user.addEvent(event);
+		user.addGame(game);
+		event.addUser(user);
+		event.addUser(user2);
+		event.setGame(game);
+		event.setLocation("right here");
+		
+		assertEquals("right here", event.getLocation());
+	}
+	
+	@Test
+	void test_event_has_visibility() {
+		Event event = new Event();
+		User user = em.find(User.class, 1);
+		User user2 = em.find(User.class, 2);
+		Game game = em.find(Game.class, 1);
+		user.addEvent(event);
+		user.addGame(game);
+		event.addUser(user);
+		event.addUser(user2);
+		event.setGame(game);
+		event.setVisibility(1);
+		
+		assertEquals(1, event.getVisibility());
 	}
 
 }
