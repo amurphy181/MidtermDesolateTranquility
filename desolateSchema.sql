@@ -50,6 +50,21 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `event`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `event` ;
@@ -64,26 +79,17 @@ CREATE TABLE IF NOT EXISTS `event` (
   `visibility` TINYINT(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `FK_GAME_TO_EVENT_idx` (`game_id` ASC),
+  INDEX `FK_EVENT_TO_CREATOR_ID_idx` (`creator_id` ASC),
   CONSTRAINT `FK_GAME_TO_EVENT`
     FOREIGN KEY (`game_id`)
     REFERENCES `game` (`id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_EVENT_TO_CREATOR_ID`
+    FOREIGN KEY (`creator_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user` ;
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -224,17 +230,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `event`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `midtermproject`;
-INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, DEFAULT);
-INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', DEFAULT);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -242,5 +237,16 @@ USE `midtermproject`;
 INSERT INTO `user` (`id`, `name`, `password`) VALUES (1, 'PurpleFuzz', 'password');
 INSERT INTO `user` (`id`, `name`, `password`) VALUES (2, 'JGMoney', 'password');
 INSERT INTO `user` (`id`, `name`, `password`) VALUES (3, 'ASauceyBoy', 'password');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `event`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `midtermproject`;
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, DEFAULT);
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', DEFAULT);
 
 COMMIT;
