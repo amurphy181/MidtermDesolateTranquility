@@ -17,11 +17,11 @@ public class Event {
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "game")
+	@JoinColumn(name = "game_id")
 	private Game game;
 	
 	
-	@ManyToMany(mappedBy = "user")
+	@ManyToMany(mappedBy = "events")
 	private List<User> users;
 	
 	

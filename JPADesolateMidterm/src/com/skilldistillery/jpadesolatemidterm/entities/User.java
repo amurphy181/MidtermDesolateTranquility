@@ -3,6 +3,8 @@ package com.skilldistillery.jpadesolatemidterm.entities;
 import javax.persistence.*;
 import java.util.*;
 
+import com.skilldistillery.jpadesolatemidterm.entities.*;
+
 @Entity
 public class User {
 	
@@ -21,6 +23,7 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "game_id"))
 	private List<Game> games;
 	
+	@ManyToMany
 	@JoinTable(name = "user_event", 
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "event_id"))

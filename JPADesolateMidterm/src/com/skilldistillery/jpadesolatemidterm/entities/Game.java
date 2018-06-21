@@ -14,7 +14,7 @@ public class Game {
 	private int maxPlayers;
 	
 	@ManyToOne
-	@JoinColumn(name = "platform")
+	@JoinColumn(name = "platform_id")
 	private Platform platform;
 
 	@ManyToMany(mappedBy = "games")
