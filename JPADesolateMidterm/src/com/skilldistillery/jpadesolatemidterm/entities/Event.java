@@ -16,7 +16,12 @@ public class Event {
 	private int visibility;
 	
 	
-	@ManyToMany(mappedBy = "user")
+	@ManyToOne
+	@JoinColumn(name = "game_id")
+	private Game game;
+	
+	
+	@ManyToMany(mappedBy = "events")
 	private List<User> users;
 	
 	
@@ -79,6 +84,14 @@ public void setUsers(List<User> users) {
 
 public String getId() {
 	return id;
+}
+
+public Game getGame() {
+	return game;
+}
+
+public void setGame(Game game) {
+	this.game = game;
 }
 
 @Override

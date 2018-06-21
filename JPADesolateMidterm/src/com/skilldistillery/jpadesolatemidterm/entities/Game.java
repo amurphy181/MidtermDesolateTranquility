@@ -5,72 +5,112 @@ import java.util.*;
 
 @Entity
 public class Game {
-	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int id;
 	private String title;
-	@Column(name="max_players")
-	private int maxPlayers;	
+	@Column(name = "max_players")
+	private int maxPlayers;
+	
 	@ManyToOne
-	@JoinColumn(name="platform")
+	@JoinColumn(name = "platform_id")
 	private Platform platform;
-	
-	@ManyToMany(mappedBy="games")
+
+	@ManyToMany(mappedBy = "games")
 	private List<User> users;
+
+	@OneToMany(mappedBy = "game")
+	private List<Event> events;
+
+	// add and remove users
+
+	public void addEvent(Event event) {
+		if (events == null)
+			events = new ArrayList<>();
+
+		if (!events.contains(event)) {
+			events.add(event);
+			if (event.getGame() != null) {
+				event.getGame().getEvents().remove(event);
+			}
+			event.setGame(this);
+		}
+	}
 	
-	@OneToMany(mappedBy="event")
-	private List<Game> games;
-	
-	
-	
-	//add and remove users
-	
-	
+	public void removeEvent(Event event) {
+		event.setGame(null);
+		if(events != null) {
+			events.remove(event);
+		}
+	}
+
 	public void addUser(User user) {
-		if(users == null) users = new ArrayList<>();
-		
-		if(!users.contains(user)) {
+		if (users == null)
+			users = new ArrayList<>();
+
+		if (!users.contains(user)) {
 			users.add(user);
 			user.addGame(this);
 		}
 	}
-	
+
 	public void removeUser(User user) {
-		if(users != null && users.contains(user)) {
+		if (users != null && users.contains(user)) {
 			users.remove(user);
 			user.removeGame(this);
 		}
 	}
-	
-	
-	
-	//getters and setters
-	
-	
+
+	// getters and setters
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public int getMaxPlayers() {
 		return maxPlayers;
 	}
+
 	public void setMaxPlayers(int maxPlayers) {
 		this.maxPlayers = maxPlayers;
 	}
+
 	public Platform getPlatform() {
 		return platform;
 	}
+
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
 	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
-	
-	//hash
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	// hash
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -81,8 +121,8 @@ public class Game {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-	
-	//equals
+
+	// equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,8 +148,8 @@ public class Game {
 			return false;
 		return true;
 	}
-	
-	//toString
+
+	// toString
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -124,5 +164,5 @@ public class Game {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

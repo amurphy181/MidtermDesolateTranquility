@@ -8,6 +8,15 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
+
+    <class>com.skilldistillery.jpadesolatemidterm.entities.Event</class>
+    <class>com.skilldistillery.jpadesolatemidterm.entities.Game</class>
+    <class>com.skilldistillery.jpadesolatemidterm.entities.Message</class>
+    <class>com.skilldistillery.jpadesolatemidterm.entities.Platform</class>
+    <class>com.skilldistillery.jpadesolatemidterm.entities.User</class>
+
+
+
     <properties>
       <property name="javax.persistence.jdbc.url"
         value="jdbc:mysql://localhost:3306/midtermproject" />
