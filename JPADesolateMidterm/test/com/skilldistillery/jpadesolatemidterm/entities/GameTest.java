@@ -38,6 +38,14 @@ public class GameTest {
 		assertEquals(5, game.getPlatform().getGames().get(0).getMaxPlayers());
 		
 	}
+	@Test
+	void test_game_to_users_many_to_many_mappings() {
+		Game game = em.find(Game.class, 1);
+		
+		User u = new User();
+		assertEquals(5, game.getPlatform().getGames().get(0).getMaxPlayers());
+		
+	}
 //	@Test
 //	void test_createActorAndFilm_persist() {
 //		Actor a = new Actor();
