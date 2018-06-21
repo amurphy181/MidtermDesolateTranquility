@@ -10,7 +10,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User create(User user) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("VideoStore");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesolateMidterm");
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User update(int id, User updatedUser) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("VideoStore");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesolateMidterm");
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
