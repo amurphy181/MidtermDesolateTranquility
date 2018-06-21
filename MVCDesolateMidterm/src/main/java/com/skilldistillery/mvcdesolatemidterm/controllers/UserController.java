@@ -31,19 +31,19 @@ public class UserController {
 	@RequestMapping(path="login.do")
 	public ModelAndView loginMethod(String userName, String password, HttpSession session, Errors error) {
 		ModelAndView mv = new ModelAndView();
-		dao.
+		User user = dao.findUserByUsername(userName);
 		if (dao.passwordConfirmation(user, password)) {
 			mv.setViewName("WEB-INF/landingPage.jsp");		
 			User u = new User();
 		}
-		if (u != null && error.getErrorCount() == 0) {
+		if (user != null && error.getErrorCount() == 0) {
 			loggedIn = true;
 			session.setAttribute("loggedIn", loggedIn);
-			session.setAttribute("user", u);
+			session.setAttribute("user", user);
 			mv.setViewName("redirect:account.do");
 
 		} else {
-			if (u == null) {
+			if (user == null) {
 				error.rejectValue("password", "error.password", "error message");
 			}
 			mv.setViewName("login.jsp");
