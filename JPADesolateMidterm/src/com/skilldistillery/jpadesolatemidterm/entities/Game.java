@@ -159,8 +159,6 @@ public class Game {
 		builder.append(title);
 		builder.append(", maxPlayers=");
 		builder.append(maxPlayers);
-		builder.append(", platform=");
-		builder.append(platform);
 		builder.append("]");
 		return builder.toString();
 	}
