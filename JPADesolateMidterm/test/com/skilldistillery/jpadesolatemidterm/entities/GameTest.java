@@ -43,7 +43,30 @@ public class GameTest {
 		Game game = em.find(Game.class, 1);
 		
 		User u = new User();
-		assertEquals(5, game.getPlatform().getGames().get(0).getMaxPlayers());
+		u.setUserName("abc");
+		u.setPassword("boogie");	
+		
+		Event event = new Event();		
+		
+		Game newGame = new Game();
+		Platform platform = new Platform();
+		
+		event.setGame(game);
+		event.addUser(u);
+			
+		newGame.addUser(u);
+		
+		platform.setPlatformName("Test Platform");
+		platform.addGame(newGame);
+		
+		newGame.setMaxPlayers(2);
+		newGame.setTitle("Test Title");
+		newGame.setPlatform(platform);
+		assertEquals("Test Platform", newGame.getPlatform().getPlatformName());
+		assertEquals(2, newGame.getMaxPlayers());
+		assertEquals("abc", newGame.getUsers().get(0).getUserName());
+		assertEquals("League of Legends", event.getGame().getTitle());
+		assertEquals("League of Legends", game.getEvents().get(0).getGame().getTitle());
 		
 	}
 //	@Test
