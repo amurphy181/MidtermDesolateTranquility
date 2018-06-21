@@ -14,6 +14,10 @@ public class Event {
 	private int status;
 	private String location;
 	private int visibility;
+	
+	@ManyToOne
+	@JoinColumn(name="creator_id")
+	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "game_id")

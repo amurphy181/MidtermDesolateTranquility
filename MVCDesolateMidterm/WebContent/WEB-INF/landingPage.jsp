@@ -11,14 +11,15 @@
 <body>
 	<h1>Success</h1>
 
-	<c:forEach items="${events }" var="events">
+	<c:forEach items="${events }" var="event">
 		<br>
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
+		
 		<br>
 		<c:forEach items="${event.users }" var="user">
-		${event.users.name }
+		${user.userName }
 		</c:forEach>
 	</c:forEach>
 
