@@ -8,11 +8,11 @@
 <title>Registration</title>
 </head>
 <body>
-<form:form action="login.do" modelAttribute="user">
+<form:form action="registration.do" modelAttribute="user">
 	<%-- Error messages --%>
-	<form:input path="userName"/>
-	<form:password path="password"/>
-	<input type="submit" value="Log In" > <br>
+	Username:<form:input path="userName"/>
+	Password:<form:password path="password"/>
+	<input type="submit" value="Create Account" > <br>
 	<form:errors path="userName">Please select a unique Username</form:errors>
 </form:form>
 </body>

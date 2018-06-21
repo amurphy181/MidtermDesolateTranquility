@@ -24,7 +24,20 @@ public class UserDAOImpl implements UserDAO {
 		em.flush();
 		return user;
 	}
+	@Override
+	public boolean uniqueUsername(String userName) {
+		String query = "select u from User u";
+		boolean unique = true;
+		List<User> allUsers = em.createQuery(query, User.class).getResultList();
+		for (User user : allUsers) {
+			if(user.getUserName().equals(userName)) {
+				unique = false;
+			}
+		}
+		return unique;
+	}
 
+	
 	@Override
 	public User update(int id, User updatedUser) {
 

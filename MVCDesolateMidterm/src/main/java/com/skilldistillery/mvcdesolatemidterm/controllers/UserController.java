@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
@@ -61,14 +62,33 @@ public class UserController {
 	@RequestMapping(path = "register.do")
 	public ModelAndView registerMethodView() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("WEB-INF/registerPage.jsp");
+		User user = new User();
+		mv.addObject("user", user);
+		mv.setViewName("WEB-INF/registerView.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "landingPage.do")
 	public ModelAndView landingPageView() {
 		ModelAndView mv = new ModelAndView();
+		User user = new User();
+		mv.addObject("user", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
+		return mv;
+	}
+	@RequestMapping(path = "registration.do")
+	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash) {
+		ModelAndView mv = new ModelAndView();
+		if (dao.uniqueUsername(user.getUserName())) {
+			mv.addObject("user", user);
+			dao.create(user);
+			flash.addFlashAttribute("registered", "registered");
+			mv.setViewName("WEB-INF/loginView.jsp");
+			
+		} else {
+			error.rejectValue("userName", "error.userName", "error message");
+			mv.setViewName("WEB-INF/registerView.jsp");
+		}
 		return mv;
 	}
 

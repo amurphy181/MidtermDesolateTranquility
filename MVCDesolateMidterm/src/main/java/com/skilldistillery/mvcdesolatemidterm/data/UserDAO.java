@@ -8,5 +8,6 @@ public interface UserDAO {
 	public User update(int id, User user);
 	public boolean passwordConfirmation(User user, String password);
 	public User findUserByUsername(String userName);
+	boolean uniqueUsername(String userName);
 
 }
