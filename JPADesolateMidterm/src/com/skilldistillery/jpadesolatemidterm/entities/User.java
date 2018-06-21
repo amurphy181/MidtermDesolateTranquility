@@ -3,7 +3,6 @@ package com.skilldistillery.jpadesolatemidterm.entities;
 import javax.persistence.*;
 import java.util.*;
 
-import com.skilldistillery.jpadesolatemidterm.entities.*;
 
 @Entity
 public class User {
