@@ -40,4 +40,16 @@ public class UserDAOImpl implements UserDAO {
 		return managed;
 	}
 
+	@Override
+	public boolean passwordConfirmation(User user, String password) {
+		
+		String properPassword = user.getPassword();
+		
+		if (properPassword.equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	  }
+
 }
