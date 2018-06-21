@@ -29,6 +29,10 @@ public class UserDAOImpl implements UserDAO {
 	public List<Event> listAllEvents() {
 		String query = "select e from Event e";
 		List<Event> eventList = em.createQuery(query, Event.class).getResultList();	
+		for (Event event : eventList) {
+			System.out.println(event);
+		}
+		
 		return eventList;
 	}
 	@Override
