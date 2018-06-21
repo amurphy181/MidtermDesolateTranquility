@@ -1,4 +1,4 @@
-package com.skilldistillery.jpadesolatemidterm.data;
+package com.skilldistillery.mvcdesolatemidterm.data;
 
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 

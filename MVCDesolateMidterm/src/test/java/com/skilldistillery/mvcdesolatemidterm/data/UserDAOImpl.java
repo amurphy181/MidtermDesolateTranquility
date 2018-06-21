@@ -1,4 +1,4 @@
-package com.skilldistillery.jpadesolatemidterm.data;
+package com.skilldistillery.mvcdesolatemidterm.data;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
