@@ -1,5 +1,8 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.List;
+
+import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 public interface UserDAO {
@@ -9,5 +12,6 @@ public interface UserDAO {
 	public boolean passwordConfirmation(User user, String password);
 	public User findUserByUsername(String userName);
 	boolean uniqueUsername(String userName);
+	List<Event> listAllEvents();
 
 }

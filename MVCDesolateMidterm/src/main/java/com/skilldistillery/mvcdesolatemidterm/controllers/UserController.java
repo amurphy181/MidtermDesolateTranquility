@@ -1,8 +1,9 @@
 package com.skilldistillery.mvcdesolatemidterm.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
@@ -72,6 +74,8 @@ public class UserController {
 	public ModelAndView landingPageView() {
 		ModelAndView mv = new ModelAndView();
 		User user = new User();
+		List<Event> eventList = dao.listAllEvents();
+		mv.addObject("events", eventList);
 		mv.addObject("user", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;

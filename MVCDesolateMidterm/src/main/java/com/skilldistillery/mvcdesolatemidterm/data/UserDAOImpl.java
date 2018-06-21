@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
@@ -23,6 +24,12 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(user);
 		em.flush();
 		return user;
+	}
+	@Override
+	public List<Event> listAllEvents() {
+		String query = "select e from Event e";
+		List<Event> eventList = em.createQuery(query, Event.class).getResultList();	
+		return eventList;
 	}
 	@Override
 	public boolean uniqueUsername(String userName) {
