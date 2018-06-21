@@ -109,8 +109,6 @@ public class Platform {
 		builder.append(id);
 		builder.append(", platformName=");
 		builder.append(platformName);
-		builder.append(", games=");
-		builder.append(games);
 		builder.append("]");
 		return builder.toString();
 	}
