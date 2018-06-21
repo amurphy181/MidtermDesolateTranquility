@@ -29,7 +29,7 @@ public class User {
 	private List<Event> events;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Event> userEvents;
+	private List<Event> createdEvents;
 	
 	
 	
@@ -37,6 +37,27 @@ public class User {
 	
 	
 	//add and remove methods
+	
+	public void addCreatedEvent(Event event) {
+		if (createdEvents == null)
+			createdEvents = new ArrayList<>();
+
+		if (!createdEvents.contains(event)) {
+			createdEvents.add(event);
+			if (event.getGame() != null) {
+				event.getGame().getEvents().remove(event);
+			}
+			event.setUser(this);
+		}
+	}
+	
+	public void removeCreatedEvent(Event event) {
+		event.setUser(null);
+		if(createdEvents != null) {
+			createdEvents.remove(event);
+		}
+	}
+	
 	
 	public void addEvent(Event event) {
 		if(events == null) events = new ArrayList<>();
@@ -47,6 +68,30 @@ public class User {
 		}
 	}
 	
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public List<Event> getCreatedEvents() {
+		return createdEvents;
+	}
+
+	public void setCreatedEvents(List<Event> userEvents) {
+		this.createdEvents = userEvents;
+	}
+
 	public void removeEvent(Event event) {
 		if(events != null && events.contains(event)) {
 			events.remove(event);
