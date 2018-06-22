@@ -14,15 +14,21 @@
 <body>
 
 	<!-- cycle through the events and be able to link over to the page in order to delete -->
-	
-	
+
+
 	<c:forEach items="${events }" var="event">
 		<br>
 		<a href="getEventId.do?fid=${event.id }">Status: ${event.status }</a>
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
+		${event.status }
 		<%-- ${event.users.userName }<br> --%>
+		<form:form action="deactivateEvent.do" method="POST"
+			modelAttribute="event">
+			<input type="submit" value="Deactivate Event" />
+			<form:hidden path="id" />
+		</form:form>
 
 		<br>
 		<c:forEach items="${event.users }" var="user">

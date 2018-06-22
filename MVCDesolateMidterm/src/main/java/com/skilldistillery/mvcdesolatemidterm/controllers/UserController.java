@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
+import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
+import com.skilldistillery.mvcdesolatemidterm.data.EventDAOImpl;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 
@@ -22,8 +25,24 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao = new UserDAOImpl();
+	EventDAO eventDAO = new EventDAOImpl();
 	private boolean loggedIn;
+	
+	// these next couple of methods need to be moved over to the event controller
+	
+	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
+	public ModelAndView deleteJobApp(int id) {
+		ModelAndView mv = new ModelAndView();
 
+		eventDAO.deactivateEvent(id);
+
+		mv.setViewName("redirect:adminPage.do");
+
+		return mv;
+	}
+	
+	
+	// user controllers follow
 	@RequestMapping(path = "welcome.do")
 	public ModelAndView loginView() {
 		ModelAndView mv = new ModelAndView();
