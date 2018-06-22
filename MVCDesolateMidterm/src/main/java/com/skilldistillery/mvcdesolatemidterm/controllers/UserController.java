@@ -25,19 +25,24 @@ import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 public class UserController {
 
 	@Autowired
-	UserDAO dao = new UserDAOImpl();
-	EventDAO eventDAO = new EventDAOImpl();
+	private UserDAO dao;
+	@Autowired
+	private EventDAO eventDAO;
+	
+	// you have the session to check for this
 	private boolean loggedIn;
 	
 	// these next couple of methods need to be moved over to the event controller
 	
 	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView deleteJobApp(@ModelAttribute("id") int id) {
+	public ModelAndView deactivateEvent(int id) {
 		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("**************" + id);
 
 		eventDAO.deactivateEvent(id);
 
-		mv.setViewName("redirect:adminPage.do");
+		mv.setViewName("WEB-INF/adminPage.jsp");
 
 		return mv;
 	}

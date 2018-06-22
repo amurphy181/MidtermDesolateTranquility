@@ -24,11 +24,10 @@
 		${event.game.platform }<br>
 		${event.status }
 		<%-- ${event.users.userName }<br> --%>
-		<form:form action="deactivateEvent.do" method="POST"
-			modelAttribute="id">
+		<form action="deactivateEvent.do" method="POST">
 			<input type="submit" value="Deactivate Event" />
-			<form:hidden path="id" />
-		</form:form>
+			<input type="hidden" name="id" value="${event.id }"/>
+		</form>
 
 		<br>
 		<c:forEach items="${event.users }" var="user">

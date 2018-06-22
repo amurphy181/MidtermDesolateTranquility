@@ -104,6 +104,7 @@ public class EventDAOImpl implements EventDAO {
 	
 	@Override
 	public boolean deactivateEvent(int id) {
+		System.out.println("+++++++++++" + id);
 		Event eventToDeactivate = em.find(Event.class, id);
 		System.out.println("ID: " + id);
 		eventToDeactivate.setStatus(0);
