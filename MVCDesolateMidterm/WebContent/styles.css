@@ -1,0 +1,41 @@
+
+body{
+	background-color: rgb(50, 50, 220);
+    font-size: 125%;
+
+}
+
+
+h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+}
+
+p  {
+    color: red;
+    font-family: courier;
+    font-size: 160%;
+}
+
+.button {
+   color: black;
+}
+
+div {
+	
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 150%;
+  color: ghostwhite;
+  text-align:center;
+    	
+}
+
+input{
+	width: 200px;
+}
+
+
