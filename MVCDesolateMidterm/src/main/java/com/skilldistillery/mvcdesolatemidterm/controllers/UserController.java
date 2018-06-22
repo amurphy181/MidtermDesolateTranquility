@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ public class UserController {
 	// these next couple of methods need to be moved over to the event controller
 	
 	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView deleteJobApp(int id) {
+	public ModelAndView deleteJobApp(@ModelAttribute("id") int id) {
 		ModelAndView mv = new ModelAndView();
 
 		eventDAO.deactivateEvent(id);

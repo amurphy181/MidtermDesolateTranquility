@@ -25,7 +25,7 @@
 		${event.status }
 		<%-- ${event.users.userName }<br> --%>
 		<form:form action="deactivateEvent.do" method="POST"
-			modelAttribute="event">
+			modelAttribute="id">
 			<input type="submit" value="Deactivate Event" />
 			<form:hidden path="id" />
 		</form:form>
