@@ -51,7 +51,7 @@ class EventTest {
 		Game game = em.find(Game.class, 1);
 		user.addEvent(event);
 		user.addGame(game);
-		event.addUser(user);
+		event.setCreator(user);
 		event.addUser(user2);
 		event.setGame(game);
 		assertEquals(2, event.getUsers().size());
@@ -66,7 +66,7 @@ class EventTest {
 		Game game = em.find(Game.class, 1);
 		user.addEvent(event);
 		user.addGame(game);
-		event.addUser(user);
+		event.setCreator(user);
 		event.addUser(user2);
 		event.setGame(game);
 		event.setLocation("right here");
@@ -82,7 +82,7 @@ class EventTest {
 		Game game = em.find(Game.class, 1);
 		user.addEvent(event);
 		user.addGame(game);
-		event.addUser(user);
+		event.setCreator(user);
 		event.addUser(user2);
 		event.setGame(game);
 		event.setVisibility(1);
