@@ -18,6 +18,8 @@ public class Event {
 	@ManyToOne
 	@JoinColumn(name="creator_id")
 	private User user;
+	
+	// many to one user fix
 
 	public User getUser() {
 		return user;
