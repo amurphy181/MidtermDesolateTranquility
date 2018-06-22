@@ -27,6 +27,7 @@ public class EventDAOImpl implements EventDAO {
 		em.flush();
 		return event;
 	}
+	
 	@Override
 	public Platform createPlatform(Platform platform) {
 		

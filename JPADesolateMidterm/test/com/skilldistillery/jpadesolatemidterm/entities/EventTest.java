@@ -105,5 +105,21 @@ class EventTest {
 		assertEquals("PurpleFuzz", event.getCreator().getUserName());
 		assertEquals(2, event.getUsers().size());
 	}
+	
+	@Test
+	void test_event_platform_is_unique() {
+		Event event = new Event();
+		User user = em.find(User.class, 1);
+		User user2 = em.find(User.class, 2);
+		Game game = em.find(Game.class, 1);
+		user.addEvent(event);
+		user.addGame(game);
+		event.setCreator(user);
+		event.addUser(user2);
+		event.setGame(game);
+		
+		assertEquals("PC", event.getGame().getPlatform().getPlatformName());
+		assertNotEquals("Xbox", event.getGame().getPlatform().getPlatformName());
+	}
 
 }
