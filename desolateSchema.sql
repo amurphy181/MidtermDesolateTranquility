@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
+  `admin` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
@@ -234,9 +235,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`) VALUES (1, 'PurpleFuzz', 'password');
-INSERT INTO `user` (`id`, `name`, `password`) VALUES (2, 'JGMoney', 'password');
-INSERT INTO `user` (`id`, `name`, `password`) VALUES (3, 'ASauceyBoy', 'password');
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (1, 'PurpleFuzz', 'password', DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (2, 'JGMoney', 'password', DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (3, 'ASauceyBoy', 'password', DEFAULT);
 
 COMMIT;
 
