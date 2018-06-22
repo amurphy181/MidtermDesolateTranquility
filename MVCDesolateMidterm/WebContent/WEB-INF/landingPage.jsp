@@ -39,7 +39,7 @@
 <form action="createEvent.do" method="POST">
 	<%-- Error messages --%>
 	Game:<input name="game"/>
-	Platform:<input name = "platform"/>
+	Platform:<input name = "platform" value= "${platform.id }"/>
 	Location:<input name="location"/>
 	<input type = "hidden" name = "id" value = "${user.id }">
 	<input type="submit" value="Add Event" > <br>
