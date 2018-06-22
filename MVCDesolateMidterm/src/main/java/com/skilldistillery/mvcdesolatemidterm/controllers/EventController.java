@@ -1,5 +1,7 @@
 package com.skilldistillery.mvcdesolatemidterm.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +32,14 @@ public class EventController {
 		User creator = daoUser.findUserByUserID(id);
 		Platform eventPlatform = daoEvent.checkPlatformUnique(platform);
 		daoEvent.createPlatform(eventPlatform);
+		System.out.println("platform was created");
 		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
 		daoEvent.createGame(eventGame);
 		Event createdEvent = new Event();
 		createdEvent.setGame(eventGame);
 		createdEvent.setLocation(location);
 		createdEvent.setCreator(creator);
+		createdEvent.setStartDate(new Date());
 		daoEvent.createEvent(createdEvent);
 		
 		mv.setViewName("redirect:landingPage.do");

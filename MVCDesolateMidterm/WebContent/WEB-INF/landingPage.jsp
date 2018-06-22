@@ -8,20 +8,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Games List</title>
 </head>
 <body>
 	<h1>Success</h1>
 	
 	<!-- testing to see if the user is an administrator -->
-	<c:if test="${user.admin == 1}">
+	<c:if test="${userCurrent.admin == 1}">
 		<h3>Current user is admin</h3>
 	</c:if>
-	<c:if test="${user.admin == 0 }">
+	<c:if test="${userCurrent.admin == 0 }">
 		<h3>Current user is not the admin</h3>
 	</c:if>
 	
-	<p>The current user is: ${user }</p>
+	<p>The current user is: ${userCurrent }</p>
 
 	<c:forEach items="${events }" var="event">
 		<br>
@@ -41,8 +41,10 @@
 	Game:<input name="game"/>
 	Platform:<input name = "platform" value= "${platform.id }"/>
 	Location:<input name="location"/>
-	<input type = "hidden" name = "id" value = "${user.id }">
+	<input type = "hidden" name = "id" value = "${userCurrent.id }">
 	<input type="submit" value="Add Event" > <br>
 </form>
+
+<a href="welcome.do">Home</a>
 </body>
 </html>

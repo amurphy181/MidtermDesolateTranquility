@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
+import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
 @Component
@@ -29,18 +30,20 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public Platform createPlatform(Platform platform) {
-
+		if (em.find(Platform.class, platform.getId()) == null) {
 		em.persist(platform);
 		em.flush();
+		}
 
 		return platform;
 	}
 
 	@Override
 	public Game createGame(Game game) {
-
-		em.persist(game);
-		em.flush();
+		if (em.find(Game.class, game.getId()) == null) {
+			em.persist(game);
+			em.flush();
+		}
 
 		return game;
 	}
@@ -52,8 +55,9 @@ public class EventDAOImpl implements EventDAO {
 		List<Game> gameList = em.createQuery(query, Game.class).getResultList();
 		for (Game currentGame : gameList) {
 			if (currentGame.getTitle().equals(game)) {
-				checkGame = currentGame;
-				checkGame.setPlatform(platform);
+				checkGame = em.find(Game.class, currentGame.getId());
+				checkGame.setPlatform(em.find(Platform.class, platform.getId()));
+
 			}
 		}
 		if (checkGame == null) {
@@ -74,7 +78,8 @@ public class EventDAOImpl implements EventDAO {
 		List<Platform> platformList = em.createQuery(query, Platform.class).getResultList();
 		for (Platform currentPlatform : platformList) {
 			if (currentPlatform.getPlatformName().equals(platform)) {
-				checkPlatform = currentPlatform;
+				checkPlatform = em.find(Platform.class, currentPlatform.getId());
+
 			}
 		}
 		if (checkPlatform == null) {

@@ -1,7 +1,20 @@
 package com.skilldistillery.jpadesolatemidterm.entities;
 
-import java.util.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Event {
@@ -24,6 +37,7 @@ public class Event {
 	@JoinColumn(name = "game_id")
 	private Game game;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany(mappedBy = "events")
 	private List<User> users;
 

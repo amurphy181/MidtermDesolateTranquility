@@ -45,7 +45,7 @@ public class UserController {
 
 				loggedIn = true;
 				session.setAttribute("loggedIn", loggedIn);
-				session.setAttribute("user", userLogin);
+				session.setAttribute("userCurrent", userLogin);
 				List<Event> eventList = dao.listAllEvents();
 				session.setAttribute("events", eventList);
 				mv.setViewName("WEB-INF/landingPage.jsp");
