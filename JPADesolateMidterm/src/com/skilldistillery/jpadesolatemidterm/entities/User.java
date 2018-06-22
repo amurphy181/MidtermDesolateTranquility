@@ -15,6 +15,7 @@ public class User {
 	@Column(name="name")
 	private String userName;
 	private String password;
+	private int admin;
 	
 	@ManyToMany
 	@JoinTable(name = "user_game", 
@@ -143,6 +144,14 @@ public class User {
 	}
 	
 	
+	public int getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
