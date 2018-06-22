@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
@@ -47,6 +49,19 @@ public class EventController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(path = "getEventId.do", method = RequestMethod.GET)
+	public ModelAndView getJobApp(@RequestParam("fid") int fid) {
+		ModelAndView mv = new ModelAndView();
+
+		Event eventLink = daoEvent.show(fid);
+
+		mv.addObject("event", eventLink);
+		mv.setViewName("WEB-INF/adminPage.jsp");
+		return mv;
+	}
+	
+	
 	
 	
 }

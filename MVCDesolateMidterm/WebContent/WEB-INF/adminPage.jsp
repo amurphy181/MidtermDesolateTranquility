@@ -18,7 +18,7 @@
 	
 	<c:forEach items="${events }" var="event">
 		<br>
-		<a href="getJobApp.do?fid=${jobApp.id }">${jobApp.company }</a>
+		<a href="getEventId.do?fid=${event.id }">Status: ${event.status }</a>
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
