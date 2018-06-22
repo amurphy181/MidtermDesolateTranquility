@@ -19,6 +19,18 @@ public class UserDAOImpl implements UserDAO {
 	private EntityManager em;
 	
 	@Override
+	public boolean joinEvent(User user, Event event) {
+		Event managedEvent = em.find(Event.class, event.getId());
+		boolean added = false;
+		if (!managedEvent.getUsers().contains(user)) {
+			managedEvent.getUsers().add(user);
+			added = true;
+		}
+		
+		return added;
+	}
+	
+	@Override
 	public User create(User user) {
 
 		em.persist(user);
