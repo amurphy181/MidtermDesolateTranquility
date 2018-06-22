@@ -47,12 +47,12 @@ public class User {
 			if (event.getGame() != null) {
 				event.getGame().getEvents().remove(event);
 			}
-			event.setUser(this);
+			event.setUsers(this);
 		}
 	}
 	
 	public void removeCreatedEvent(Event event) {
-		event.setUser(null);
+		event.setUsers(null);
 		if(createdEvents != null) {
 			createdEvents.remove(event);
 		}
