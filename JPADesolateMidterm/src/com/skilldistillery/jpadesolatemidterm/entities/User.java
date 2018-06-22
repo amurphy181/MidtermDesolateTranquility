@@ -28,7 +28,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> events;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "creator")
 	private List<Event> createdEvents;
 	
 	
