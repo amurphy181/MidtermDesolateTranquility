@@ -17,17 +17,9 @@ public class Event {
 	
 	@ManyToOne
 	@JoinColumn(name="creator_id")
-	private User user;
+	private User creator;
 	
-	// many to one user fix
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
@@ -35,7 +27,8 @@ public class Event {
 	@ManyToMany(mappedBy = "events")
 	private List<User> users;
 
-	public void addUser(User user) {
+	
+	public void addUsers(User user) {
 		if (users == null)
 			users = new ArrayList<>();
 
@@ -45,13 +38,29 @@ public class Event {
 		}
 	}
 
-	public void removeUser(User user) {
+	public void removeUsers(User user) {
 		if (users == null && users.contains(user)) {
 			users.remove(user);
 			user.removeEvent(this);
 		}
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+	
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	public User getCreator() {
+		return creator;
+	}
+	
+	public void setCreator(User user) {
+		this.creator = user;
+	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -84,13 +93,6 @@ public class Event {
 		this.visibility = visibility;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
 
 	public int getId() {
 		return id;

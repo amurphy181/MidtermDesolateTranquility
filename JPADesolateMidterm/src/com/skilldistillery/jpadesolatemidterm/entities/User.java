@@ -47,12 +47,13 @@ public class User {
 			if (event.getGame() != null) {
 				event.getGame().getEvents().remove(event);
 			}
-			event.setUsers(this);
+			event.setCreator(this);;
 		}
 	}
 	
 	public void removeCreatedEvent(Event event) {
 		event.setUsers(null);
+		event.setCreator(null);
 		if(createdEvents != null) {
 			createdEvents.remove(event);
 		}
@@ -64,9 +65,17 @@ public class User {
 		
 		if(!events.contains(event)) {
 			events.add(event);
-			event.addUser(this);
+			event.addUsers(this);
 		}
 	}
+	
+	public void removeEvent(Event event) {
+		if(events != null && events.contains(event)) {
+			events.remove(event);
+			event.removeUsers(this);
+		}
+	}
+	
 	
 	public List<Game> getGames() {
 		return games;
@@ -92,13 +101,6 @@ public class User {
 		this.createdEvents = userEvents;
 	}
 
-	public void removeEvent(Event event) {
-		if(events != null && events.contains(event)) {
-			events.remove(event);
-			event.removeUser(this);
-		}
-	}
-	
 	public void addGame(Game game) {
 		if(games == null) games = new ArrayList<>();
 		
