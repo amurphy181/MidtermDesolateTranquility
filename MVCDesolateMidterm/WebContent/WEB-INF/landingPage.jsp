@@ -25,15 +25,16 @@
 
 	<c:forEach items="${events }" var="event">
 		<br>
+		<c:if test="${event.visibility == 1 }">
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
 		<%-- ${event.users.userName }<br> --%>
-		
 		<br>
 		<c:forEach items="${event.users }" var="user">
 		${user.userName }
 		</c:forEach>
+		</c:if>
 	</c:forEach>
 	<br>
 <form action="createEvent.do" method="POST">
