@@ -89,5 +89,21 @@ class EventTest {
 		
 		assertEquals(1, event.getVisibility());
 	}
+	
+	@Test
+	void test_event_has_creator() {
+		Event event = new Event();
+		User user = em.find(User.class, 1);
+		User user2 = em.find(User.class, 2);
+		Game game = em.find(Game.class, 1);
+		user.addEvent(event);
+		user.addGame(game);
+		event.setCreator(user);
+		event.addUser(user2);
+		event.setGame(game);
+		
+		assertEquals("PurpleFuzz", event.getCreator().getUserName());
+		assertEquals(2, event.getUsers().size());
+	}
 
 }
