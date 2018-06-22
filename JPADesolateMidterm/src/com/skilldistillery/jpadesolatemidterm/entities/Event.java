@@ -14,7 +14,20 @@ public class Event {
 	private int status;
 	private String location;
 	private int visibility;
+	
+	@ManyToOne
+	@JoinColumn(name="creator_id")
+	private User user;
+	
+	// many to one user fix
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
