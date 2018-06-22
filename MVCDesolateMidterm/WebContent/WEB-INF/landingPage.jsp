@@ -35,6 +35,11 @@
 		<c:forEach items="${event.users }" var="user">
 		${user.userName }
 		</c:forEach>
+	<form action="joinEvent.do" method="GET">
+	<input type = "hidden" name = "userId" value = "${userCurrent.id }">
+	<input type = "hidden" name = "eventId" value = "${event.id }">
+	<input type="submit" value="Join Event" > <br>
+	</form>
 		</c:if>
 	</c:forEach>
 	<br>

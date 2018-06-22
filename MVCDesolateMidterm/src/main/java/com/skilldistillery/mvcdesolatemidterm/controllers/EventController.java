@@ -43,6 +43,7 @@ public class EventController {
 		createdEvent.setCreator(creator);
 		createdEvent.setStartDate(new Date());
 		createdEvent.setVisibility(1);
+		createdEvent.getUsers().add(creator);
 		daoEvent.createEvent(createdEvent);
 		
 		mv.setViewName("redirect:landingPage.do");
@@ -58,6 +59,17 @@ public class EventController {
 
 		mv.addObject("event", eventLink);
 		mv.setViewName("WEB-INF/adminPage.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path ="joinEvent.do")
+	public ModelAndView joinEvent(int userId, int eventId) {
+		ModelAndView mv = new ModelAndView();
+		User addUserToEvent = daoUser.findUserByUserID(userId);
+		Event eventToJoin = daoEvent.findEventByEventID(eventId);
+		daoUser.joinEvent(addUserToEvent, eventToJoin);
+		
+		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}
 	

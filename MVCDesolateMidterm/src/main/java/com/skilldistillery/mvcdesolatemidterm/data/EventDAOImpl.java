@@ -95,5 +95,12 @@ public class EventDAOImpl implements EventDAO {
 
 		return checkPlatform;
 	}
+	
+	@Override
+	public Event findEventByEventID(int id) {
+		Event found = em.find(Event.class, id);
+		
+		return found;
+	}
 
 }
