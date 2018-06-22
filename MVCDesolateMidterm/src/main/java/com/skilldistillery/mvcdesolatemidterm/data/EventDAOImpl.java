@@ -30,15 +30,22 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public Platform createPlatform(Platform platform) {
 		
-		em.persist(platform);
-		em.flush();
+		if(em.find(Platform.class, platform.getId()) == null) {
+			em.persist(platform);
+			em.flush();
+			
+		}
+		
 		return platform;
 	}
 	
 	@Override
 	public Game createGame(Game game) {
-		em.persist(game);
-		em.flush();
+		if(em.find(Game.class, game.getId()) == null) {
+			em.persist(game);
+			em.flush();
+			
+		}
 		return game;
 	}
 	

@@ -23,19 +23,20 @@ public class EventController {
 	UserDAO daoUser = new UserDAOImpl();
 	
 	@RequestMapping(path="createEvent.do")
-	public ModelAndView createEvent(String game, String platform, String location, int userId) {
+	public ModelAndView createEvent(String game, String platform, String location, int userId, Event event) {
 		ModelAndView mv = new ModelAndView();
 		User creator = daoUser.findUserByUserID(userId);
 		Platform eventPlatform = daoEvent.checkPlatfromUnique(platform);
 		daoEvent.createPlatform(eventPlatform);
 		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
 		daoEvent.createGame(eventGame);
-		Event createdEvent = new Event();
+		Event createdEvent = event;
 		createdEvent.setGame(eventGame);
 		createdEvent.setLocation(location);
 		createdEvent.setCreator(creator);
+		daoEvent.createEvent(createdEvent);
 		
-		
+		mv.setViewName("redirect:landingPage.do");
 		
 		return mv;
 	}
