@@ -20,6 +20,8 @@
 	<c:if test="${user.admin == 0 }">
 		<h3>Current user is not the admin</h3>
 	</c:if>
+	
+	<p>The current user is: ${user }</p>
 
 	<c:forEach items="${events }" var="event">
 		<br>
@@ -34,13 +36,13 @@
 		</c:forEach>
 	</c:forEach>
 	<br>
-<form:form action="createEvent.do" modelAttribute="event" method="POST">
+<form action="createEvent.do" method="POST">
 	<%-- Error messages --%>
-	Game:<form:input path="game"/>
-	Platform:<form:input path = "platform"/>
-	Location:<form:password path="location"/>
-	<input type = "hidden" name = "userId" value = "${user.id }">
+	Game:<input name="game"/>
+	Platform:<input name = "platform"/>
+	Location:<input name="location"/>
+	<input type = "hidden" name = "id" value = "${user.id }">
 	<input type="submit" value="Add Event" > <br>
-</form:form>
+</form>
 </body>
 </html>
