@@ -24,9 +24,9 @@ import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 public class EventController {
 
 	@Autowired
-	EventDAO daoEvent = new EventDAOImpl();
+	private EventDAO daoEvent;
 	@Autowired
-	UserDAO daoUser = new UserDAOImpl();
+	private UserDAO daoUser;
 	
 	@RequestMapping(path="createEvent.do") 
 	public ModelAndView createEvent(String game, String platform, String location, int id) {

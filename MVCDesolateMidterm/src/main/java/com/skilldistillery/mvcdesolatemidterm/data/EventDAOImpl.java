@@ -133,7 +133,16 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public boolean deactivateEvent(int id) {
-		// TODO Auto-generated method stub
+		System.out.println("+++++++++++" + id);
+		Event eventToDeactivate = em.find(Event.class, id);
+		System.out.println("ID: " + id);
+		eventToDeactivate.setStatus(0);
+		em.flush();
+		
+		if(em.find(Event.class, eventToDeactivate.getId()).equals(0)) {
+			System.out.println(eventToDeactivate);
+			return true;
+		}
 		return false;
 	}
 	
