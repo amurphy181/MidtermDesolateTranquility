@@ -15,5 +15,6 @@ public interface UserDAO {
 	public List<Event> listAllEvents();
 	public User findUserByUserID(int id);
 	boolean joinEvent(User user, Event event);
+	public List<User> listAllUsers();
 
 }

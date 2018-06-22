@@ -47,6 +47,14 @@ public class UserDAOImpl implements UserDAO {
 		
 		return eventList;
 	}
+	
+	@Override
+	public List<User> listAllUsers() {
+		String query = "SELECT u FROM User u";
+		List<User> userList = em.createQuery(query, User.class).getResultList();
+		
+		return userList;
+	}
 	@Override
 	public boolean uniqueUsername(String userName) {
 		String query = "select u from User u";

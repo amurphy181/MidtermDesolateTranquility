@@ -42,13 +42,27 @@ public class UserController {
 
 		eventDAO.deactivateEvent(id);
 
-		mv.setViewName("WEB-INF/adminPage.jsp");
+		mv.setViewName("redirect:adminPage.jsp");
 
+		return mv;
+	}
+	
+	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
+	public ModelAndView reactivateEvent(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("+++++++++++++" + id);
+		
+		eventDAO.reactivateEvent(id);
+		
+		mv.setViewName("redirect:adminPage.jsp");
+		
 		return mv;
 	}
 	
 	
 	// user controllers follow
+	
 	@RequestMapping(path = "welcome.do")
 	public ModelAndView loginView() {
 		ModelAndView mv = new ModelAndView();
@@ -102,6 +116,17 @@ public class UserController {
 		User user = new User();
 		mv.addObject("user", user);
 		mv.setViewName("WEB-INF/registerView.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path = "adminPage.do")
+	public ModelAndView adminPageView(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("users", completeUserList);
+		
+
+		
 		return mv;
 	}
 

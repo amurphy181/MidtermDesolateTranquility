@@ -28,6 +28,11 @@
 			<input type="submit" value="Deactivate Event" />
 			<input type="hidden" name="id" value="${event.id }"/>
 		</form>
+		
+		<form action="reactivateEvent.do" method="POST">
+			<input type="submit" value="Reactivate Event" />
+			<input type="hidden" name="id" value="${event.id }"/>
+		</form>
 
 		<br>
 		<c:forEach items="${event.users }" var="user">
