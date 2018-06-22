@@ -33,20 +33,7 @@ public class EventController {
 		// taking in strings then creating the objects since game requires a platform
 		System.out.println("game: " + game + " platform" + platform + " location" + location + " userId" + id);
 		ModelAndView mv = new ModelAndView();
-		User creator = daoUser.findUserByUserID(id);
-		Platform eventPlatform = daoEvent.checkPlatformUnique(platform);
-		daoEvent.createPlatform(eventPlatform);
-		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
-		daoEvent.createGame(eventGame);
-		Event createdEvent = new Event();
-		createdEvent.setGame(eventGame);
-		createdEvent.setLocation(location);
-		createdEvent.setCreator(creator);
-		createdEvent.setStartDate(new Date());
-		createdEvent.setVisibility(1);
-		createdEvent.addUser(creator);
-		System.out.println(createdEvent.getUsers().get(0));
-		daoEvent.createEvent(createdEvent);
+		daoEvent.createEvent(game, platform, location, id);
 		
 		mv.setViewName("redirect:landingPage.do");
 		
