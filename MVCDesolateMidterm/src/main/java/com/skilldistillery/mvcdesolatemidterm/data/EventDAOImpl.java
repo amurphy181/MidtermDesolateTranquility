@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
+import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 
 @Transactional
 @Component
 public class EventDAOImpl implements EventDAO {
-	EventDAOImpl
+	EventDAOImpl dao = new EventDAOImpl();
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -35,6 +36,16 @@ public class EventDAOImpl implements EventDAO {
 	}
 	
 	@Override
+	public Game createGame(Game game) {
+		
+		
+		return null;
+	}
+	
+//	@Override
+//	public Game checkGameUnique()
+	
+	@Override
 	public Platform checkPlatfromUnique(String platform) {
 		String query = "select p from Platfrom p";
 		Platform checkPlatform = null;
@@ -47,10 +58,11 @@ public class EventDAOImpl implements EventDAO {
 		if (checkPlatform == null) {
 			checkPlatform = new Platform();
 			checkPlatform.setPlatformName(platform);
+			dao.createPlatform(checkPlatform);
 			
 		}
 		
-		return null;
+		return checkPlatform;
 	}
 	
 	
