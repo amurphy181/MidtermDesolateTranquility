@@ -38,13 +38,14 @@ public class UserController {
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
 		ModelAndView mv = new ModelAndView();
 		User userLogin = dao.findUserByUsername(user.getUserName());
+		System.out.println(userLogin);
 		System.out.println(user.getPassword());
 		if (userLogin != null) {
 			if (dao.passwordConfirmation(userLogin, user.getPassword())) {
 
 				loggedIn = true;
 				session.setAttribute("loggedIn", loggedIn);
-				session.setAttribute("user", user);
+				session.setAttribute("userCurrent", userLogin);
 				List<Event> eventList = dao.listAllEvents();
 				session.setAttribute("events", eventList);
 				mv.setViewName("WEB-INF/landingPage.jsp");
@@ -73,18 +74,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "landingPage.do")
-	public ModelAndView landingPageView() {
+	public ModelAndView landingPageView(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User user = new User();
 		List<Event> eventList = dao.listAllEvents();
 		mv.addObject("events", eventList);
+		User user = (User) session.getAttribute("user");
 		if(eventList == null) {
 			System.out.println("event list is null");
 		} else {
 			System.out.println("it went on through");
 		}
 		System.out.println(eventList);
-		mv.addObject("user", user);
+		session.setAttribute("user", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;
 	}
@@ -93,7 +94,6 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		if (dao.uniqueUsername(user.getUserName())) {
 		//	mv.addObject("user", user);
-			session.setAttribute("user", user);
 			dao.create(user);
 			
 			boolean added = true;

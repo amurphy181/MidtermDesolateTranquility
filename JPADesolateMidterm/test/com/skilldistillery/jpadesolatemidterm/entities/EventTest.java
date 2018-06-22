@@ -122,4 +122,18 @@ class EventTest {
 		assertNotEquals("Xbox", event.getGame().getPlatform().getPlatformName());
 	}
 
+	@Test
+	void test_createPlatform_creates_platform() {
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
