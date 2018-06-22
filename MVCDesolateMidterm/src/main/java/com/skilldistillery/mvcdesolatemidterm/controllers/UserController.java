@@ -73,18 +73,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "landingPage.do")
-	public ModelAndView landingPageView() {
+	public ModelAndView landingPageView(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User user = new User();
 		List<Event> eventList = dao.listAllEvents();
 		mv.addObject("events", eventList);
+		User user = (User) session.getAttribute("user");
 		if(eventList == null) {
 			System.out.println("event list is null");
 		} else {
 			System.out.println("it went on through");
 		}
 		System.out.println(eventList);
-		mv.addObject("user", user);
+		session.setAttribute("user", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;
 	}
