@@ -235,9 +235,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (1, 'PurpleFuzz', 'password', DEFAULT);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (2, 'JGMoney', 'password', DEFAULT);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (3, 'ASauceyBoy', 'password', DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (1, 'PurpleFuzz', 'password', 0);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (2, 'JGMoney', 'password', 0);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (3, 'ASauceyBoy', 'password', 0);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (4, 'admin', 'admin', 1);
 
 COMMIT;
 

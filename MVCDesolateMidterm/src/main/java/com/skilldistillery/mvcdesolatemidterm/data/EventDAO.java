@@ -9,6 +9,7 @@ public interface EventDAO {
 	public Platform checkPlatfromUnique(String platform);
 	public Event createEvent(Event event);
 	public Platform createPlatform(Platform platform);
+	public Game checkGameUnique(String game, Platform platform);
 	public Game createGame(Game game);
 
 }

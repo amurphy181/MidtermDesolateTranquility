@@ -42,8 +42,26 @@ public class EventDAOImpl implements EventDAO {
 		return null;
 	}
 	
-//	@Override
-//	public Game checkGameUnique()
+	@Override
+	public Game checkGameUnique(String game, Platform platform) {
+		String query = "select g from Game g";
+		Game checkGame = null;
+		List<Game> gameList = em.createQuery(query, Game.class).getResultList();
+		for (Game currentGame : gameList) {
+			if(currentGame.getTitle().equals(game)) {
+				checkGame = currentGame;
+				checkGame.setPlatform(platform);
+			}
+		}
+		if (checkGame == null) {
+			checkGame = new Game();
+			
+		}
+		
+		
+		return null;
+
+	}
 	
 	@Override
 	public Platform checkPlatfromUnique(String platform) {
@@ -51,7 +69,7 @@ public class EventDAOImpl implements EventDAO {
 		Platform checkPlatform = null;
 		List<Platform> platformList = em.createQuery(query, Platform.class).getResultList();
 		for (Platform currentPlatform : platformList) {
-			if(currentPlatform.getPlatformName() == platform) {
+			if(currentPlatform.getPlatformName().equals(platform)) {
 				checkPlatform = currentPlatform;
 			}
 		}
