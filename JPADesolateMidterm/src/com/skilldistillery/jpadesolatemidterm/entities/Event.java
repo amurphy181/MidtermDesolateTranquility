@@ -28,7 +28,7 @@ public class Event {
 	private List<User> users;
 
 	
-	public void addUsers(User user) {
+	public void addUser(User user) {
 		if (users == null)
 			users = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class Event {
 		}
 	}
 
-	public void removeUsers(User user) {
+	public void removeUser(User user) {
 		if (users == null && users.contains(user)) {
 			users.remove(user);
 			user.removeEvent(this);

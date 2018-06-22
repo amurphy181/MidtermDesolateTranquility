@@ -28,7 +28,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> events;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "creator")
 	private List<Event> createdEvents;
 	
 	
@@ -65,14 +65,14 @@ public class User {
 		
 		if(!events.contains(event)) {
 			events.add(event);
-			event.addUsers(this);
+			event.addUser(this);
 		}
 	}
 	
 	public void removeEvent(Event event) {
 		if(events != null && events.contains(event)) {
 			events.remove(event);
-			event.removeUsers(this);
+			event.removeUser(this);
 		}
 	}
 	
