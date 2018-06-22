@@ -40,6 +40,7 @@ public class EventController {
 		createdEvent.setLocation(location);
 		createdEvent.setCreator(creator);
 		createdEvent.setStartDate(new Date());
+		createdEvent.setVisibility(1);
 		daoEvent.createEvent(createdEvent);
 		
 		mv.setViewName("redirect:landingPage.do");
