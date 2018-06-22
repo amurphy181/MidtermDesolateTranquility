@@ -1,5 +1,5 @@
 
-body{
+body {
 	background-color: rgb(50, 50, 220);
     font-size: 125%;
 
@@ -29,7 +29,7 @@ div {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 150%;
-  color: ghostwhite;
+  
   text-align:center;
     	
 }
@@ -37,5 +37,7 @@ div {
 input{
 	width: 200px;
 }
+
+
 
 
