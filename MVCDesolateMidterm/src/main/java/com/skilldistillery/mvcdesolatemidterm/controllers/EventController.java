@@ -27,7 +27,9 @@ public class EventController {
 		ModelAndView mv = new ModelAndView();
 		User creator = daoUser.findUserByUserID(userId);
 		Platform eventPlatform = daoEvent.checkPlatfromUnique(platform);
+		daoEvent.createPlatform(eventPlatform);
 		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
+		daoEvent.createGame(eventGame);
 		Event createdEvent = new Event();
 		createdEvent.setGame(eventGame);
 		createdEvent.setLocation(location);

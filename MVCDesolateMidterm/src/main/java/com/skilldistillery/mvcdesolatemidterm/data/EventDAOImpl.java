@@ -15,7 +15,6 @@ import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 @Transactional
 @Component
 public class EventDAOImpl implements EventDAO {
-	EventDAOImpl dao = new EventDAOImpl();
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -58,7 +57,6 @@ public class EventDAOImpl implements EventDAO {
 			checkGame = new Game();
 			checkGame.setTitle(game);
 			checkGame.setPlatform(platform);
-			dao.createGame(checkGame);
 			
 		}
 		
@@ -80,7 +78,6 @@ public class EventDAOImpl implements EventDAO {
 		if (checkPlatform == null) {
 			checkPlatform = new Platform();
 			checkPlatform.setPlatformName(platform);
-			dao.createPlatform(checkPlatform);
 			
 		}
 		
