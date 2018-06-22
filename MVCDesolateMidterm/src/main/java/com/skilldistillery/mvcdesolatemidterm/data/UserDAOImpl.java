@@ -21,9 +21,10 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean joinEvent(User user, Event event) {
 		Event managedEvent = em.find(Event.class, event.getId());
+		User addUser = em.find(User.class, user.getId());
 		boolean added = false;
 		if (!managedEvent.getUsers().contains(user)) {
-			managedEvent.getUsers().add(user);
+			managedEvent.addUser(addUser);
 			added = true;
 		}
 		
