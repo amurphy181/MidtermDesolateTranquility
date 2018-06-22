@@ -8,21 +8,30 @@ import org.springframework.web.servlet.ModelAndView;
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
+import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAOImpl;
+import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
+import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 
 @Controller
 public class EventController {
 
 	@Autowired
-	EventDAO dao = new EventDAOImpl();
+	EventDAO daoEvent = new EventDAOImpl();
+	@Autowired
+	UserDAO daoUser = new UserDAOImpl();
 	
 	@RequestMapping(path="createEvent.do")
-	public ModelAndView createEvent(String game, String platform, String location) {
+	public ModelAndView createEvent(String game, String platform, String location, int userId) {
 		ModelAndView mv = new ModelAndView();
-		Platform eventPlatform = dao.checkPlatfromUnique(platform);
-		Game eventGame = dao.checkGameUnique(game, eventPlatform);
+		User creator = daoUser.findUserByUserID(userId);
+		Platform eventPlatform = daoEvent.checkPlatfromUnique(platform);
+		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
 		Event createdEvent = new Event();
+		createdEvent.setGame(eventGame);
+		createdEvent.setLocation(location);
+		createdEvent.setCreator(creator);
 		
 		
 		

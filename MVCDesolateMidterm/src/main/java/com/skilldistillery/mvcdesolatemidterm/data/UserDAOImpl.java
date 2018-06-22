@@ -75,6 +75,13 @@ public class UserDAOImpl implements UserDAO {
 	  }
 	
 	@Override
+	public User findUserByUserID(int id) {
+		User found = em.find(User.class, id);
+		
+		return found;
+	}
+	
+	@Override
 	public User findUserByUsername(String userName) {
 		String query = "select u from User u";
 		User confirmed = null;

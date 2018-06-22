@@ -13,5 +13,6 @@ public interface UserDAO {
 	public User findUserByUsername(String userName);
 	boolean uniqueUsername(String userName);
 	List<Event> listAllEvents();
+	User findUserByUserID(int id);
 
 }

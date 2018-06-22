@@ -31,6 +31,7 @@
 	Game:<form:input path="game"/>
 	Platform:<form:input path = "platform"/>
 	Location:<form:password path="location"/>
+	<input type = "hidden" name = "userId" value = "${user.id }">
 	<input type="submit" value="Add Event" > <br>
 </form:form>
 </body>
