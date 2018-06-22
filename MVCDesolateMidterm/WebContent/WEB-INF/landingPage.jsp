@@ -23,6 +23,13 @@
 		${user.userName }
 		</c:forEach>
 	</c:forEach>
-
+	<br>
+<form:form action="createEvent.do" modelAttribute="event" method="POST">
+	<%-- Error messages --%>
+	Game:<form:input path="game"/>
+	Platform:<form:input path = "platform"/>
+	Location:<form:password path="location"/>
+	<input type="submit" value="Add Event" > <br>
+</form:form>
 </body>
 </html>

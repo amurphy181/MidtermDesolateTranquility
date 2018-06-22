@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `platform_id` INT NOT NULL,
-  `max_players` INT(11) NOT NULL,
+  `max_players` INT(11) NULL,
   PRIMARY KEY (`id`),
   INDEX `FK_GAME_TO_PLATFORM_ID_idx` (`platform_id` ASC),
   CONSTRAINT `FK_GAME_TO_PLATFORM_ID`
