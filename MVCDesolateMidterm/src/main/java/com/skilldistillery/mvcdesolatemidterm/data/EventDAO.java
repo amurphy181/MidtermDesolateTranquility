@@ -12,6 +12,7 @@ public interface EventDAO {
 	public Game checkGameUnique(String game, Platform platform);
 	public Game createGame(Game game);
 	public Event show(int id);
-	Event findEventByEventID(int id);
+	public Event findEventByEventID(int id);
+	public boolean deactivateEvent(int id);
 
 }

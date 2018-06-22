@@ -29,13 +29,14 @@ div {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 150%;
-  
+  color: ghostwhite;
   text-align:center;
     	
 }
 
 input{
 	width: 200px;
+	color: black;
 }
 
 

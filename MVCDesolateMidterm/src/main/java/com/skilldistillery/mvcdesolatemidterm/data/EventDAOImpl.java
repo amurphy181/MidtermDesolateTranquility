@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
-import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
 @Component
@@ -101,6 +100,21 @@ public class EventDAOImpl implements EventDAO {
 		Event found = em.find(Event.class, id);
 		
 		return found;
+	}
+	
+	@Override
+	public boolean deactivateEvent(int id) {
+		Event eventToDeactivate = em.find(Event.class, id);
+		System.out.println("ID: " + id);
+		eventToDeactivate.setStatus(0);
+		em.flush();
+		
+		if(em.find(Event.class, eventToDeactivate.getId()).equals(0)) {
+			System.out.println(eventToDeactivate);
+			return true;
+		}
+		
+		return false;
 	}
 
 }

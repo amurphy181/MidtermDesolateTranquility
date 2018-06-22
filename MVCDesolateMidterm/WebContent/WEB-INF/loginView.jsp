@@ -25,11 +25,11 @@
 <div>
 <c:if test="${added == true}">You successfully registered </c:if>
 <form:form action="login.do" modelAttribute="user" method="POST">
-	<%-- Error messages --%>
-	Username  <form:input path="userName"/><br>
+	Username  <form:input type="text" autocorrect="off" autocapitalize="none" path="userName"/><br>
 	Password  <form:password path="password"/><br><br>
 	<p class="button">
 	<input type="submit" value="Log In" ></p> <br>
+	<%-- Error messages --%>
 	<form:errors path="password">Incorrect Password</form:errors>
 	<form:errors path="userName">Username not found</form:errors>
 </form:form>
