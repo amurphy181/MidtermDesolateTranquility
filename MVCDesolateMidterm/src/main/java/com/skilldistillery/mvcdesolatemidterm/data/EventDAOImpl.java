@@ -38,9 +38,9 @@ public class EventDAOImpl implements EventDAO {
 	
 	@Override
 	public Game createGame(Game game) {
-		
-		
-		return null;
+		em.persist(game);
+		em.flush();
+		return game;
 	}
 	
 	@Override
@@ -56,11 +56,14 @@ public class EventDAOImpl implements EventDAO {
 		}
 		if (checkGame == null) {
 			checkGame = new Game();
+			checkGame.setTitle(game);
+			checkGame.setPlatform(platform);
+			dao.createGame(checkGame);
 			
 		}
 		
 		
-		return null;
+		return checkGame;
 
 	}
 	
