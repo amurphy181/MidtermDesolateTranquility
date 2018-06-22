@@ -16,6 +16,7 @@
 	<!-- testing to see if the user is an administrator -->
 	<c:if test="${userCurrent.admin == 1}">
 		<h3>Current user is admin</h3>
+		<a href = "adminPage.do">Admin Page</a>
 	</c:if>
 	<c:if test="${userCurrent.admin == 0 }">
 		<h3>Current user is not the admin</h3>

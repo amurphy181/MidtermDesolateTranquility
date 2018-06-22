@@ -33,6 +33,13 @@ public class UserController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = "adminPage.do")
+	public ModelAndView adminPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/adminPage.jsp");
+		return mv;
+	}
 
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
