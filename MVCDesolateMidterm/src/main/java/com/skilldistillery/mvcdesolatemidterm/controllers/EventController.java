@@ -1,6 +1,8 @@
 package com.skilldistillery.mvcdesolatemidterm.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,20 +33,7 @@ public class EventController {
 		// taking in strings then creating the objects since game requires a platform
 		System.out.println("game: " + game + " platform" + platform + " location" + location + " userId" + id);
 		ModelAndView mv = new ModelAndView();
-		User creator = daoUser.findUserByUserID(id);
-		Platform eventPlatform = daoEvent.checkPlatformUnique(platform);
-		daoEvent.createPlatform(eventPlatform);
-		System.out.println("platform was created");
-		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
-		daoEvent.createGame(eventGame);
-		Event createdEvent = new Event();
-		createdEvent.setGame(eventGame);
-		createdEvent.setLocation(location);
-		createdEvent.setCreator(creator);
-		createdEvent.setStartDate(new Date());
-		createdEvent.setVisibility(1);
-		createdEvent.getUsers().add(creator);
-		daoEvent.createEvent(createdEvent);
+		daoEvent.createEvent(game, platform, location, id);
 		
 		mv.setViewName("redirect:landingPage.do");
 		
@@ -68,7 +57,6 @@ public class EventController {
 		User addUserToEvent = daoUser.findUserByUserID(userId);
 		Event eventToJoin = daoEvent.findEventByEventID(eventId);
 		daoUser.joinEvent(addUserToEvent, eventToJoin);
-		
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}

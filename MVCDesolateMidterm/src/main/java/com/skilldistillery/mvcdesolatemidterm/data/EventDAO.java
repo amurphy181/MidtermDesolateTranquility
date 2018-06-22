@@ -14,5 +14,6 @@ public interface EventDAO {
 	public Event show(int id);
 	public Event findEventByEventID(int id);
 	public boolean deactivateEvent(int id);
+	Event createEvent(String game, String platform, String location, int id);
 
 }

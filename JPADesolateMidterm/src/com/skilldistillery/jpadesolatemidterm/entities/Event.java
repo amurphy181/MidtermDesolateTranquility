@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Event {
 	private Game game;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@ManyToMany(mappedBy = "events")
+	@ManyToMany(mappedBy = "events", cascade=CascadeType.PERSIST)
 	private List<User> users;
 
 	
@@ -53,7 +54,7 @@ public class Event {
 	}
 
 	public void removeUser(User user) {
-		if (users == null && users.contains(user)) {
+		if (users != null && users.contains(user)) {
 			users.remove(user);
 			user.removeEvent(this);
 		}

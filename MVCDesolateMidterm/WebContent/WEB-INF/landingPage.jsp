@@ -30,6 +30,8 @@
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
+		${event.creator.userName }<br>
+		${event.users }<br>
 		<%-- ${event.users.userName }<br> --%>
 		<br>
 		<c:forEach items="${event.users }" var="user">

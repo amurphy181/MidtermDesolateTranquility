@@ -1,21 +1,29 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
+import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 @Transactional
 @Component
 public class EventDAOImpl implements EventDAO {
 
+	@Autowired
+	UserDAO userDao;
+	@Autowired
+	EventDAO eventDao;
+	
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -25,11 +33,26 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public Event createEvent(Event event) {
+	public Event createEvent(String game, String platform, String location, int id) {
 
-		em.persist(event);
+		User creator = userDao.findUserByUserID(id);
+		Platform eventPlatform = eventDao.checkPlatformUnique(platform);
+		eventDao.createPlatform(eventPlatform);
+		Game eventGame = eventDao.checkGameUnique(game, eventPlatform);
+		eventDao.createGame(eventGame);
+		Event createdEvent = new Event();
+		createdEvent.setGame(eventGame);
+		createdEvent.setLocation(location);
+		createdEvent.setCreator(creator);
+		createdEvent.setStartDate(new Date());
+		createdEvent.setVisibility(1);
+		createdEvent.addUser(creator);
+		System.out.println(createdEvent.getUsers().get(0));
+		
+		
+		em.persist(createdEvent);
 		em.flush();
-		return event;
+		return createdEvent;
 	}
 
 	@Override
@@ -101,7 +124,13 @@ public class EventDAOImpl implements EventDAO {
 		
 		return found;
 	}
-	
+
+	@Override
+	public Event createEvent(Event event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public boolean deactivateEvent(int id) {
 		System.out.println("+++++++++++" + id);
@@ -114,8 +143,22 @@ public class EventDAOImpl implements EventDAO {
 			System.out.println(eventToDeactivate);
 			return true;
 		}
-		
 		return false;
 	}
+	
+//	@Override
+//	public boolean deactivateEvent(int id) {
+//		Event eventToDeactivate = em.find(Event.class, id);
+//		System.out.println("ID: " + id);
+//		eventToDeactivate.setStatus(0);
+//		em.flush();
+//		
+//		if(em.find(Event.class, eventToDeactivate.getId()).equals(0)) {
+//			System.out.println(eventToDeactivate);
+//			return true;
+//		}
+//		
+//		return false;
+//	}
 
 }
