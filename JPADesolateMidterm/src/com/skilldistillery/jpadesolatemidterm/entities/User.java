@@ -37,6 +37,7 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "game_id"))
 	private List<Game> games;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	@JoinTable(name = "user_event", 
 			joinColumns = @JoinColumn(name = "user_id"),
