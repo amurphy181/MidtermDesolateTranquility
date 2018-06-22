@@ -30,7 +30,6 @@ public class UserDAOImpl implements UserDAO {
 		String query = "select e from Event e";
 		List<Event> eventList = em.createQuery(query, Event.class).getResultList();	
 		for (Event event : eventList) {
-			System.out.println(event);
 		}
 		
 		return eventList;
@@ -88,10 +87,9 @@ public class UserDAOImpl implements UserDAO {
 		List<User> allUsers = em.createQuery(query, User.class).getResultList();
 		for (User user : allUsers) {
 			if (user.getUserName().equals(userName)) {
-				confirmed = user;
+				confirmed = em.find(User.class, user.getId());
 			}
 		}
-		
 		return confirmed;
 	}
 

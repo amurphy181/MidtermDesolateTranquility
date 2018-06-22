@@ -38,13 +38,14 @@ public class UserController {
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
 		ModelAndView mv = new ModelAndView();
 		User userLogin = dao.findUserByUsername(user.getUserName());
+		System.out.println(userLogin);
 		System.out.println(user.getPassword());
 		if (userLogin != null) {
 			if (dao.passwordConfirmation(userLogin, user.getPassword())) {
 
 				loggedIn = true;
 				session.setAttribute("loggedIn", loggedIn);
-				session.setAttribute("user", user);
+				session.setAttribute("user", userLogin);
 				List<Event> eventList = dao.listAllEvents();
 				session.setAttribute("events", eventList);
 				mv.setViewName("WEB-INF/landingPage.jsp");
@@ -93,7 +94,6 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		if (dao.uniqueUsername(user.getUserName())) {
 		//	mv.addObject("user", user);
-			session.setAttribute("user", user);
 			dao.create(user);
 			
 			boolean added = true;
