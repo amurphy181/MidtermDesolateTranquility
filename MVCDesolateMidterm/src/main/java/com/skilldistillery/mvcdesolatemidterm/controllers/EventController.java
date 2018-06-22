@@ -22,15 +22,17 @@ public class EventController {
 	@Autowired
 	UserDAO daoUser = new UserDAOImpl();
 	
-	@RequestMapping(path="createEvent.do")
-	public ModelAndView createEvent(String game, String platform, String location, int userId, Event event) {
+	@RequestMapping(path="createEvent.do") 
+	public ModelAndView createEvent(String game, String platform, String location, int id) {
+		// taking in strings then creating the objects since game requires a platform
+		System.out.println("game: " + game + " platform" + platform + " location" + location + " userId" + id);
 		ModelAndView mv = new ModelAndView();
-		User creator = daoUser.findUserByUserID(userId);
-		Platform eventPlatform = daoEvent.checkPlatfromUnique(platform);
+		User creator = daoUser.findUserByUserID(id);
+		Platform eventPlatform = daoEvent.checkPlatformUnique(platform);
 		daoEvent.createPlatform(eventPlatform);
 		Game eventGame = daoEvent.checkGameUnique(game, eventPlatform);
 		daoEvent.createGame(eventGame);
-		Event createdEvent = event;
+		Event createdEvent = new Event();
 		createdEvent.setGame(eventGame);
 		createdEvent.setLocation(location);
 		createdEvent.setCreator(creator);

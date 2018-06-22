@@ -6,7 +6,7 @@ import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 
 public interface EventDAO {
 
-	public Platform checkPlatfromUnique(String platform);
+	public Platform checkPlatformUnique(String platform);
 	public Event createEvent(Event event);
 	public Platform createPlatform(Platform platform);
 	public Game checkGameUnique(String game, Platform platform);
