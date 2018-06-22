@@ -16,6 +16,7 @@
 	<!-- testing to see if the user is an administrator -->
 	<c:if test="${userCurrent.admin == 1}">
 		<h3>Current user is admin</h3>
+		<a href = "adminPage.do">Admin Page</a>
 	</c:if>
 	<c:if test="${userCurrent.admin == 0 }">
 		<h3>Current user is not the admin</h3>
@@ -34,6 +35,11 @@
 		<c:forEach items="${event.users }" var="user">
 		${user.userName }
 		</c:forEach>
+	<form action="joinEvent.do" method="GET">
+	<input type = "hidden" name = "userId" value = "${userCurrent.id }">
+	<input type = "hidden" name = "eventId" value = "${event.id }">
+	<input type="submit" value="Join Event" > <br>
+	</form>
 		</c:if>
 	</c:forEach>
 	<br>

@@ -12,7 +12,8 @@ public interface UserDAO {
 	public boolean passwordConfirmation(User user, String password);
 	public User findUserByUsername(String userName);
 	boolean uniqueUsername(String userName);
-	List<Event> listAllEvents();
-	User findUserByUserID(int id);
+	public List<Event> listAllEvents();
+	public User findUserByUserID(int id);
+	boolean joinEvent(User user, Event event);
 
 }
