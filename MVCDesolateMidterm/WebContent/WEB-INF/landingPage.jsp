@@ -12,6 +12,14 @@
 </head>
 <body>
 	<h1>Success</h1>
+	
+	<!-- testing to see if the user is an administrator -->
+	<c:if test="${user.admin == 1}">
+		<h3>Current user is admin</h3>
+	</c:if>
+	<c:if test="${user.admin == 0 }">
+		<h3>Current user is not the admin</h3>
+	</c:if>
 
 	<c:forEach items="${events }" var="event">
 		<br>
