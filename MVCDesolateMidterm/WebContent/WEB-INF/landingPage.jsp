@@ -82,7 +82,7 @@
 				<li>
 					<a href="profileView.do"><span class="glyphicon glyphicon-envelope"></span> Profile</a>
 				</li>
-					<c:if test="${userCurrent.admin == 1}">
+					<c:if test="${userCurrent.admin}">
 
 				<li>
 					<a href="adminPage.do"><span class="glyphicon glyphicon-bell"></span> Admin</a>
