@@ -54,14 +54,14 @@
 
 	<!-- cycle through the events and be able to link over to the page in order to delete -->
 
-	<c:forEach items="${events }" var="event">
+	<%-- <c:forEach items="${events }" var="event">
 		<br>
 		<a href="getEventId.do?fid=${event.id }">Status: ${event.status }</a>
 		${event.location }<br>
 		${event.game.title}<br>
 		${event.game.platform }<br>
 		${event.status }
-		<%-- ${event.users.userName }<br> --%>
+		${event.users.userName }<br>
 		<form action="deactivateEvent.do" method="POST">
 			<input type="submit" value="Deactivate Event" /> <input
 				type="hidden" name="id" value="${event.id }" />
@@ -73,10 +73,69 @@
 		</form>
 
 		<br>
-	</c:forEach>
+	</c:forEach> --%>
+	
+					
+		<div class="col-sm-6">
+			<div class="panel panel-info">				
+					<c:forEach items="${events }" var="event">
+				<div class="panel-body">
+					<div class="media">
+						<a class="media-left" href="#fake">
+							<img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+						</a>
+					
+					
+						<div class="media-body">
+							
+							<h3><a href="getEventId.do?fid=${event.id }">Status:
+							
+							<c:if test="${event.status}">
+							Active
+							</c:if>
+							<c:if test="${!event.status}">
+							Inactive
+							</c:if>
+							
+							</a></h3>
+							<h4 class="media-heading">${event.game.title }</h4>
+							<p>	<c:if test="${empty event.location }">
+								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
+								</c:if>
+		
+		 
+								<c:if test="${not empty event.location}">
+								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
+								</c:if></p>
+								
+										<form action="deactivateEvent.do" method="POST">
+										<input type="submit" value="Deactivate Event" /> <input
+										type="hidden" name="id" value="${event.id }" />
+										</form>
+
+										<form action="reactivateEvent.do" method="POST">
+										<input type="submit" value="Reactivate Event" /> <input
+										type="hidden" name="id" value="${event.id }" />
+										</form>
+							<ul class="nav nav-pills nav-pills-custom">
+								<li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
+							</ul>
+						</div>
+					</div>
+					</div>
+				
+				</c:forEach>
+				</div>
+				</div>
 
 	<!-- output all users so that admin can deactivate and reactivate them at will -->
 	<h3>User List</h3>
+	
+	
+	
 	<c:forEach items="${completeUserList }" var="user">
 		User: ${user.userName }<br>
 		Active: ${user.status }<br>
