@@ -43,7 +43,7 @@ public class GameDAOImpl implements GameDAO {
 		boolean containGame = false;
 		User joinEventUser = em.find(User.class, id);
 			joinEventUser.addGame(newGame);
-			System.out.println(joinEventUser.getGames());
+			System.out.println("============================="+joinEventUser.getGames());
 		return containGame;
 	}
 
