@@ -86,7 +86,7 @@ public class EventDAOImpl implements EventDAO {
 		Game checkGame = null;
 		List<Game> gameList = em.createQuery(query, Game.class).getResultList();
 		for (Game currentGame : gameList) {
-			if (currentGame.getTitle().equals(game)) {
+			if (currentGame.getTitle().equals(game) && currentGame.getPlatform().equals(platform)) {
 				checkGame = em.find(Game.class, currentGame.getId());
 				checkGame.setPlatform(em.find(Platform.class, platform.getId()));
 

@@ -58,6 +58,7 @@ public class EventController {
 		Event eventToJoin = daoEvent.findEventByEventID(eventId);
 		daoGame.joinEventAddGame(userId, eventToJoin.getGame());
 		daoUser.joinEvent(addUserToEvent, eventToJoin);
+		addUserToEvent = daoUser.findUserByUserID(userId);
 		session.setAttribute("userCurrent", addUserToEvent);
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
