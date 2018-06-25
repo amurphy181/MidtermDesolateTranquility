@@ -6,4 +6,6 @@ public interface GameDAO {
 
 	Game addUserGame(int id, String game, String platform);
 
+	boolean joinEventAddGame(int id, Game game);
+
 }

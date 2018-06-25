@@ -21,16 +21,32 @@ public class GameDAOImpl implements GameDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
+	
+	//Users have a list of games, this allows users to add to the list.
 	@Override
 	public Game addUserGame(int id, String game, String platform) {
 		User userAddGame = em.find(User.class, id);
 		Platform platformAddGame = eventDao.checkPlatformUnique(platform);
 		eventDao.createPlatform(platformAddGame);
 		Game addedGame = eventDao.checkGameUnique(game, platformAddGame);
+		addedGame.setVisible(true);
 		eventDao.createGame(addedGame);
 		userAddGame.addGame(addedGame);
 		return addedGame;
 		
+	}
+	
+	//If a user joins an event and the game is not in their library it will automatically be added.
+	@Override
+	public boolean joinEventAddGame(int id, Game game) {
+		Game newGame = em.find(Game.class, game.getId());
+		boolean containGame = false;
+		User joinEventUser = em.find(User.class, id);
+		if(joinEventUser.getGames().contains(newGame)) {
+			containGame = true;
+		}
+		
+		return containGame;
 	}
 
 }
