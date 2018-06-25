@@ -234,10 +234,22 @@ public class User {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", admin=" + admin + ", status="
-				+ status + ", games=" + games + ", events=" + events + ", createdEvents=" + createdEvents + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", admin=");
+		builder.append(admin);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	

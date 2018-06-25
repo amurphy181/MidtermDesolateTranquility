@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,19 +64,22 @@ public class EventController {
 	}
 	
 	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView deactivateEvent(int id) {
+	public ModelAndView deactivateEvent(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
 		daoEvent.deactivateEvent(id);
+		session.setAttribute("event", id);
+
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}
 	
 	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView reactivateEvent(int id) {
+	public ModelAndView reactivateEvent(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("+++++++++++++" + id);
 		daoEvent.reactivateEvent(id);
+		session.setAttribute("event", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}

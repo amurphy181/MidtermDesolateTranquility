@@ -38,7 +38,7 @@
 	
 	<!-- output all users so that admin can deactivate and reactivate them at will -->
 	<h3>User List</h3>
-	<c:forEach items="${users }" var="user">
+	<c:forEach items="${completeUserList }" var="user">
 		User: ${user.userName }<br>
 		Active: ${user.status }<br>
 		

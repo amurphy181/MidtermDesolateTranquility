@@ -95,8 +95,7 @@ public class UserController {
 	public ModelAndView adminPageView(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<User> completeUserList = dao.listAllUsers();
-		mv.addObject("users", completeUserList);
-		User user = (User) session.getAttribute("user");
+		mv.addObject("completeUserList", completeUserList);
 		System.out.println(completeUserList);
 		mv.setViewName("WEB-INF/adminPage.jsp");
 
