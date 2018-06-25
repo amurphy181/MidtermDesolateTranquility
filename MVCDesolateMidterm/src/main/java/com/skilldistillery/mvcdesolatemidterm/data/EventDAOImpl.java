@@ -136,10 +136,10 @@ public class EventDAOImpl implements EventDAO {
 		System.out.println("+++++++++++" + id);
 		Event eventToDeactivate = em.find(Event.class, id);
 		System.out.println("ID: " + id);
-		eventToDeactivate.setStatus(0);
+		eventToDeactivate.setStatus(false);
 		em.flush();
 		
-		if(em.find(Event.class, eventToDeactivate.getId()).equals(0)) {
+		if(em.find(Event.class, eventToDeactivate.getId()).equals(false)) {
 			System.out.println(eventToDeactivate);
 			return true;
 		}
@@ -151,10 +151,10 @@ public class EventDAOImpl implements EventDAO {
 		System.out.println("+++++++++++ " + id + " reactivate");
 		Event eventToReactivate = em.find(Event.class, id);
 		System.out.println("ID: " + id);
-		eventToReactivate.setStatus(1);
+		eventToReactivate.setStatus(true);
 		em.flush();
 		
-		if(em.find(Event.class, eventToReactivate.getId()).equals(1)) {
+		if(em.find(Event.class, eventToReactivate.getId()).equals(true)) {
 			System.out.println(eventToReactivate);
 			return true;
 		}
