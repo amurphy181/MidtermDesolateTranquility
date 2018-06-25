@@ -9,13 +9,19 @@
 <title>Profile Page</title>
 </head>
 <body>
-<h1>${user.userName }'s profile page</h1>
+<h1>${userCurrent.userName }'s profile page</h1>
 <div>
-<c:forEach items="${user.games }" var="userGames">
+<c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
 		</c:forEach>
 </div>
-
+<form action="addGameToList.do" method="POST">
+	<%-- Error messages --%>
+	Game:<input name="game"/>
+	Platform:<input name = "platform" value= "${platform.id }"/>
+	<input type = "hidden" name = "id" value = "${userCurrent.id }">
+	<input type="submit" value="Add Game" > <br>
+</form>
 
 </body>
 </html>

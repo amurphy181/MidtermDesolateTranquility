@@ -55,6 +55,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		return userList;
 	}
+	
 	@Override
 	public boolean uniqueUsername(String userName) {
 		String query = "select u from User u";
@@ -112,6 +113,36 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return confirmed;
+	}
+	
+	@Override
+	public boolean deactivateUser(int id) {
+		System.out.println("&&&&&& USER DEACTIVATE &&&&&&");
+		User userToDeactivate = em.find(User.class, id);
+		userToDeactivate.setStatus(false);
+		em.flush();
+		
+		if(em.find(User.class, userToDeactivate.getId()).equals(0)) {
+			System.out.println(userToDeactivate);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	@Override
+	public boolean reactivateUser(int id) {
+		System.out.println("@@@@@ USER REACTIVATE @@@@@");
+		User userToReactivate = em.find(User.class, id);
+		userToReactivate.setStatus(false);
+		em.flush();
+		
+		if(em.find(User.class, userToReactivate.getId()).equals(1)) {
+			System.out.println(userToReactivate);
+			return true;
+		}
+		return false;
+		
 	}
 
 }

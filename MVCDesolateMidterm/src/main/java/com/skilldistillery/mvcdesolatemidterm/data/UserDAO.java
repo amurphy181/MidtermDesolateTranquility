@@ -16,5 +16,7 @@ public interface UserDAO {
 	public User findUserByUserID(int id);
 	boolean joinEvent(User user, Event event);
 	public List<User> listAllUsers();
+	public boolean deactivateUser(int id);
+	public boolean reactivateUser(int id);
 
 }
