@@ -168,23 +168,15 @@
 								<input type="text" name="platform" class="form-control" id="search2" aria-describedby="search" placeholder="console" value="${platform.id }">	
 								<input type="text" name="location" class="form-control" id="search2" aria-describedby="search" placeholder="location (optional)">
 								<input type = "hidden" name = "id" value = "${userCurrent.id }">
-							<input type="submit" value="Add Event" > <br>
+								</i>
+							<input type="submit" class="button1" value="Post" > <br>
 
 						
-								</i>
 								</form>
 						
 						
 							</div>
 						</div>
-						
-						<!-- USER POST BUTTON -->
-						
-												<a class="media-right" href="#fake">
-							<img alt="" class="media-object img-rounded" src="http://placehold.it/35x35">
-									
-							
-						</a>
 					
 					</div>
 				</div>
