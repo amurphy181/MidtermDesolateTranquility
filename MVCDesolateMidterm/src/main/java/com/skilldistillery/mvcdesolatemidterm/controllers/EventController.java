@@ -1,9 +1,5 @@
 package com.skilldistillery.mvcdesolatemidterm.controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
-import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
-import com.skilldistillery.mvcdesolatemidterm.data.EventDAOImpl;
+import com.skilldistillery.mvcdesolatemidterm.data.GameDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.UserDAO;
-import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 
 @Controller
 public class EventController {
@@ -29,14 +23,18 @@ public class EventController {
 	private EventDAO daoEvent;
 	@Autowired
 	private UserDAO daoUser;
+	@Autowired
+	private GameDAO daoGame;
 	
 	@RequestMapping(path="createEvent.do") 
-	public ModelAndView createEvent(String game, String platform, String location, int id) {
+	public ModelAndView createEvent(String game, String platform, String location, int id, HttpSession session) {
 		// taking in strings then creating the objects since game requires a platform
 		System.out.println("game: " + game + " platform" + platform + " location" + location + " userId" + id);
 		ModelAndView mv = new ModelAndView();
 		daoEvent.createEvent(game, platform, location, id);
-		
+		Game addedGame = daoGame.addUserGame(id, game, platform);
+		User updateGamesList = daoUser.findUserByUserID(id);
+		session.setAttribute("userCurrent", updateGamesList);
 		mv.setViewName("redirect:landingPage.do");
 		
 		return mv;
@@ -54,11 +52,13 @@ public class EventController {
 	}
 	
 	@RequestMapping(path ="joinEvent.do")
-	public ModelAndView joinEvent(int userId, int eventId) {
+	public ModelAndView joinEvent(int userId, int eventId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User addUserToEvent = daoUser.findUserByUserID(userId);
 		Event eventToJoin = daoEvent.findEventByEventID(eventId);
+		daoGame.joinEventAddGame(userId, eventToJoin.getGame());
 		daoUser.joinEvent(addUserToEvent, eventToJoin);
+		session.setAttribute("userCurrent", addUserToEvent);
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}

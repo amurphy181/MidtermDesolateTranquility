@@ -28,12 +28,12 @@ public class UserController {
 	private UserDAO dao;
 	@Autowired
 	private EventDAO eventDAO;
-	
+
 	// you have the session to check for this
 	private boolean loggedIn;
-	
+
 	// user controllers follow
-	
+
 	@RequestMapping(path = "welcome.do")
 	public ModelAndView loginView() {
 		ModelAndView mv = new ModelAndView();
@@ -43,7 +43,6 @@ public class UserController {
 
 		return mv;
 	}
-	
 
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
@@ -83,23 +82,17 @@ public class UserController {
 		mv.setViewName("WEB-INF/registerView.jsp");
 		return mv;
 	}
-//	
-//	@RequestMapping(path = "adminPage.do")
-//	public ModelAndView adminPage() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("WEB-INF/adminPage.jsp");
-//		return mv;
-//	}
-	
+
 	@RequestMapping(path = "adminPage.do")
-	public ModelAndView adminPageView(HttpSession session) {
+	public ModelAndView adminPageView(HttpSession session, User user) {
 		ModelAndView mv = new ModelAndView();
 		List<User> completeUserList = dao.listAllUsers();
+		List<Event> completeEventList = dao.listAllEvents();
+		mv.addObject("events", completeEventList);
 		mv.addObject("completeUserList", completeUserList);
 		System.out.println(completeUserList);
 		mv.setViewName("WEB-INF/adminPage.jsp");
 
-		
 		return mv;
 	}
 
@@ -107,9 +100,10 @@ public class UserController {
 	public ModelAndView landingPageView(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Event> eventList = dao.listAllEvents();
-		mv.addObject("events", eventList);
+
+		session.setAttribute("events", eventList);
 		User user = (User) session.getAttribute("user");
-		if(eventList == null) {
+		if (eventList == null) {
 			System.out.println("event list is null");
 		} else {
 			System.out.println("it went on through");
@@ -119,44 +113,50 @@ public class UserController {
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;
 	}
+
 	@RequestMapping(path = "registration.do", method = RequestMethod.POST)
 	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (dao.uniqueUsername(user.getUserName())) {
-		//	mv.addObject("user", user);
+			// mv.addObject("user", user);
 			dao.create(user);
-			
+
 			boolean added = true;
-			
+
 			flash.addFlashAttribute("added", added);
 			mv.setViewName("redirect:welcome.do");
-			
+
 		} else {
 			error.rejectValue("userName", "error.userName", "error message");
 			mv.setViewName("WEB-INF/registerView.jsp");
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.POST)
 	public ModelAndView deactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
 		dao.deactivateUser(id);
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
-	
+
 	}
+
 	@RequestMapping(path = "reactivateUser.do", method = RequestMethod.POST)
 	public ModelAndView reactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
 		dao.reactivateUser(id);
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
-		
+
 	}
 
 }

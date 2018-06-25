@@ -25,7 +25,7 @@ public class Event {
 	private int id;
 	@Column(name = "start_date")
 	private Date startDate;
-	private int status;
+	private boolean status;
 	private String location;
 	private int visibility;
 	
@@ -84,11 +84,11 @@ public class Event {
 		this.startDate = startDate;
 	}
 
-	public int getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
@@ -129,11 +129,12 @@ public class Event {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((creator == null) ? 0 : creator.hashCode());
 		result = prime * result + ((game == null) ? 0 : game.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + status;
+		result = prime * result + (status ? 1231 : 1237);
 		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		result = prime * result + visibility;
 		return result;
@@ -148,6 +149,11 @@ public class Event {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
+		if (creator == null) {
+			if (other.creator != null)
+				return false;
+		} else if (!creator.equals(other.creator))
+			return false;
 		if (game == null) {
 			if (other.game != null)
 				return false;
