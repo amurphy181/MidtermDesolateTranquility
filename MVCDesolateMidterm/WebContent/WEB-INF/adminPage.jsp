@@ -171,6 +171,15 @@
 								<input type="submit" class="btn btn-primary" value="Activate User" /> <input type="hidden"
 									name="id" value="${user.id }" />
 							</form>
+							<form action="deactivateAdmin.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Remove As Admin" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
+					
+							<form action="activateAdmin.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Set as Admin" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
 							
 						</div>
 					</div>
