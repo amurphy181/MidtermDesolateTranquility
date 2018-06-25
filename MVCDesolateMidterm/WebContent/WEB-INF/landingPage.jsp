@@ -15,39 +15,48 @@
 <title>Games List</title>
 </head>
 <body>
-	<h1>Success</h1>
+	<h1>See Who's Playing</h1>
 	
 	<!-- testing to see if the user is an administrator -->
 	<c:if test="${userCurrent.admin == 1}">
 		<h3>Current user is admin</h3>
 		<a href = "adminPage.do">Admin Page</a>
 	</c:if>
-	<c:if test="${userCurrent.admin == 0 }">
+<%-- 	<c:if test="${userCurrent.admin == 0 }">
 		<h3>Current user is not the admin</h3>
-	</c:if>
+	</c:if> --%>
 	
-	<p>The current user is: ${userCurrent }</p>
-
+	<p>You are logged in as ${userCurrent.userName }</p>
+<div class="mainDisplay">
 	<c:forEach items="${events }" var="event">
 		<br>
 		<c:if test="${event.visibility == 1 }">
-		${event.location }<br>
-		${event.game.title}<br>
-		${event.game.platform }<br>
-		${event.creator.userName }<br>
-		${event.users }<br>
-		<%-- ${event.users.userName }<br> --%>
+		
+		
+		<c:if test="${empty event.location }">
+		${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
+		</c:if>
+		
+		 
+		<c:if test="${not empty event.location}">
+		${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
+		</c:if>
+		
+
 		<br>
-		<c:forEach items="${event.users }" var="user">
+		<c:if test="${not empty event.users }">
+		with <c:forEach items="${event.users }" var="user">
 		${user.userName }
 		</c:forEach>
+		</c:if>
 	<form action="joinEvent.do" method="GET">
 	<input type = "hidden" name = "userId" value = "${userCurrent.id }">
 	<input type = "hidden" name = "eventId" value = "${event.id }">
-	<input type="submit" value="Join Event" > <br>
+	<input type="submit" value="Join" > <br>
 	</form>
 		</c:if>
 	</c:forEach>
+	</div>
 	<br>
 <form action="createEvent.do" method="POST">
 	<%-- Error messages --%>
