@@ -140,19 +140,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.POST)
-	public ModelAndView deactivateUser(int id) {
+	public ModelAndView deactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
 		dao.deactivateUser(id);
+		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	
 	}
 	@RequestMapping(path = "reactivateUser.do", method = RequestMethod.POST)
-	public ModelAndView reactivateUser(int id) {
+	public ModelAndView reactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
 		dao.reactivateUser(id);
+		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 		

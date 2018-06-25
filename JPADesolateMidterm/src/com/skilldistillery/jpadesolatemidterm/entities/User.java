@@ -45,6 +45,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> events;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "creator")
 	private List<Event> createdEvents;
 	

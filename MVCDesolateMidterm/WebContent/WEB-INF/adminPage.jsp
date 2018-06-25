@@ -39,17 +39,20 @@
 	<!-- output all users so that admin can deactivate and reactivate them at will -->
 	<h3>User List</h3>
 	<c:forEach items="${users }" var="user">
-		${user.userName }<br>
+		User: ${user.userName }<br>
+		Active: ${user.status }<br>
+		
 		
 		<form action="deactivateUser.do" method="POST">
-			<input type="submit" value="Deactivate Event" />
+			<input type="submit" value="Deactivate User" />
 			<input type="hidden" name="id" value="${user.id }"/>
 		</form>
 		
 		<form action="reactivateUser.do" method="POST">
-			<input type="submit" value="Reactivate Event" />
+			<input type="submit" value="Reactivate User" />
 			<input type="hidden" name="id" value="${user.id }"/>
 		</form>
+		<br>
 	</c:forEach>
 
 </body>

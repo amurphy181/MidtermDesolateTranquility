@@ -122,7 +122,7 @@ public class UserDAOImpl implements UserDAO {
 		userToDeactivate.setStatus(false);
 		em.flush();
 		
-		if(em.find(User.class, userToDeactivate.getId()).equals(0)) {
+		if(em.find(User.class, userToDeactivate.getId()).equals(false)) {
 			System.out.println(userToDeactivate);
 			return true;
 		}
@@ -134,10 +134,10 @@ public class UserDAOImpl implements UserDAO {
 	public boolean reactivateUser(int id) {
 		System.out.println("@@@@@ USER REACTIVATE @@@@@");
 		User userToReactivate = em.find(User.class, id);
-		userToReactivate.setStatus(false);
+		userToReactivate.setStatus(true);
 		em.flush();
 		
-		if(em.find(User.class, userToReactivate.getId()).equals(1)) {
+		if(em.find(User.class, userToReactivate.getId()).equals(true)) {
 			System.out.println(userToReactivate);
 			return true;
 		}
