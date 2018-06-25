@@ -50,7 +50,8 @@ public class GameController {
 		Platform updatePlatform = eventDao.checkPlatformUnique(platform);
 		eventDao.createPlatform(updatePlatform);
 		Game updatedGame = eventDao.checkGameUnique(title, updatePlatform);
-		updatedGame = gameDao.updateGame(id, updatedGame);
+		int userId = userUpdateGame.getId();
+		updatedGame = gameDao.updateGame(id, updatedGame, userId);
 		System.out.println("============= updatedGame===========");
 		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
 		session.setAttribute("userCurrent", userUpdateGame);

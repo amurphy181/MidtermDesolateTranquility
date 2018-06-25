@@ -1,5 +1,7 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.List;
+
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 
 public interface GameDAO {
@@ -8,8 +10,10 @@ public interface GameDAO {
 
 	boolean joinEventAddGame(int id, Game game);
 
-	Game updateGame(int id, Game updatedGame);
-
 	Game findGameById(int id);
+
+	List<Game> findAllGames();
+
+	Game updateGame(int id, Game updatedGame, int userId);
 
 }

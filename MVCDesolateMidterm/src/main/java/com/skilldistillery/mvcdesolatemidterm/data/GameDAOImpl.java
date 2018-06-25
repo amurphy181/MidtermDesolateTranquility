@@ -1,5 +1,7 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,6 +19,8 @@ public class GameDAOImpl implements GameDAO {
 	
 	@Autowired
 	private EventDAO eventDao;
+	@Autowired
+	private GameDAO gameDao;
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -47,17 +51,26 @@ public class GameDAOImpl implements GameDAO {
 	}
 	
 	@Override
-	public Game updateGame(int id, Game updatedGame) {
+	public Game updateGame(int id, Game updatedGame, int userId) {
 
 		Game managed = em.find(Game.class, id);
-		if (!managed.getPlatform().equals(updatedGame.getPlatform()) && !managed.getTitle().equals(updatedGame.getTitle())){
-			managed.setTitle(updatedGame.getTitle());
-			managed.setPlatform(updatedGame.getPlatform());
-			managed.setVisible(true);
+		User user = em.find(User.class, userId);
+		List<Game> allGames = gameDao.findAllGames();
+		for (Game game : allGames) {
+			if(updatedGame.getPlatform().getPlatformName().equals(game.getPlatform().getPlatformName()) && updatedGame.getTitle().equals(game.getTitle())) {
 			
-			em.flush();
+				managed = em.find(Game.class, game.getId());
+				user.addGame(managed);
+				return managed;
+			}
 			
 		}
+			
+		managed.setTitle(updatedGame.getTitle());
+		managed.setPlatform(updatedGame.getPlatform());
+		managed.setVisible(true);
+			em.flush();
+			user.addGame(managed);
 
 		return managed;
 	}
@@ -66,6 +79,15 @@ public class GameDAOImpl implements GameDAO {
 		Game foundGame = em.find(Game.class, id);
 		
 		return foundGame;
+	}
+	
+	@Override
+	public List<Game> findAllGames() {
+		String query = "select g from Game g";
+		List<Game> allGames = em.createQuery(query, Game.class).getResultList();
+		
+		
+		return allGames;
 	}
 
 }

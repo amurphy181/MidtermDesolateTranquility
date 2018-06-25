@@ -32,6 +32,10 @@ ${addedGame }
 	<input type = "hidden" name = "id" value = "${userCurrent.id }">
 	<input type="submit" value="Add Game" > <br>
 </form>
+<h2>Joined Events</h2>
+<c:forEach items = "${userCurrent.events }" var="userEvents">
+${userEvents.game.title }
+</c:forEach>
 <a href="landingPage.do">Home</a>
 
 </body>
