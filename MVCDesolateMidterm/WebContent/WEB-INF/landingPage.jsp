@@ -78,12 +78,16 @@
 				<li class="active">
 					<a href="#fake"><span class="glyphicon glyphicon-home"></span> Home</a>
 				</li>
-				<li>
-					<a href="#fake"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
-				</li>
+				
 				<li>
 					<a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
 				</li>
+					<c:if test="${userCurrent.admin == 1}">
+
+				<li>
+					<a href="adminPage.do"><span class="glyphicon glyphicon-bell"></span> Admin</a>
+				</li>
+				</c:if>
 			</ul>
 			<div class="navbar-form navbar-right">
 				<div class="form-group has-feedback">
