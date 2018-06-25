@@ -59,5 +59,6 @@
 </form>
 
 <a href="welcome.do">Home</a>
+<a href="profileView.do">Profile</a>
 </body>
 </html>
