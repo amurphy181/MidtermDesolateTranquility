@@ -73,6 +73,26 @@ public class UserController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = "logout.do", method = RequestMethod.POST)
+	public ModelAndView logoutMethod(User user, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User userLogout = dao.findUserByUsername(user.getUserName());
+		System.out.println(userLogout);
+		System.out.println(user.getPassword());
+		
+		if(userLogout != null) {
+			loggedIn = false;
+			session.removeAttribute("loggedIn");
+			mv.setViewName("WEB-INF/loginView.jsp");
+		}
+		
+		
+		return mv;
+	}
+	
+	
+	
 
 	@RequestMapping(path = "register.do")
 	public ModelAndView registerMethodView() {
