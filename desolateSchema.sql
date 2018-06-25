@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `admin` TINYINT NOT NULL DEFAULT 0,
+  `status` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
@@ -235,10 +236,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (1, 'PurpleFuzz', 'password', 0);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (2, 'JGMoney', 'password', 0);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (3, 'ASauceyBoy', 'password', 0);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`) VALUES (4, 'admin', 'admin', 1);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (1, 'PurpleFuzz', 'password', 0, 1);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (2, 'JGMoney', 'password', 0, 1);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (3, 'ASauceyBoy', 'password', 0, 1);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (4, 'admin', 'admin', 1, 1);
 
 COMMIT;
 
@@ -248,7 +249,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, DEFAULT);
-INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', DEFAULT);
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, 1);
+INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', 1);
 
 COMMIT;
