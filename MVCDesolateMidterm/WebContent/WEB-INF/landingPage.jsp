@@ -76,7 +76,7 @@
 		<div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="true">
 			<ul class="nav navbar-nav">
 				<li class="active">
-					<a href="#fake"><span class="glyphicon glyphicon-home"></span> Home</a>
+					<a href="welcome.do"><span class="glyphicon glyphicon-home"></span> Home</a>
 				</li>
 				
 				<li>
