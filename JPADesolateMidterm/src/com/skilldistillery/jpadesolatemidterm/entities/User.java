@@ -29,6 +29,7 @@ public class User {
 	private String userName;
 	private String password;
 	private int admin;
+	private boolean status;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
@@ -167,12 +168,25 @@ public class User {
 		this.admin = admin;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + admin;
+		result = prime * result + ((createdEvents == null) ? 0 : createdEvents.hashCode());
+		result = prime * result + ((events == null) ? 0 : events.hashCode());
+		result = prime * result + ((games == null) ? 0 : games.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
@@ -186,12 +200,31 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (admin != other.admin)
+			return false;
+		if (createdEvents == null) {
+			if (other.createdEvents != null)
+				return false;
+		} else if (!createdEvents.equals(other.createdEvents))
+			return false;
+		if (events == null) {
+			if (other.events != null)
+				return false;
+		} else if (!events.equals(other.events))
+			return false;
+		if (games == null) {
+			if (other.games != null)
+				return false;
+		} else if (!games.equals(other.games))
+			return false;
 		if (id != other.id)
 			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (status != other.status)
 			return false;
 		if (userName == null) {
 			if (other.userName != null)
@@ -202,17 +235,8 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
-		builder.append(id);
-		builder.append(", userName=");
-		builder.append(userName);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", games=");
-		builder.append(games);
-		builder.append("]");
-		return builder.toString();
+		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", admin=" + admin + ", status="
+				+ status + ", games=" + games + ", events=" + events + ", createdEvents=" + createdEvents + "]";
 	}
 
 	

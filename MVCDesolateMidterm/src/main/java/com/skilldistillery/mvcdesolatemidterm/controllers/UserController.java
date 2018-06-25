@@ -44,12 +44,6 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "adminPage.do")
-	public ModelAndView adminPage() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("WEB-INF/adminPage.jsp");
-		return mv;
-	}
 
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
@@ -89,19 +83,26 @@ public class UserController {
 		mv.setViewName("WEB-INF/registerView.jsp");
 		return mv;
 	}
-	
+//	
 //	@RequestMapping(path = "adminPage.do")
-//	public ModelAndView adminPageView(HttpSession session) {
+//	public ModelAndView adminPage() {
 //		ModelAndView mv = new ModelAndView();
-//		List<User> completeUserList = dao.listAllUsers();
-//		mv.addObject("users", completeUserList);
-//		User user = (User) session.getAttribute("user");
-//		System.out.println(completeUserList);
 //		mv.setViewName("WEB-INF/adminPage.jsp");
-//
-//		
 //		return mv;
 //	}
+	
+	@RequestMapping(path = "adminPage.do")
+	public ModelAndView adminPageView(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("users", completeUserList);
+		User user = (User) session.getAttribute("user");
+		System.out.println(completeUserList);
+		mv.setViewName("WEB-INF/adminPage.jsp");
+
+		
+		return mv;
+	}
 
 	@RequestMapping(path = "landingPage.do")
 	public ModelAndView landingPageView(HttpSession session) {
@@ -136,6 +137,25 @@ public class UserController {
 			mv.setViewName("WEB-INF/registerView.jsp");
 		}
 		return mv;
+	}
+	
+	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.POST)
+	public ModelAndView deactivateUser(int id) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("**************" + id);
+		dao.deactivateUser(id);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+	
+	}
+	@RequestMapping(path = "reactivateUser.do", method = RequestMethod.POST)
+	public ModelAndView reactivateUser(int id) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("**************" + id);
+		dao.reactivateUser(id);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+		
 	}
 
 }
