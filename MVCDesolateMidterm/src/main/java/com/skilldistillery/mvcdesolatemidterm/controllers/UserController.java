@@ -74,7 +74,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "logout.do", method = RequestMethod.POST)
+	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
 	public ModelAndView logoutMethod(User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User userLogout = dao.findUserByUsername(user.getUserName());
@@ -83,8 +83,9 @@ public class UserController {
 		
 		if(userLogout != null) {
 			loggedIn = false;
-			session.removeAttribute("loggedIn");
-			mv.setViewName("WEB-INF/loginView.jsp");
+			session.invalidate();
+//			session.removeAttribute("loggedIn");
+			mv.setViewName("redirect:welcome.do");
 		}
 		
 		

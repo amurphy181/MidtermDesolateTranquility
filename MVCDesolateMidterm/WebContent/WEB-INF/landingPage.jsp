@@ -80,7 +80,7 @@
 				</li>
 				
 				<li>
-					<a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+					<a href="profileView.do"><span class="glyphicon glyphicon-envelope"></span> Profile</a>
 				</li>
 					<c:if test="${userCurrent.admin == 1}">
 
@@ -95,9 +95,11 @@
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
 
+					<a href="logout.do">
 				<button class="btn btn-primary" type="submit" aria-label="Left Align">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Tweet
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Logout
 				</button>
+					</a>
 			</div>
 		</div>
 	</div>
