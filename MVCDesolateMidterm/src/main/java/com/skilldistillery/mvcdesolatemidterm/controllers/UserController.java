@@ -32,10 +32,6 @@ public class UserController {
 	// you have the session to check for this
 	private boolean loggedIn;
 	
-	// these next couple of methods need to be moved over to the event controller
-	
-	
-	
 	// user controllers follow
 	
 	@RequestMapping(path = "welcome.do")
