@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `title` VARCHAR(45) NOT NULL,
   `platform_id` INT NOT NULL,
   `max_players` INT(11) NULL,
+  `status` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `FK_GAME_TO_PLATFORM_ID_idx` (`platform_id` ASC),
   CONSTRAINT `FK_GAME_TO_PLATFORM_ID`
@@ -224,9 +225,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (1, 'League of Legends', 1, 5);
-INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (2, 'Call of Duty', 2, 6);
-INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`) VALUES (3, 'Magic the Gathering', 3, 2);
+INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`, `status`) VALUES (1, 'League of Legends', 1, 5, 1);
+INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`, `status`) VALUES (2, 'Call of Duty', 2, 6, 1);
+INSERT INTO `game` (`id`, `title`, `platform_id`, `max_players`, `status`) VALUES (3, 'Magic the Gathering', 3, 2, 1);
 
 COMMIT;
 
