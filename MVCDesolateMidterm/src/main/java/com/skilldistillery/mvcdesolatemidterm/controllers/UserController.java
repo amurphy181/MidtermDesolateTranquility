@@ -75,17 +75,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
-	public ModelAndView logoutMethod(User user, HttpSession session) {
+	public ModelAndView logoutMethod(@ModelAttribute("userCurrent") User user, HttpSession session, RedirectAttributes flash) {
 		ModelAndView mv = new ModelAndView();
-		User userLogout = dao.findUserByUsername(user.getUserName());
+		
+		System.out.println(user);
+		User userLogout = (User) session.getAttribute("userCurrent");
 		System.out.println(userLogout);
-		System.out.println(user.getPassword());
+		System.out.println("!@!@!@!@ LOGOUT TESTER @!@!@!@!");
 		
 		if(userLogout != null) {
 			loggedIn = false;
 			session.invalidate();
-//			session.removeAttribute("loggedIn");
+			flash.addFlashAttribute("logOut", userLogout.getUserName());
 			mv.setViewName("redirect:welcome.do");
+		} else {
+			System.out.println("LOGOUT failed.\n");
 		}
 		
 		
