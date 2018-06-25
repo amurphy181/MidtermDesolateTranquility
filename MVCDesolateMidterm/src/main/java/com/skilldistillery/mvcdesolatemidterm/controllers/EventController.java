@@ -69,7 +69,7 @@ public class EventController {
 
 		daoEvent.deactivateEvent(id);
 
-		mv.setViewName("redirect:adminPage.jsp");
+		mv.setViewName("redirect:adminPage.do");
 
 		return mv;
 	}
@@ -82,7 +82,7 @@ public class EventController {
 		
 		daoEvent.reactivateEvent(id);
 		
-		mv.setViewName("redirect:adminPage.jsp");
+		mv.setViewName("redirect:adminPage.do");
 		
 		return mv;
 	}
