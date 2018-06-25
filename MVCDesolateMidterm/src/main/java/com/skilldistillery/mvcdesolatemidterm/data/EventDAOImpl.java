@@ -23,6 +23,8 @@ public class EventDAOImpl implements EventDAO {
 	UserDAO userDao;
 	@Autowired
 	EventDAO eventDao;
+	@Autowired
+	GameDAO gameDao;
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -40,6 +42,9 @@ public class EventDAOImpl implements EventDAO {
 		eventDao.createPlatform(eventPlatform);
 		Game eventGame = eventDao.checkGameUnique(game, eventPlatform);
 		eventDao.createGame(eventGame);
+		gameDao.addUserGame(id, game, platform);
+		
+
 		Event createdEvent = new Event();
 		createdEvent.setGame(eventGame);
 		createdEvent.setLocation(location);

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,9 @@ import com.skilldistillery.jpadesolatemidterm.entities.User;
 @Component
 public class UserDAOImpl implements UserDAO {
 
+	@Autowired
+	GameDAO gameDao;
+	
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -27,6 +31,7 @@ public class UserDAOImpl implements UserDAO {
 			managedEvent.addUser(addUser);
 			added = true;
 		}
+		
 		
 		return added;
 	}
