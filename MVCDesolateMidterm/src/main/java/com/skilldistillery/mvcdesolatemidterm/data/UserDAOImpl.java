@@ -120,6 +120,8 @@ public class UserDAOImpl implements UserDAO {
 		return confirmed;
 	}
 	
+	// deactivate and reactivate users
+	
 	@Override
 	public boolean deactivateUser(int id) {
 		System.out.println("&&&&&& USER DEACTIVATE &&&&&&");
@@ -144,6 +146,37 @@ public class UserDAOImpl implements UserDAO {
 		
 		if(em.find(User.class, userToReactivate.getId()).equals(true)) {
 			System.out.println(userToReactivate);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	// activate Admin status for users
+	@Override
+	public boolean deactivateAdmin(int id) {
+		System.out.println("&&&&&& ADMIN DEACTIVATE &&&&&&");
+		User adminToDeactivate = em.find(User.class, id);
+		adminToDeactivate.setAdmin(false);
+		em.flush();
+		
+		if(em.find(User.class, adminToDeactivate.getId()).equals(false)) {
+			System.out.println(adminToDeactivate);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	@Override
+	public boolean activateAdmin(int id) {
+		System.out.println("@@@@@ ADMIN ACTIVATE @@@@@");
+		User userChangeToAdmin = em.find(User.class, id);
+		userChangeToAdmin.setAdmin(true);
+		em.flush();
+		
+		if(em.find(User.class, userChangeToAdmin.getId()).equals(true)) {
+			System.out.println(userChangeToAdmin);
 			return true;
 		}
 		return false;

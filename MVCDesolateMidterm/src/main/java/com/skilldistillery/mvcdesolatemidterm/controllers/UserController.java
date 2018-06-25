@@ -127,14 +127,14 @@ public class UserController {
 		List<Event> eventList = dao.listAllEvents();
 
 		session.setAttribute("events", eventList);
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("userCurrent");
 		if (eventList == null) {
 			System.out.println("event list is null");
 		} else {
 			System.out.println("it went on through");
 		}
 		System.out.println(eventList);
-		session.setAttribute("user", user);
+		session.setAttribute("userCurrent", user);
 		mv.setViewName("WEB-INF/landingPage.jsp");
 		return mv;
 	}
@@ -157,6 +157,8 @@ public class UserController {
 		}
 		return mv;
 	}
+	
+	// activate and deactivate users
 
 	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.POST)
 	public ModelAndView deactivateUser(HttpSession session, int id) {
@@ -182,6 +184,31 @@ public class UserController {
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 
+	}
+	@RequestMapping(path = "deactivateAdmin.do", method = RequestMethod.POST)
+	public ModelAndView deactivateAdmin(HttpSession session, int id) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("************** " + id + "Deactivate admin status");
+		dao.deactivateAdmin(id);
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("completeUserList", completeUserList);
+		session.setAttribute("user", id);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+		
+	}
+	
+	@RequestMapping(path = "activateAdmin.do", method = RequestMethod.POST)
+	public ModelAndView activateAdmin(HttpSession session, int id) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("************** " + id + "Activate as Admin");
+		dao.activateAdmin(id);
+		List<User> completeUserList = dao.listAllUsers();
+		mv.addObject("completeUserList", completeUserList);
+		session.setAttribute("user", id);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+		
 	}
 
 }

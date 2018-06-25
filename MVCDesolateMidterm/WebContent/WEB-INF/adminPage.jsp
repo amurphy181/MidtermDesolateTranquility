@@ -31,7 +31,7 @@
 				<li>
 					<a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
 				</li>
-					<c:if test="${userCurrent.admin == 1}">
+					<c:if test="${userCurrent.admin}">
 
 				<li>
 					<a href="adminPage.do"><span class="glyphicon glyphicon-bell"></span> Admin</a>
@@ -44,9 +44,11 @@
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
 
+							<a href="logout.do">
 				<button class="btn btn-primary" type="submit" aria-label="Left Align">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Tweet
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Logout
 				</button>
+					</a>
 			</div>
 		</div>
 	</div>
@@ -158,7 +160,13 @@
 							</c:if>
 							<c:if test="${!user.status}">
 							Inactive
-							</c:if></h4>
+							</c:if>
+							<c:if test="${user.admin}">
+							Administrator
+							</c:if>
+							
+							</h4>
+							
 		
 	
 								
@@ -169,6 +177,15 @@
 					
 							<form action="reactivateUser.do" method="POST">
 								<input type="submit" class="btn btn-primary" value="Activate User" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
+							<form action="deactivateAdmin.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Remove As Admin" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
+					
+							<form action="activateAdmin.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Set as Admin" /> <input type="hidden"
 									name="id" value="${user.id }" />
 							</form>
 							
