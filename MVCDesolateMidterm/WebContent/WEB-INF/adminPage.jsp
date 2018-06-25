@@ -15,7 +15,6 @@
 
 	<!-- cycle through the events and be able to link over to the page in order to delete -->
 
-
 	<c:forEach items="${events }" var="event">
 		<br>
 		<a href="getEventId.do?fid=${event.id }">Status: ${event.status }</a>
@@ -35,9 +34,22 @@
 		</form>
 
 		<br>
-		<c:forEach items="${event.users }" var="user">
-		${user.userName }
-		</c:forEach>
+	</c:forEach>
+	
+	<!-- output all users so that admin can deactivate and reactivate them at will -->
+	<h3>User List</h3>
+	<c:forEach items="${users }" var="user">
+		${user.userName }<br>
+		
+		<form action="deactivateUser.do" method="POST">
+			<input type="submit" value="Deactivate Event" />
+			<input type="hidden" name="id" value="${user.id }"/>
+		</form>
+		
+		<form action="reactivateUser.do" method="POST">
+			<input type="submit" value="Reactivate Event" />
+			<input type="hidden" name="id" value="${user.id }"/>
+		</form>
 	</c:forEach>
 
 </body>

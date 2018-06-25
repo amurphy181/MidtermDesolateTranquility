@@ -1,6 +1,6 @@
 
 body {
-	background-color: rgb(50, 50, 220);
+	background-color: rgb(50, 50, 170);
     font-size: 125%;
 
 }
@@ -20,6 +20,9 @@ p  {
 
 .button {
    color: black;
+}
+.mainDisplay{
+	
 }
 
 div {
