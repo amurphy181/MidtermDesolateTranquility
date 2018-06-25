@@ -28,7 +28,7 @@ public class User {
 	@Column(name="name")
 	private String userName;
 	private String password;
-	private int admin;
+	private boolean admin;
 	private boolean status;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -161,11 +161,11 @@ public class User {
 	}
 	
 	
-	public int getAdmin() {
+	public boolean getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(int admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
@@ -181,7 +181,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + admin;
+		result = prime * result + (admin ? 1231 : 1237);
 		result = prime * result + ((createdEvents == null) ? 0 : createdEvents.hashCode());
 		result = prime * result + ((events == null) ? 0 : events.hashCode());
 		result = prime * result + ((games == null) ? 0 : games.hashCode());

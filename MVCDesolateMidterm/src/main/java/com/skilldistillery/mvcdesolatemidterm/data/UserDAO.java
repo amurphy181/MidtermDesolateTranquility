@@ -18,5 +18,7 @@ public interface UserDAO {
 	public List<User> listAllUsers();
 	public boolean deactivateUser(int id);
 	public boolean reactivateUser(int id);
+	public boolean deactivateAdmin(int id);
+	public boolean activateAdmin(int id);
 
 }
