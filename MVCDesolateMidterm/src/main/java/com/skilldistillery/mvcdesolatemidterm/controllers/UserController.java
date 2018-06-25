@@ -188,8 +188,8 @@ public class UserController {
 	@RequestMapping(path = "deactivateAdmin.do", method = RequestMethod.POST)
 	public ModelAndView deactivateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("**************" + id);
-		dao.deactivateUser(id);
+		System.out.println("************** " + id + "Deactivate admin status");
+		dao.deactivateAdmin(id);
 		List<User> completeUserList = dao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
@@ -201,8 +201,8 @@ public class UserController {
 	@RequestMapping(path = "activateAdmin.do", method = RequestMethod.POST)
 	public ModelAndView activateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("**************" + id);
-		dao.reactivateUser(id);
+		System.out.println("************** " + id + "Activate as Admin");
+		dao.activateAdmin(id);
 		List<User> completeUserList = dao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
