@@ -11,8 +11,14 @@
 <body>
 <h1>${userCurrent.userName }'s profile page</h1>
 <div>
+${addedGame }
+<c:if test="${not empty addedGame}"><h3>${addedGame } was added to your list.</h3>
+</c:if>
+
 <c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
+		${userGames.platform.platformName }
+		<br>
 		</c:forEach>
 </div>
 <form action="addGameToList.do" method="POST">
@@ -22,6 +28,7 @@
 	<input type = "hidden" name = "id" value = "${userCurrent.id }">
 	<input type="submit" value="Add Game" > <br>
 </form>
+<a href="landingPage.do">Home</a>
 
 </body>
 </html>

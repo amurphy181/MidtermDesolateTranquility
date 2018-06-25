@@ -25,6 +25,8 @@ public class Game {
 	private String title;
 	@Column(name = "max_players")
 	private int maxPlayers;
+	@Column(name="status")
+	private boolean visible;
 	
 	@ManyToOne
 	@JoinColumn(name = "platform_id")
@@ -84,6 +86,14 @@ public class Game {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 	public int getMaxPlayers() {

@@ -25,7 +25,9 @@ public class GameDAOImpl implements GameDAO {
 	public Game addUserGame(int id, String game, String platform) {
 		User userAddGame = em.find(User.class, id);
 		Platform platformAddGame = eventDao.checkPlatformUnique(platform);
+		eventDao.createPlatform(platformAddGame);
 		Game addedGame = eventDao.checkGameUnique(game, platformAddGame);
+		eventDao.createGame(addedGame);
 		userAddGame.addGame(addedGame);
 		return addedGame;
 		
