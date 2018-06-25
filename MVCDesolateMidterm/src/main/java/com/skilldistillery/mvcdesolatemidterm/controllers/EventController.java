@@ -61,6 +61,31 @@ public class EventController {
 		return mv;
 	}
 	
+	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
+	public ModelAndView deactivateEvent(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("**************" + id);
+
+		daoEvent.deactivateEvent(id);
+
+		mv.setViewName("redirect:adminPage.jsp");
+
+		return mv;
+	}
+	
+	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
+	public ModelAndView reactivateEvent(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("+++++++++++++" + id);
+		
+		daoEvent.reactivateEvent(id);
+		
+		mv.setViewName("redirect:adminPage.jsp");
+		
+		return mv;
+	}
 	
 	
 	
