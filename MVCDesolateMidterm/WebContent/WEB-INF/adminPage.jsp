@@ -44,9 +44,11 @@
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
 
+							<a href="logout.do">
 				<button class="btn btn-primary" type="submit" aria-label="Left Align">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Tweet
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Logout
 				</button>
+					</a>
 			</div>
 		</div>
 	</div>

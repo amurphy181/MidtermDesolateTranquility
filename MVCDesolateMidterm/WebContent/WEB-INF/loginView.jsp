@@ -22,9 +22,10 @@
 <title>Who's Playing?</title>
 </head>
 
-
 <body>
+
 <div>
+
 <c:if test="${added == true}">You successfully registered </c:if>
 <c:if test="${not empty logOut }">${logOut } successfully logged out!</c:if><br>
 <form:form action="login.do" modelAttribute="user" method="POST">
