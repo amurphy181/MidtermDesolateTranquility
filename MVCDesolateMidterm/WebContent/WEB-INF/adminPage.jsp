@@ -75,8 +75,9 @@
 		<br>
 	</c:forEach> --%>
 	
-					
+		
 		<div class="col-sm-6">
+			<h3>Events List</h3>
 			<div class="panel panel-info">				
 					<c:forEach items="${events }" var="event">
 				<div class="panel-body">
@@ -88,7 +89,7 @@
 					
 						<div class="media-body">
 							
-							<h3><a href="getEventId.do?fid=${event.id }">Status:
+							<h3>Status:
 							
 							<c:if test="${event.status}">
 							Active
@@ -97,7 +98,7 @@
 							Inactive
 							</c:if>
 							
-							</a></h3>
+							</h3>
 							<h4 class="media-heading">${event.game.title }</h4>
 							<p>	<c:if test="${empty event.location }">
 								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
@@ -109,12 +110,12 @@
 								</c:if></p>
 								
 										<form action="deactivateEvent.do" method="POST">
-										<input type="submit" value="Deactivate Event" /> <input
+										<input type="submit" class="btn btn-primary" value="Deactivate Event" /> <input
 										type="hidden" name="id" value="${event.id }" />
 										</form>
 
 										<form action="reactivateEvent.do" method="POST">
-										<input type="submit" value="Reactivate Event" /> <input
+										<input type="submit" class="btn btn-primary" value="Activate Event" /> <input
 										type="hidden" name="id" value="${event.id }" />
 										</form>
 							<ul class="nav nav-pills nav-pills-custom">
@@ -132,25 +133,53 @@
 				</div>
 
 	<!-- output all users so that admin can deactivate and reactivate them at will -->
-	<h3>User List</h3>
 	
 	
 	
-	<c:forEach items="${completeUserList }" var="user">
-		User: ${user.userName }<br>
-		Active: ${user.status }<br>
-
-		<form action="deactivateUser.do" method="POST">
-			<input type="submit" value="Deactivate User" /> <input type="hidden"
-				name="id" value="${user.id }" />
-		</form>
-
-		<form action="reactivateUser.do" method="POST">
-			<input type="submit" value="Reactivate User" /> <input type="hidden"
-				name="id" value="${user.id }" />
-		</form>
-		<br>
-	</c:forEach>
+			<div class="col-sm-6">
+				<h3>User List</h3>
+			<div class="panel panel-info">				
+					<c:forEach items="${completeUserList }" var="user">
+				<div class="panel-body">
+					<div class="media">
+						<a class="media-left" href="#fake">
+							<img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+						</a>
+					
+					
+						<div class="media-body">
+							
+							<h3>${user.userName }</h3>
+							<h4 class="media-heading">							
+							Status:
+							
+							<c:if test="${user.status}">
+							Active
+							</c:if>
+							<c:if test="${!user.status}">
+							Inactive
+							</c:if></h4>
+		
+	
+								
+							<form action="deactivateUser.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Deactivate User" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
+					
+							<form action="reactivateUser.do" method="POST">
+								<input type="submit" class="btn btn-primary" value="Activate User" /> <input type="hidden"
+									name="id" value="${user.id }" />
+							</form>
+							
+						</div>
+					</div>
+					</div>
+				
+				</c:forEach>
+				</div>
+				</div>
+	
 
 </body>
 </html>
