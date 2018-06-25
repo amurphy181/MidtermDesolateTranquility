@@ -24,33 +24,32 @@
 		${event.status }
 		<%-- ${event.users.userName }<br> --%>
 		<form action="deactivateEvent.do" method="POST">
-			<input type="submit" value="Deactivate Event" />
-			<input type="hidden" name="id" value="${event.id }"/>
+			<input type="submit" value="Deactivate Event" /> <input
+				type="hidden" name="id" value="${event.id }" />
 		</form>
-		
+
 		<form action="reactivateEvent.do" method="POST">
-			<input type="submit" value="Reactivate Event" />
-			<input type="hidden" name="id" value="${event.id }"/>
+			<input type="submit" value="Reactivate Event" /> <input
+				type="hidden" name="id" value="${event.id }" />
 		</form>
 
 		<br>
 	</c:forEach>
-	
+
 	<!-- output all users so that admin can deactivate and reactivate them at will -->
 	<h3>User List</h3>
 	<c:forEach items="${completeUserList }" var="user">
 		User: ${user.userName }<br>
 		Active: ${user.status }<br>
-		
-		
+
 		<form action="deactivateUser.do" method="POST">
-			<input type="submit" value="Deactivate User" />
-			<input type="hidden" name="id" value="${user.id }"/>
+			<input type="submit" value="Deactivate User" /> <input type="hidden"
+				name="id" value="${user.id }" />
 		</form>
-		
+
 		<form action="reactivateUser.do" method="POST">
-			<input type="submit" value="Reactivate User" />
-			<input type="hidden" name="id" value="${user.id }"/>
+			<input type="submit" value="Reactivate User" /> <input type="hidden"
+				name="id" value="${user.id }" />
 		</form>
 		<br>
 	</c:forEach>
