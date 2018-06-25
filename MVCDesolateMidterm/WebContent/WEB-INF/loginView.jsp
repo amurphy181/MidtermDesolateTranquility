@@ -24,6 +24,7 @@
 <body>
 <div>
 <c:if test="${added == true}">You successfully registered </c:if>
+<c:if test="${not empty logOut }">${logOut } successfully logged out!</c:if><br>
 <form:form action="login.do" modelAttribute="user" method="POST">
 	Username  <form:input type="text" autocorrect="off" autocapitalize="none" path="userName"/><br>
 	Password  <form:password path="password"/><br><br>
