@@ -50,12 +50,14 @@ public class GameDAOImpl implements GameDAO {
 	public Game updateGame(int id, Game updatedGame) {
 
 		Game managed = em.find(Game.class, id);
-		
-		managed.setTitle(updatedGame.getTitle());
-		managed.setPlatform(updatedGame.getPlatform());
-		managed.setVisible(true);
-
-		em.flush();
+		if (!managed.getPlatform().equals(updatedGame.getPlatform()) && !managed.getTitle().equals(updatedGame.getTitle())){
+			managed.setTitle(updatedGame.getTitle());
+			managed.setPlatform(updatedGame.getPlatform());
+			managed.setVisible(true);
+			
+			em.flush();
+			
+		}
 
 		return managed;
 	}

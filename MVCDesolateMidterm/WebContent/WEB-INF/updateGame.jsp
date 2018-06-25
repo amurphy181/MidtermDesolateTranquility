@@ -13,7 +13,7 @@
 <form action="updateGameInfo.do" method="POST">
 Title:<input type="text" name="title" value="${game.title }"/>
 Platform: <input type="text" name="platform" value="${game.platform.platformName}"/><br>
-
+	<input type ="hidden" name = "id" value="${game.id }"/>
 	<input type="submit" value="Update Game"/> 
 	</form>
 	<a href="profileView.do">Back</a>

@@ -44,18 +44,16 @@ public class GameController {
 		return mv;
 	}
 	@RequestMapping(path="updateGameInfo.do", method = RequestMethod.POST)
-	public ModelAndView updateGamePage(String platform, String title, HttpSession session) {
+	public ModelAndView updateGamePage(int id, String platform, String title, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User userUpdateGame = (User) session.getAttribute("userCurrent");
 		Platform updatePlatform = eventDao.checkPlatformUnique(platform);
 		eventDao.createPlatform(updatePlatform);
 		Game updatedGame = eventDao.checkGameUnique(title, updatePlatform);
-		System.out.println(updatedGame.getTitle());
-		int id = updatedGame.getId();
 		updatedGame = gameDao.updateGame(id, updatedGame);
 		System.out.println("============= updatedGame===========");
-		User updateGamesList = userDao.findUserByUserID(id);
-		session.setAttribute("userCurrent", updateGamesList);
+		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
+		session.setAttribute("userCurrent", userUpdateGame);
 
 		mv.setViewName("redirect:profileView.do");
 		return mv;
