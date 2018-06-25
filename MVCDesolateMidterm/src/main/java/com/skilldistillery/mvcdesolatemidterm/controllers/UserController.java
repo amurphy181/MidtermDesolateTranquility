@@ -119,18 +119,18 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "adminPage.do")
-	public ModelAndView adminPageView(HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		List<User> completeUserList = dao.listAllUsers();
-		mv.addObject("users", completeUserList);
-		User user = (User) session.getAttribute("user");
-		System.out.println(completeUserList);
-		mv.setViewName("WEB-INF/adminPage.jsp");
-
-		
-		return mv;
-	}
+//	@RequestMapping(path = "adminPage.do")
+//	public ModelAndView adminPageView(HttpSession session) {
+//		ModelAndView mv = new ModelAndView();
+//		List<User> completeUserList = dao.listAllUsers();
+//		mv.addObject("users", completeUserList);
+//		User user = (User) session.getAttribute("user");
+//		System.out.println(completeUserList);
+//		mv.setViewName("WEB-INF/adminPage.jsp");
+//
+//		
+//		return mv;
+//	}
 
 	@RequestMapping(path = "landingPage.do")
 	public ModelAndView landingPageView(HttpSession session) {
