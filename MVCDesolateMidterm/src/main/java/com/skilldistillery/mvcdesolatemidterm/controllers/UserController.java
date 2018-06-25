@@ -34,31 +34,6 @@ public class UserController {
 	
 	// these next couple of methods need to be moved over to the event controller
 	
-	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView deactivateEvent(int id) {
-		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("**************" + id);
-
-		eventDAO.deactivateEvent(id);
-
-		mv.setViewName("redirect:adminPage.jsp");
-
-		return mv;
-	}
-	
-	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
-	public ModelAndView reactivateEvent(int id) {
-		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("+++++++++++++" + id);
-		
-		eventDAO.reactivateEvent(id);
-		
-		mv.setViewName("redirect:adminPage.jsp");
-		
-		return mv;
-	}
 	
 	
 	// user controllers follow
