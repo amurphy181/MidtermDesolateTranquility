@@ -8,4 +8,8 @@ public interface GameDAO {
 
 	boolean joinEventAddGame(int id, Game game);
 
+	Game updateGame(int id, Game updatedGame);
+
+	Game findGameById(int id);
+
 }

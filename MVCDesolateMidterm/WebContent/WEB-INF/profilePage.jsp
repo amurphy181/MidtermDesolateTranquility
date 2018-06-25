@@ -18,6 +18,10 @@ ${addedGame }
 <c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
 		${userGames.platform.platformName }
+		<form action="updateGame.do">
+		<input type="submit" value="Update Game">
+		<input type="hidden" name="id" value="${userGames.id}">
+		</form>
 		<br>
 		</c:forEach>
 </div>
