@@ -31,7 +31,7 @@
 				<li>
 					<a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
 				</li>
-					<c:if test="${userCurrent.admin == 1}">
+					<c:if test="${userCurrent.admin}">
 
 				<li>
 					<a href="adminPage.do"><span class="glyphicon glyphicon-bell"></span> Admin</a>
@@ -158,7 +158,13 @@
 							</c:if>
 							<c:if test="${!user.status}">
 							Inactive
-							</c:if></h4>
+							</c:if>
+							<c:if test="${user.admin}">
+							Administrator
+							</c:if>
+							
+							</h4>
+							
 		
 	
 								
