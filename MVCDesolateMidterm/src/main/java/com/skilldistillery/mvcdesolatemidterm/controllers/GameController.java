@@ -106,6 +106,14 @@ public class GameController {
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
+	@RequestMapping(path="deleteFriend.do")
+	public ModelAndView removeFriendFromList(int userId, int friendId, RedirectAttributes flash) {
+		ModelAndView mv = new ModelAndView();
+		User friend = gameDao.removeUserFromFriendList(userId, friendId);
+		flash.addFlashAttribute("byefriend", friend);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
 	
 	
 }
