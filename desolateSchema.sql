@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(45) NOT NULL,
   `admin` TINYINT NOT NULL DEFAULT 0,
   `status` TINYINT NOT NULL DEFAULT 1,
+  `profile_summary` VARCHAR(140) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
@@ -237,10 +238,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (1, 'PurpleFuzz', 'password', 0, 1);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (2, 'JGMoney', 'password', 0, 1);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (3, 'ASauceyBoy', 'password', 0, 1);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`) VALUES (4, 'admin', 'admin', 1, 1);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (1, 'PurpleFuzz', 'password', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (2, 'JGMoney', 'password', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (3, 'ASauceyBoy', 'password', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (4, 'admin', 'admin', 1, 1, NULL);
 
 COMMIT;
 
