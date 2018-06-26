@@ -1,10 +1,11 @@
 package com.skilldistillery.mvcdesolatemidterm.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -91,9 +92,20 @@ public class GameController {
 	
 	@RequestMapping(path="viewAllUsers.do")
 	public ModelAndView showAllUsers(int id) {
-		
-		
-		return null;
+		ModelAndView mv = new ModelAndView();
+		List<User> allUsers = gameDao.showAllUsers();
+		mv.addObject("allUsers", allUsers);
+		mv.setViewName("WEB-INF/allUsers.jsp");
+		return mv;
 	}
+	@RequestMapping(path="addFriend.do")
+	public ModelAndView addNewFriend(int userId, int friendId, RedirectAttributes flash) {
+		ModelAndView mv = new ModelAndView();
+		User friend = gameDao.addUserToFriendList(userId, friendId);
+		flash.addFlashAttribute("friend", friend);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	
 	
 }

@@ -20,9 +20,9 @@ public interface GameDAO {
 
 	Game removeGame(int gameId, int userId);
 
-	User addUserToList(int userId, int friendId);
+	User addUserToFriendList(int userId, int friendId);
 
-	User removeUserFromList(int userId, int friendId);
+	User removeUserFromFriendList(int userId, int friendId);
 
 	List<User> showAllUsers();
 

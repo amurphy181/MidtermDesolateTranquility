@@ -109,14 +109,14 @@ public class GameDAOImpl implements GameDAO {
 //I want this function to allow users to add friends to their list. I don't want them to add themselves.
 //Do I want to view a list of all users to add or a search? lets have this just be a basic add.
 	@Override
-	public User addUserToList(int userId, int friendId) {
+	public User addUserToFriendList(int userId, int friendId) {
 		User user = em.find(User.class, userId);
 		User friend = em.find(User.class, friendId);
 		user.addFriend(friend);
 		return friend;
 	}
 	@Override
-	public User removeUserFromList(int userId, int friendId) {
+	public User removeUserFromFriendList(int userId, int friendId) {
 		User user = em.find(User.class, userId);
 		User friend = em.find(User.class, friendId);
 		user.removeFriend(friend);

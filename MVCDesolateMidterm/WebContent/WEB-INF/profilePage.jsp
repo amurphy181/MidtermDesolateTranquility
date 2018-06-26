@@ -71,6 +71,8 @@
 </c:if>
 <c:if test="${not empty SummaryNotUpdated}"><h3>Summary could not be changed. Limit 140 characters.</h3>
 </c:if>
+<c:if test="${not empty friend}"><h3>${friend.userName } was added to your friends list</h3>
+</c:if>
 <p>${userCurrent.summary }</p>
 
 <c:forEach items="${userCurrent.games }" var="userGames">
