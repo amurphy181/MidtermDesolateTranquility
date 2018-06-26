@@ -250,5 +250,14 @@ public class UserController {
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
+	
+	@RequestMapping(path="setProfilePicture.do", method = RequestMethod.POST)
+	public ModelAndView setProfilePicture(String picURL, int userId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(userId);
+		userDao.setProfilePicture(userId, picURL);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
 
 }

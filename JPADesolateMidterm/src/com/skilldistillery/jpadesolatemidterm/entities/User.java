@@ -33,7 +33,11 @@ public class User {
 	private boolean status;
 	@Column(name="profile_summary")
 	private String summary;
+	@Column(name="picture_url")
+	private String pictureURL;
 	
+	
+
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	@JoinTable(name = "user_game", 
@@ -220,6 +224,14 @@ public class User {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
+	}
 
 	@Override
 	public int hashCode() {
@@ -228,10 +240,13 @@ public class User {
 		result = prime * result + (admin ? 1231 : 1237);
 		result = prime * result + ((createdEvents == null) ? 0 : createdEvents.hashCode());
 		result = prime * result + ((events == null) ? 0 : events.hashCode());
+		result = prime * result + ((friendList == null) ? 0 : friendList.hashCode());
 		result = prime * result + ((games == null) ? 0 : games.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((pictureURL == null) ? 0 : pictureURL.hashCode());
 		result = prime * result + (status ? 1231 : 1237);
+		result = prime * result + ((summary == null) ? 0 : summary.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
@@ -257,6 +272,11 @@ public class User {
 				return false;
 		} else if (!events.equals(other.events))
 			return false;
+		if (friendList == null) {
+			if (other.friendList != null)
+				return false;
+		} else if (!friendList.equals(other.friendList))
+			return false;
 		if (games == null) {
 			if (other.games != null)
 				return false;
@@ -269,7 +289,17 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (pictureURL == null) {
+			if (other.pictureURL != null)
+				return false;
+		} else if (!pictureURL.equals(other.pictureURL))
+			return false;
 		if (status != other.status)
+			return false;
+		if (summary == null) {
+			if (other.summary != null)
+				return false;
+		} else if (!summary.equals(other.summary))
 			return false;
 		if (userName == null) {
 			if (other.userName != null)

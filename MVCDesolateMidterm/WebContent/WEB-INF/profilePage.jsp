@@ -85,11 +85,10 @@
 								<h3>Summary could not be changed. Limit 140 characters.</h3>
 							</c:if>
 							<c:if test="${not empty friend}">
-								<h3>${friend.userName }was added to your friends list</h3>
+								<h3>${friend.userName }wasaddedtoyour friends list</h3>
 							</c:if>
 							<c:if test="${not empty byefriend}">
-								<h3>${byefriend.userName }was removed from your friends
-									list</h3>
+								<h3>${byefriend.userName }wasremovedfromyour friends list</h3>
 							</c:if>
 
 							<!-- Trigger the modal with a button -->
@@ -110,8 +109,20 @@
 										<div class="modal-body">
 											<p>Two plus two is four, minus one, that's three - quick
 												maths.</p>
-											<img src="https://steamuserimages-a.akamaihd.net/ugc/314494866247087768/3DA6ADF15C7B3D61615BA5BB726DA6112BC8FFAC/?interpolation=lanczos-none&output-format=jpeg&output-quality=95&fit=inside%7C268%3A268&composite-to=*,*%7C268%3A268&background-color=black" 
-												width="200" height="200">
+
+
+											<form action="setProfilePicture.do" method="POST">
+												<input type="hidden" name="userId"
+													value="${userCurrent.id }"> <input type="hidden"
+													name="picURL"
+													value="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg">
+												<button>
+													<img
+														src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
+														width="200" height="200" />
+												</button>
+											</form>
+
 										</div>
 
 										<div class="modal-footer">

@@ -204,7 +204,6 @@ public class UserDAOImpl implements UserDAO {
 			String encryptedPassword = encoder.encode(newPassword);
 			managedUser.setPassword(encryptedPassword);
 
-			
 			return true;
 		}
 	}
@@ -221,6 +220,12 @@ public class UserDAOImpl implements UserDAO {
 			return true;
 		}
 		
+	}
+	
+	@Override
+	public void setProfilePicture(int id, String picURL) {
+		User userPicUpdate = em.find(User.class, id);
+		userPicUpdate.setPictureURL(picURL);
 	}
 
 }
