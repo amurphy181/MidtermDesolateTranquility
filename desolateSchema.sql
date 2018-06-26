@@ -105,6 +105,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `friends` ;
 
 CREATE TABLE IF NOT EXISTS `friends` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
   `friend_id` INT(11) NOT NULL,
   `accepted` VARCHAR(45) NOT NULL DEFAULT 0,
@@ -112,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
   `message` VARCHAR(140) NULL,
   INDEX `FK_FRIEND_TO_USER_ID_idx` (`friend_id` ASC),
   INDEX `FK_USER_TO_USER_ID_idx` (`user_id` ASC),
+  PRIMARY KEY (`id`),
   CONSTRAINT `FK_FRIEND_TO_USER_ID`
     FOREIGN KEY (`friend_id`)
     REFERENCES `user` (`id`)

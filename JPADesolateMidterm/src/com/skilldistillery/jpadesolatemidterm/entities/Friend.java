@@ -2,20 +2,26 @@ package com.skilldistillery.jpadesolatemidterm.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="friends")
 public class Friend {
 
-	@Column(name="user_id")
-	@OneToOne
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	private int id;
+	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
-	@OneToOne
-	@Column(name="friend_id")
+	@ManyToOne
+	@JoinColumn(name="friend_id")
 	private User friend;
 	private boolean accepted;
 	private Date timestamp;
@@ -50,6 +56,9 @@ public class Friend {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public int getId() {
+		return id;
 	}
 	@Override
 	public int hashCode() {

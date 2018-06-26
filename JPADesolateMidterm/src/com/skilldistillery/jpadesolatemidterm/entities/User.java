@@ -35,6 +35,8 @@ public class User {
 	private String summary;
 	@Column(name="picture_url")
 	private String pictureURL;
+	@OneToMany(mappedBy= "user")
+	private List<Friend> requests;
 	
 	
 
