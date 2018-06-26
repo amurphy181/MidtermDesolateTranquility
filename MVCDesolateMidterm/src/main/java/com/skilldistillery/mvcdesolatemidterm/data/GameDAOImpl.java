@@ -52,9 +52,10 @@ public class GameDAOImpl implements GameDAO {
 	
 	@Override
 	public Game updateGame(int id, Game updatedGame, int userId) {
-
-		Game managed = em.find(Game.class, id);
+		Game removedFromList = gameDao.findGameById(id);
+		Game managed = null;
 		User user = em.find(User.class, userId);
+		user.removeGame(removedFromList);
 		List<Game> allGames = gameDao.findAllGames();
 		for (Game game : allGames) {
 			if(updatedGame.getPlatform().getPlatformName().equals(game.getPlatform().getPlatformName()) && updatedGame.getTitle().equals(game.getTitle())) {
@@ -65,10 +66,12 @@ public class GameDAOImpl implements GameDAO {
 			}
 			
 		}
+		if (managed == null) {
+			 managed = updatedGame;
+			managed = eventDao.createGame(managed);
 			
-		managed.setTitle(updatedGame.getTitle());
-		managed.setPlatform(updatedGame.getPlatform());
-		managed.setVisible(true);
+		}
+		
 			em.flush();
 			user.addGame(managed);
 
