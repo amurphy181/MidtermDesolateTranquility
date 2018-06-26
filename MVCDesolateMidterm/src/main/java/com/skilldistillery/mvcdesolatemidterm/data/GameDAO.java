@@ -16,4 +16,7 @@ public interface GameDAO {
 
 	Game updateGame(int id, Game updatedGame, int userId);
 
+
+	Game removeGame(int gameId, int userId);
+
 }

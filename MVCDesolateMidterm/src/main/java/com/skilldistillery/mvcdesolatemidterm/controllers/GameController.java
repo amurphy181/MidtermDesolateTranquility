@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,11 +65,23 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Game addedGame = gameDao.addUserGame(id, game, platform);
 		User updateGamesList = userDao.findUserByUserID(id);
-		flash.addFlashAttribute("addedGame", addedGame.getTitle());
+		flash.addFlashAttribute("addedGame", addedGame);
 		System.out.println(addedGame.getTitle());
 		session.setAttribute("userCurrent", updateGamesList);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
+	}
+	@RequestMapping(path="deleteGameFromList.do")
+	public ModelAndView deleteGameFromList(int gameId, int userId, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Game removedGame = gameDao.removeGame(gameId, userId);
+		flash.addFlashAttribute("removedGame", removedGame);
+		User userUpdateGame = userDao.findUserByUserID(userId);
+		session.setAttribute("userCurrent", userUpdateGame);
+		
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+		
 	}
 	
 }

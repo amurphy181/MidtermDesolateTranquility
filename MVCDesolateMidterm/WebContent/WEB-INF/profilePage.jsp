@@ -61,7 +61,9 @@
 					
 						<div class="media-body">
 
-<c:if test="${not empty addedGame}"><h3>${addedGame } was added to your list.</h3>
+<c:if test="${not empty addedGame}"><h3>${addedGame.title } for ${addedGame.platform.platformName } was added to your list.</h3>
+</c:if>
+<c:if test="${not empty removedGame}"><h3>${removedGame.title } for ${removedGame.platform.platformName } was removed from your list.</h3>
 </c:if>
 
 <c:forEach items="${userCurrent.games }" var="userGames">
@@ -70,6 +72,11 @@
 		<form action="updateGame.do">
 		<input type="submit" value="Update Game">
 		<input type="hidden" name="id" value="${userGames.id}">
+		</form>
+		<form action="deleteGameFromList.do">
+		<input type="submit" value="Delete Game">
+		<input type="hidden" name="gameId" value="${userGames.id}">
+		<input type="hidden" name="userId" value="${userCurrent.id}">
 		</form>
 		<br>
 		</c:forEach>

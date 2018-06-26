@@ -90,4 +90,13 @@ public class GameDAOImpl implements GameDAO {
 		return allGames;
 	}
 
+	@Override
+	public Game removeGame(int gameId, int userId) {
+		Game removedGame = em.find(Game.class, gameId);
+		User user = em.find(User.class, userId);
+		user.removeGame(removedGame);
+		
+		return removedGame;
+	}
+	
 }
