@@ -13,7 +13,8 @@
 <c:if test="${user.id != userCurrent.id }">
 ${user.userName }
 <br>
-<form action="addFriend.do">
+<form action="sendRequest.do">
+	Message: <input type="text" name="message">
 	<input type="hidden" name="friendId" value="${user.id}">
 	<input type="hidden" name="userId" value="${userCurrent.id}">
 	<input type="submit" value="Add Friend">

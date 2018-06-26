@@ -84,7 +84,7 @@ public class User {
 		
 		if (!friendList.contains(friend)) {
 			friendList.add(friend);
-			
+			friend.addFriend(this);
 		}
 	}
 	

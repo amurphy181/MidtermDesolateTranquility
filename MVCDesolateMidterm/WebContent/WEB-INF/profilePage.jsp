@@ -66,6 +66,12 @@
 
 						<div class="media-body">
 
+							<c:if test="${request == currentUser.id}">
+								<form action="acceptRequest.do" method="POST">
+								<input type = "submit" value= "Accept Request">
+								<input type = "hidden" name = "requestId" value= "${request.id}">
+								</form>
+							</c:if>
 							<c:if test="${not empty addedGame}">
 								<h3>${addedGame.title }for
 									${addedGame.platform.platformName } was added to your list.</h3>

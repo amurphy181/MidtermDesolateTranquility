@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -147,14 +148,16 @@ public class GameDAOImpl implements GameDAO {
 	}
 	@Override
 	public Friend acceptFriendRequest(Friend friendRequest) {
-	
-		friendRequest.setAccepted(true);
-		return friendRequest;
+		Friend acceptRequest = em.find(Friend.class, friendRequest.getId());
+		acceptRequest.setAccepted(true);
+		gameDao.addUserToFriendList(acceptRequest.getUser().getId(), acceptRequest.getFriend().getId());
+		return acceptRequest;
 	}
 	@Override
-	public Friend findFriendRequest(int userId, int friendId) {
+	public Friend findFriendRequest(int requestId) {
+		Friend request = em.find(Friend.class, requestId);
 		
-		return null;
+		return request;
 	}
 	
 }

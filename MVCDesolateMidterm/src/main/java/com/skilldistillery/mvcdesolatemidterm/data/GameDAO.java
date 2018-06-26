@@ -31,6 +31,7 @@ public interface GameDAO {
 
 	Friend acceptFriendRequest(Friend friendRequest);
 
-	Friend findFriendRequest(int userId, int friendId);
+
+	Friend findFriendRequest(int requestId);
 
 }
