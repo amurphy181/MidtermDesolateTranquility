@@ -1,5 +1,6 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.skilldistillery.jpadesolatemidterm.entities.Friend;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
@@ -108,6 +110,7 @@ public class GameDAOImpl implements GameDAO {
 //remember to move all functions below this line to user later
 //I want this function to allow users to add friends to their list. I don't want them to add themselves.
 //Do I want to view a list of all users to add or a search? lets have this just be a basic add.
+	//adds users to friends list
 	@Override
 	public User addUserToFriendList(int userId, int friendId) {
 		User user = em.find(User.class, userId);
@@ -115,6 +118,7 @@ public class GameDAOImpl implements GameDAO {
 		user.addFriend(friend);
 		return friend;
 	}
+	//removes
 	@Override
 	public User removeUserFromFriendList(int userId, int friendId) {
 		User user = em.find(User.class, userId);
@@ -122,12 +126,35 @@ public class GameDAOImpl implements GameDAO {
 		user.removeFriend(friend);
 		return friend;
 	}
-	
+	//shows all for adding users -- want to change to regex later
 	@Override
 	public List<User> showAllUsers(){
 		String query = "select u from User u";
 		List<User> allUsers = em.createQuery(query, User.class).getResultList();
 		return allUsers;
+	}
+	
+	//attempt to send friend request
+	@Override
+	public Friend sendFriendRequest(int userId, String message, int friendId) {
+		Friend request = new Friend();
+		User friend = em.find(User.class, friendId);
+		request.setUser(em.find(User.class, userId));
+		request.setFriend(friend);
+		request.setMessage(message);
+		request.setAccepted(false);
+		return request;
+	}
+	@Override
+	public Friend acceptFriendRequest(Friend friendRequest) {
+	
+		friendRequest.setAccepted(true);
+		return friendRequest;
+	}
+	@Override
+	public Friend findFriendRequest(int userId, int friendId) {
+		
+		return null;
 	}
 	
 }

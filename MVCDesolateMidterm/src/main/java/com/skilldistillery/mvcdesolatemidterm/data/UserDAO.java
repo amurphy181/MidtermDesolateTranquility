@@ -20,7 +20,8 @@ public interface UserDAO {
 	public boolean reactivateUser(int id);
 	public boolean deactivateAdmin(int id);
 	public boolean activateAdmin(int id);
-	boolean setNewPassword(int id, String newPassword);
-	boolean setProfileBlurb(int id, String blurb);
+	public boolean setNewPassword(int id, String newPassword);
+	public boolean setProfileBlurb(int id, String blurb);
+	public void setProfilePicture(int id, String picURL);
 
 }

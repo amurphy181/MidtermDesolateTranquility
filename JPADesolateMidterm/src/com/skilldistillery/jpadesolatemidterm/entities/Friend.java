@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Friends {
+@Table(name="friends")
+public class Friend {
 
 	@Column(name="user_id")
 	@OneToOne
@@ -68,7 +70,7 @@ public class Friends {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Friends other = (Friends) obj;
+		Friend other = (Friend) obj;
 		if (accepted != other.accepted)
 			return false;
 		if (friend == null) {
