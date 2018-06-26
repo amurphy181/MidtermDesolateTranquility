@@ -250,18 +250,18 @@
 <!--       BODY OF MESSAGE MODAL -->
       <div class="modal-body">
       
-      	<%-- <c:forEach items="${event.messages }" var="message">
+      	 <c:forEach items="${event.messages }" var="message">
 								
         <p>	${message.user.userName}: ${message.content}<br></p>
 							
-			</c:forEach> --%>
+			</c:forEach>
       </div>
       
       
       <div class="modal-footer">
       <form action="postMessage.do" method="POST"><i>
       <input type="text" name="messageContent" class="form-control" id="search2" aria-describedby="search" placeholder="message">
-        <input type="submit" class="btn btn-default" >Post<input type="hidden" name="eventId" value="${event.id }" type="hidden" name="userId" value="${userCurrent.id }"  />
+        <input type="submit" class="btn btn-default" ><input type="hidden" name="eventId" value="${event.id }" type="hidden" name="user" value="${userCurrent }"  />
         </i></form>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
