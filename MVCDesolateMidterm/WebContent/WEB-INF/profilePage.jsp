@@ -19,7 +19,7 @@
 		<div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="true">
 			<ul class="nav navbar-nav">
 				<li class="active">
-					<a href="welcome.do"><span class="glyphicon glyphicon-home"></span> Home</a>
+					<a href="landingPage.do"><span class="glyphicon glyphicon-home"></span> Home</a>
 				</li>
 				
 				<li>
@@ -64,6 +64,8 @@
 <c:if test="${not empty addedGame}"><h3>${addedGame.title } for ${addedGame.platform.platformName } was added to your list.</h3>
 </c:if>
 <c:if test="${not empty removedGame}"><h3>${removedGame.title } for ${removedGame.platform.platformName } was removed from your list.</h3>
+</c:if>
+<c:if test="${not empty success}"><h3>Password Successfully Changed</h3>
 </c:if>
 
 <c:forEach items="${userCurrent.games }" var="userGames">
@@ -124,7 +126,17 @@
 					</div>
 					</div>
 </c:forEach>
-<a href="landingPage.do">Home</a>
+
+<form:form action="changePassword.do" modelAttribute="passwordDTO" method="POST">
+	Old Password  <form:input type="password" autocorrect="off" autocapitalize="none" path="oldPassword"/><br>
+	New Password  <form:input type="password" autocorrect="off" autocapitalize="none" path="newPassword"/><br>
+	<p class="button">
+	<input type="submit" value="Change Password" ></p> <br>
+		<input type = "hidden" name = "id" value = "${userCurrent.id }">
+		<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
+		<form:errors path="newPassword">That's literally the same password...</form:errors>
+
+</form:form>
 
 </body>
 </html>

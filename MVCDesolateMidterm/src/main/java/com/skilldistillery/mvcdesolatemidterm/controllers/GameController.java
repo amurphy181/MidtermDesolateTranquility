@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
+import com.skilldistillery.jpadesolatemidterm.entities.PasswordDTO;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
@@ -30,7 +31,8 @@ public class GameController {
 	@RequestMapping(path="profileView.do")
 	public ModelAndView viewProfilePage() {
 		ModelAndView mv = new ModelAndView();
-		
+		PasswordDTO passwordDTO = new PasswordDTO();
+		mv.addObject("passwordDTO", passwordDTO);
 		
 		mv.setViewName("WEB-INF/profilePage.jsp");
 		return mv;

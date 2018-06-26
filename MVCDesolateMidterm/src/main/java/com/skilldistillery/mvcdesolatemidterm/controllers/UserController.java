@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
+import com.skilldistillery.jpadesolatemidterm.entities.PasswordDTO;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAOImpl;
@@ -25,7 +26,7 @@ import com.skilldistillery.mvcdesolatemidterm.data.UserDAOImpl;
 public class UserController {
 
 	@Autowired
-	private UserDAO dao;
+	private UserDAO userDao;
 	@Autowired
 	private EventDAO eventDAO;
 
@@ -47,16 +48,16 @@ public class UserController {
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginMethod(User user, HttpSession session, Errors error) {
 		ModelAndView mv = new ModelAndView();
-		User userLogin = dao.findUserByUsername(user.getUserName());
+		User userLogin = userDao.findUserByUsername(user.getUserName());
 		System.out.println(userLogin);
 		System.out.println(user.getPassword());
 		if (userLogin != null) {
-			if (dao.passwordConfirmation(userLogin, user.getPassword())) {
+			if (userDao.passwordConfirmation(userLogin, user.getPassword())) {
 
 				loggedIn = true;
 				session.setAttribute("loggedIn", loggedIn);
 				session.setAttribute("userCurrent", userLogin);
-				List<Event> eventList = dao.listAllEvents();
+				List<Event> eventList = userDao.listAllEvents();
 				session.setAttribute("events", eventList);
 				mv.setViewName("WEB-INF/landingPage.jsp");
 			} else {
@@ -111,8 +112,8 @@ public class UserController {
 	@RequestMapping(path = "adminPage.do")
 	public ModelAndView adminPageView(HttpSession session, User user) {
 		ModelAndView mv = new ModelAndView();
-		List<User> completeUserList = dao.listAllUsers();
-		List<Event> completeEventList = dao.listAllEvents();
+		List<User> completeUserList = userDao.listAllUsers();
+		List<Event> completeEventList = userDao.listAllEvents();
 		mv.addObject("events", completeEventList);
 		mv.addObject("completeUserList", completeUserList);
 		System.out.println(completeUserList);
@@ -124,7 +125,7 @@ public class UserController {
 	@RequestMapping(path = "landingPage.do")
 	public ModelAndView landingPageView(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Event> eventList = dao.listAllEvents();
+		List<Event> eventList = userDao.listAllEvents();
 
 		session.setAttribute("events", eventList);
 		User user = (User) session.getAttribute("userCurrent");
@@ -142,9 +143,9 @@ public class UserController {
 	@RequestMapping(path = "registration.do", method = RequestMethod.POST)
 	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if (dao.uniqueUsername(user.getUserName())) {
+		if (userDao.uniqueUsername(user.getUserName())) {
 			// mv.addObject("user", user);
-			dao.create(user);
+			userDao.create(user);
 
 			boolean added = true;
 
@@ -164,8 +165,8 @@ public class UserController {
 	public ModelAndView deactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
-		dao.deactivateUser(id);
-		List<User> completeUserList = dao.listAllUsers();
+		userDao.deactivateUser(id);
+		List<User> completeUserList = userDao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
@@ -177,8 +178,8 @@ public class UserController {
 	public ModelAndView reactivateUser(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("**************" + id);
-		dao.reactivateUser(id);
-		List<User> completeUserList = dao.listAllUsers();
+		userDao.reactivateUser(id);
+		List<User> completeUserList = userDao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
@@ -189,8 +190,8 @@ public class UserController {
 	public ModelAndView deactivateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("************** " + id + "Deactivate admin status");
-		dao.deactivateAdmin(id);
-		List<User> completeUserList = dao.listAllUsers();
+		userDao.deactivateAdmin(id);
+		List<User> completeUserList = userDao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
@@ -202,11 +203,37 @@ public class UserController {
 	public ModelAndView activateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("************** " + id + "Activate as Admin");
-		dao.activateAdmin(id);
-		List<User> completeUserList = dao.listAllUsers();
+		userDao.activateAdmin(id);
+		List<User> completeUserList = userDao.listAllUsers();
 		mv.addObject("completeUserList", completeUserList);
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
+		return mv;
+		
+	}
+	
+	@RequestMapping(path="changePassword.do", method= RequestMethod.POST)
+	public ModelAndView changePassword(PasswordDTO passwordDTO, int id, Errors error, RedirectAttributes flash) {
+		User checkUserPassword = userDao.findUserByUserID(id);
+		ModelAndView mv = new ModelAndView();
+		if(userDao.passwordConfirmation(checkUserPassword, passwordDTO.getOldPassword())) {
+			if(userDao.setNewPassword(id, passwordDTO.getNewPassword())) {
+				flash.addFlashAttribute("success", "Password Changed Successfully");
+				mv.setViewName("redirect:profileView.do");
+			}
+			else {
+				error.rejectValue("newPassword", "error.newPassword", "error message");
+				mv.setViewName("WEB-INF/profilePage.jsp");
+				
+				
+			}
+		}
+		else {
+			error.rejectValue("oldPassword", "error.oldPassword", "error message");
+			mv.setViewName("WEB-INF/profilePage.jsp");
+
+		}
+		
 		return mv;
 		
 	}

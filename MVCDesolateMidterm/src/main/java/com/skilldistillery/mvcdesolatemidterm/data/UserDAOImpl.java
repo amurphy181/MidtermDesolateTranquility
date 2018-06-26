@@ -182,5 +182,17 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 		
 	}
+	@Override
+	public boolean setNewPassword(int id, String newPassword) {
+		User changeUserPassword = em.find(User.class, id);
+		if (changeUserPassword.getPassword().equals(newPassword)) {
+		return false;
+		}
+		else {
+			changeUserPassword.setPassword(newPassword);
+			
+			return true;
+		}
+	}
 
 }
