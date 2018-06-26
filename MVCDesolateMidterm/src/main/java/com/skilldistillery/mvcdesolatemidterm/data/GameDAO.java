@@ -2,6 +2,7 @@ package com.skilldistillery.mvcdesolatemidterm.data;
 
 import java.util.List;
 
+import com.skilldistillery.jpadesolatemidterm.entities.Friend;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
@@ -25,5 +26,11 @@ public interface GameDAO {
 	User removeUserFromFriendList(int userId, int friendId);
 
 	List<User> showAllUsers();
+
+	Friend sendFriendRequest(int userId, String message, int friendId);
+
+	Friend acceptFriendRequest(Friend friendRequest);
+
+	Friend findFriendRequest(int userId, int friendId);
 
 }
