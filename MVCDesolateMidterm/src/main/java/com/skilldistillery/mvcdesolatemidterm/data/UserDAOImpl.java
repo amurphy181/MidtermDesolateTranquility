@@ -194,5 +194,19 @@ public class UserDAOImpl implements UserDAO {
 			return true;
 		}
 	}
+	
+	@Override
+	public boolean setProfileBlurb(int id, String blurb) {
+		if (blurb.length() > 140) {
+			
+			return false;
+		}
+		else {
+			User setUserBlurb = em.find(User.class, id);
+			setUserBlurb.setSummary(blurb);
+			return true;
+		}
+		
+	}
 
 }

@@ -17,6 +17,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 
+
 @Entity
 public class User {
 	
@@ -30,6 +31,8 @@ public class User {
 	private String password;
 	private boolean admin;
 	private boolean status;
+	@Column(name="profile_summary")
+	private String summary;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
@@ -167,6 +170,14 @@ public class User {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	public boolean isStatus() {

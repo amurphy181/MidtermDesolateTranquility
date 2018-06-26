@@ -67,6 +67,11 @@
 </c:if>
 <c:if test="${not empty success}"><h3>Password Successfully Changed</h3>
 </c:if>
+<c:if test="${not empty SummaryUpdated}"><h3>Profile Summary Set</h3>
+</c:if>
+<c:if test="${not empty SummaryNotUpdated}"><h3>Summary could not be changed. Limit 140 characters.</h3>
+</c:if>
+<p>${userCurrent.summary }</p>
 
 <c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
@@ -135,8 +140,13 @@
 		<input type = "hidden" name = "id" value = "${userCurrent.id }">
 		<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
 		<form:errors path="newPassword">That's literally the same password...</form:errors>
-
 </form:form>
 
+<form action="setProfileBlurb.do" method="POST">
+Profile Summary: <input type = "text" name = "blurb"><br>
+<h5>Limit 140 characters</h5>
+<input type = "hidden" name = "id" value = "${userCurrent.id }">
+<input type="submit" value="Set Summary" > <br>
+</form>
 </body>
 </html>
