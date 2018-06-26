@@ -54,9 +54,17 @@ public class EventController {
 	}
 	
 	@RequestMapping(path="postMessage.do")
-	public ModelAndView addGameToUserList(int eventId, int userId, String messageContent, RedirectAttributes flash, HttpSession session) {
+	public ModelAndView postMessage(int eventId, String messageContent, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
+		User user = (User) session.getAttribute("userCurrent");
+		System.out.println("user id" + user);
+		System.out.println("event id" + eventId);
+		int userId = user.getId();
+		
+		System.out.println(userId);
 		Message m = daoEvent.addMessage(messageContent, userId, eventId);
+		System.out.println(m);
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}

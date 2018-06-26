@@ -19,12 +19,14 @@ public class Message {
 	@Id
 	private int id;
 	private String content;
+	
 	@Column(name="time_sent")
 	private Date timeSent;
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
+	
 	@OneToOne
 	@JoinColumn(name="sender_id")
 	private User user;

@@ -131,11 +131,6 @@ public class EventDAOImpl implements EventDAO {
 		return found;
 	}
 
-	@Override
-	public Event createEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean deactivateEvent(int id) {
@@ -169,22 +164,25 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public Message addMessage(String messageContent, int userId, int eventId) {
-		
+		System.out.println(userId);
 		Event eventToAddMessageTo = em.find(Event.class, eventId);
 		
 		Message m = new Message();
 		m.setContent(messageContent);
 		m.setEvent(eventToAddMessageTo);
 		m.setUser(em.find(User.class, userId));
+		
+		System.out.println("**************");
+		System.out.println(m.getUser());
+		
 			
 		em.persist(m);
-		
-		
-		eventToAddMessageTo.addMessage(m);
 		em.flush();
 
 		return m;
 	}
+
+
 	
 
 }
