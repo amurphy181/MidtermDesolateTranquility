@@ -3,6 +3,7 @@ package com.skilldistillery.mvcdesolatemidterm.data;
 import java.util.List;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
+import com.skilldistillery.jpadesolatemidterm.entities.User;
 
 public interface GameDAO {
 
@@ -18,5 +19,7 @@ public interface GameDAO {
 
 
 	Game removeGame(int gameId, int userId);
+
+	User addUserToList(int userId, int friendId);
 
 }

@@ -50,6 +50,7 @@ public class GameDAOImpl implements GameDAO {
 		return containGame;
 	}
 	
+	//This long ass method removes the original game from the list of user games. Then the new game to be updated is checked against the database. if the exact game and platform combo exists that game is returned. Otherwise a new game is created and added to the db and user list
 	@Override
 	public Game updateGame(int id, Game updatedGame, int userId) {
 		Game removedFromList = gameDao.findGameById(id);
@@ -77,13 +78,15 @@ public class GameDAOImpl implements GameDAO {
 
 		return managed;
 	}
+	
+	//find specific game by id
 	@Override
 	public Game findGameById(int id) {
 		Game foundGame = em.find(Game.class, id);
 		
 		return foundGame;
 	}
-	
+	//finds all games to display or find specific one from list
 	@Override
 	public List<Game> findAllGames() {
 		String query = "select g from Game g";
@@ -92,7 +95,7 @@ public class GameDAOImpl implements GameDAO {
 		
 		return allGames;
 	}
-
+//removes game from user list of games
 	@Override
 	public Game removeGame(int gameId, int userId) {
 		Game removedGame = em.find(Game.class, gameId);
@@ -100,6 +103,17 @@ public class GameDAOImpl implements GameDAO {
 		user.removeGame(removedGame);
 		
 		return removedGame;
+	}
+	
+//remember to move this function to user later
+//I want this function to allow users to add friends to their list. I don't want them to add themselves.
+//Do I want to view a list of all users to add or a search? lets have this just be a basic add.
+	@Override
+	public User addUserToList(int userId, int friendId) {
+		User user = em.find(User.class, userId);
+		User friend = em.find(User.class, friendId);
+		user.ad
+		return friend;
 	}
 	
 }

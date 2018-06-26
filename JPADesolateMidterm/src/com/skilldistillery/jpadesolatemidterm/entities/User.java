@@ -52,6 +52,16 @@ public class User {
 	@OneToMany(mappedBy = "creator")
 	private List<Event> createdEvents;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany
+	@JoinTable(name="friends",
+				joinColumns = @JoinColumn(name = "user_id"),
+				inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private List<User> friendList;
+	
+	
+	
+	
 	
 	
 	
@@ -59,6 +69,21 @@ public class User {
 	
 	//add and remove methods
 	
+	public void addFriend(User friend) {
+		if (friendList == null)
+			friendList = new ArrayList<>();
+		
+		if (!friendList.contains(friend)) {
+			friendList.add(friend);
+			
+		}
+	}
+	
+	public void removeFriend(User friend) {
+		if(friendList != null) {
+			friendList.remove(friend);
+		}
+	}
 	public void addCreatedEvent(Event event) {
 		if (createdEvents == null)
 			createdEvents = new ArrayList<>();
@@ -178,6 +203,14 @@ public class User {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public List<User> getFriendList() {
+		return friendList;
+	}
+
+	public void setFriendList(List<User> friendList) {
+		this.friendList = friendList;
 	}
 
 	public boolean isStatus() {
