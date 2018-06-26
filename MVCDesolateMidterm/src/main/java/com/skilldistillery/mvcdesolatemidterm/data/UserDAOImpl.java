@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	GameDAO gameDao;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -38,6 +42,8 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public User create(User user) {
+		String encodedPassword = encoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 
 		em.persist(user);
 		em.flush();
@@ -81,7 +87,8 @@ public class UserDAOImpl implements UserDAO {
 		User managed = em.find(User.class, id);
 		
 		managed.setUserName(updatedUser.getUserName());
-		managed.setPassword(updatedUser.getPassword());
+		String encryptedPassword = encoder.encode(updatedUser.getPassword());
+		managed.setPassword(encryptedPassword);
 
 		em.flush();
 
@@ -91,9 +98,12 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean passwordConfirmation(User user, String password) {
 		
-		String properPassword = user.getPassword();
+		String query = "SELECT u FROM User u WHERE u.userName = :name";
+		User managedUser = em.createQuery(query, User.class)
+										.setParameter("name",  user.getUserName())
+										.getSingleResult();
 		
-		if (properPassword.equals(password)) {
+		if(encoder.matches(password, managedUser.getPassword())) {
 			return true;
 		} else {
 			return false;
@@ -184,12 +194,15 @@ public class UserDAOImpl implements UserDAO {
 	}
 	@Override
 	public boolean setNewPassword(int id, String newPassword) {
-		User changeUserPassword = em.find(User.class, id);
-		if (changeUserPassword.getPassword().equals(newPassword)) {
+		User managedUser = em.find(User.class, id);
+		
+		if (encoder.matches(newPassword, managedUser.getPassword())) {
 		return false;
 		}
 		else {
-			changeUserPassword.setPassword(newPassword);
+			String encryptedPassword = encoder.encode(newPassword);
+			managedUser.setPassword(encryptedPassword);
+
 			
 			return true;
 		}

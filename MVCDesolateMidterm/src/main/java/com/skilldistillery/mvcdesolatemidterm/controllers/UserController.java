@@ -31,14 +31,12 @@ public class UserController {
 	private UserDAO userDao;
 	@Autowired
 	private EventDAO eventDAO;
-	@Autowired
-	private PasswordEncoder encoder;
+	
 
 	// you have the session to check for this
 	private boolean loggedIn;
 
 	// user controllers follow
-	
 
 	@RequestMapping(path = "welcome.do")
 	public ModelAndView loginView() {
@@ -55,7 +53,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		User userLogin = userDao.findUserByUsername(user.getUserName());
 		System.out.println(userLogin);
-		
+
 		System.out.println(user.getPassword());
 		if (userLogin != null) {
 			if (userDao.passwordConfirmation(userLogin, user.getPassword())) {
@@ -80,17 +78,18 @@ public class UserController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
-	public ModelAndView logoutMethod(@ModelAttribute("userCurrent") User user, HttpSession session, RedirectAttributes flash) {
+	public ModelAndView logoutMethod(@ModelAttribute("userCurrent") User user, HttpSession session,
+			RedirectAttributes flash) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		System.out.println(user);
 		User userLogout = (User) session.getAttribute("userCurrent");
 		System.out.println(userLogout);
 		System.out.println("!@!@!@!@ LOGOUT TESTER @!@!@!@!");
-		
-		if(userLogout != null) {
+
+		if (userLogout != null) {
 			loggedIn = false;
 			session.invalidate();
 			flash.addFlashAttribute("logOut", userLogout.getUserName());
@@ -98,20 +97,7 @@ public class UserController {
 		} else {
 			System.out.println("LOGOUT failed.\n");
 		}
-		
-		
-		return mv;
-	}
-	
-	
-	
 
-	@RequestMapping(path = "register.do")
-	public ModelAndView registerMethodView() {
-		ModelAndView mv = new ModelAndView();
-		User user = new User();
-		mv.addObject("user", user);
-		mv.setViewName("WEB-INF/registerView.jsp");
 		return mv;
 	}
 
@@ -146,6 +132,16 @@ public class UserController {
 		return mv;
 	}
 
+	@RequestMapping(path = "register.do")
+	public ModelAndView registerMethodView() {
+		ModelAndView mv = new ModelAndView();
+		User user = new User();
+
+		mv.addObject("user", user);
+		mv.setViewName("WEB-INF/registerView.jsp");
+		return mv;
+	}
+
 	@RequestMapping(path = "registration.do", method = RequestMethod.POST)
 	public ModelAndView Registered(User user, Errors error, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -164,7 +160,7 @@ public class UserController {
 		}
 		return mv;
 	}
-	
+
 	// activate and deactivate users
 
 	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.POST)
@@ -192,6 +188,7 @@ public class UserController {
 		return mv;
 
 	}
+
 	@RequestMapping(path = "deactivateAdmin.do", method = RequestMethod.POST)
 	public ModelAndView deactivateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
@@ -202,9 +199,9 @@ public class UserController {
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping(path = "activateAdmin.do", method = RequestMethod.POST)
 	public ModelAndView activateAdmin(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
@@ -215,45 +212,41 @@ public class UserController {
 		session.setAttribute("user", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(path="changePassword.do", method= RequestMethod.POST)
+
+	@RequestMapping(path = "changePassword.do", method = RequestMethod.POST)
 	public ModelAndView changePassword(PasswordDTO passwordDTO, int id, Errors error, RedirectAttributes flash) {
 		User checkUserPassword = userDao.findUserByUserID(id);
 		ModelAndView mv = new ModelAndView();
-		if(userDao.passwordConfirmation(checkUserPassword, passwordDTO.getOldPassword())) {
-			if(userDao.setNewPassword(id, passwordDTO.getNewPassword())) {
+		if (userDao.passwordConfirmation(checkUserPassword, passwordDTO.getOldPassword())) {
+			if (userDao.setNewPassword(id, passwordDTO.getNewPassword())) {
 				flash.addFlashAttribute("success", "Password Changed Successfully");
 				mv.setViewName("redirect:profileView.do");
-			}
-			else {
+			} else {
 				error.rejectValue("newPassword", "error.newPassword", "error message");
 				mv.setViewName("WEB-INF/profilePage.jsp");
-				
-				
+
 			}
-		}
-		else {
+		} else {
 			error.rejectValue("oldPassword", "error.oldPassword", "error message");
 			mv.setViewName("WEB-INF/profilePage.jsp");
 
 		}
-		
+
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(path="setProfileBlurb.do")
+
+	@RequestMapping(path = "setProfileBlurb.do")
 	public ModelAndView setProfileBlurb(String blurb, int id, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (userDao.setProfileBlurb(id, blurb)) {
 			flash.addFlashAttribute("SummaryUpdated", 7);
-		}
-		else {
+		} else {
 			flash.addFlashAttribute("SummaryNotUpdated", 7);
 		}
-	
+
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}

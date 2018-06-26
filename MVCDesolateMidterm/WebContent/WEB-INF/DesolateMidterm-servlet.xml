@@ -24,8 +24,14 @@
 		<property name="entityManagerFactory"
 			ref="myEntityManagerFactory" />
 	</bean>
+
+
+  <bean id="encoder" 
+	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
-	<tx:annotation-driven transaction-manager="myTransactionManager" />
 	
+	<tx:annotation-driven
+		transaction-manager="myTransactionManager" />
+
 
 </beans>
