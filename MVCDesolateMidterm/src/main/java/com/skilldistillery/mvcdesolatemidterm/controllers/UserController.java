@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -30,11 +31,14 @@ public class UserController {
 	private UserDAO userDao;
 	@Autowired
 	private EventDAO eventDAO;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	// you have the session to check for this
 	private boolean loggedIn;
 
 	// user controllers follow
+	
 
 	@RequestMapping(path = "welcome.do")
 	public ModelAndView loginView() {
@@ -51,6 +55,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		User userLogin = userDao.findUserByUsername(user.getUserName());
 		System.out.println(userLogin);
+		
 		System.out.println(user.getPassword());
 		if (userLogin != null) {
 			if (userDao.passwordConfirmation(userLogin, user.getPassword())) {
