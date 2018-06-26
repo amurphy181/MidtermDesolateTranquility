@@ -91,7 +91,7 @@ public class UserController {
 
 		if (userLogout != null) {
 			loggedIn = false;
-			session.invalidate();
+			//session.invalidate();
 			flash.addFlashAttribute("logOut", userLogout.getUserName());
 			mv.setViewName("redirect:welcome.do");
 		} else {

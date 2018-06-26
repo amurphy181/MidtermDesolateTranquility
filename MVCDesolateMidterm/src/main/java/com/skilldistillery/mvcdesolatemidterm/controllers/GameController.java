@@ -131,13 +131,14 @@ public class GameController {
 		Friend request = gameDao.sendFriendRequest(userId, message, friendId);
 		System.out.println("============ sent Request");
 		User friend = userDao.findUserByUserID(friendId);
-		session.setAttribute("request", request.getFriend().getId());
+		
+		session.setAttribute("request", request);
 		mv.setViewName("redirect:profileView.do");
 		System.out.println("===========out of method");
 		return mv;
 	}
 
-	@RequestMapping(path = "acceptRequest.do")
+	@RequestMapping(path = "acceptFriendRequest.do")
 	public ModelAndView acceptFriendRequest(int requestId, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(requestId);

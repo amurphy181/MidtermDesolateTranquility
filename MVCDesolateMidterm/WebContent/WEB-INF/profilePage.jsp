@@ -52,7 +52,7 @@
 			</div>
 		</div>
 	</div>
-	<h1>${userCurrent.userName }'sprofile</h1>
+	<h1>${userCurrent.userName }'s profile</h1>
 	<div>
 		<div class="col-sm-6">
 			<h3>Events List</h3>
@@ -65,12 +65,12 @@
 
 
 						<div class="media-body">
-
-							<c:if test="${request == currentUser.id}">
-								<form action="acceptRequest.do" method="POST">
+<h1>Hello Hello ${request.id }</h1>
+							<c:if test="${request.friend.id == userCurrent.id}">
+								<form action="acceptFriendRequest.do" method="POST">
 								<input type = "submit" value= "Accept Request">
 								<input type = "hidden" name = "requestId" value= "${request.id}">
-								</form>
+								</form> 
 							</c:if>
 							<c:if test="${not empty addedGame}">
 								<h3>${addedGame.title }for

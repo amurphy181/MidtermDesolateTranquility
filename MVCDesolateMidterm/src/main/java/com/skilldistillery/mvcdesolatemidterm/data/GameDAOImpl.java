@@ -39,6 +39,7 @@ public class GameDAOImpl implements GameDAO {
 		addedGame.setVisible(true);
 		eventDao.createGame(addedGame);
 		userAddGame.addGame(addedGame);
+		em.flush();
 		return addedGame;
 		
 	}
@@ -50,6 +51,7 @@ public class GameDAOImpl implements GameDAO {
 		boolean containGame = false;
 		User joinEventUser = em.find(User.class, id);
 			joinEventUser.addGame(newGame);
+			em.flush();
 		return containGame;
 	}
 	
@@ -117,6 +119,7 @@ public class GameDAOImpl implements GameDAO {
 		User user = em.find(User.class, userId);
 		User friend = em.find(User.class, friendId);
 		user.addFriend(friend);
+		em.flush();
 		return friend;
 	}
 	//removes
@@ -144,13 +147,17 @@ public class GameDAOImpl implements GameDAO {
 		request.setFriend(friend);
 		request.setMessage(message);
 		request.setAccepted(false);
+		request.setTimestamp(new Date());
+		em.persist(request);
+		em.flush();
 		return request;
 	}
 	@Override
 	public Friend acceptFriendRequest(Friend friendRequest) {
 		Friend acceptRequest = em.find(Friend.class, friendRequest.getId());
 		acceptRequest.setAccepted(true);
-		gameDao.addUserToFriendList(acceptRequest.getUser().getId(), acceptRequest.getFriend().getId());
+		gameDao.addUserToFriendList(acceptRequest.getFriend().getId(), acceptRequest.getUser().getId());
+		em.flush();
 		return acceptRequest;
 	}
 	@Override
