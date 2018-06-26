@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -236,6 +237,20 @@ public class UserController {
 		
 		return mv;
 		
+	}
+	
+	@RequestMapping(path="setProfileBlurb.do")
+	public ModelAndView setProfileBlurb(String blurb, int id, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		if (userDao.setProfileBlurb(id, blurb)) {
+			flash.addFlashAttribute("SummaryUpdated", 7);
+		}
+		else {
+			flash.addFlashAttribute("SummaryNotUpdated", 7);
+		}
+	
+		mv.setViewName("redirect:profileView.do");
+		return mv;
 	}
 
 }

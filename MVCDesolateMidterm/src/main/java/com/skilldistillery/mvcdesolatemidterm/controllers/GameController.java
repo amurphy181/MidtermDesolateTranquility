@@ -29,11 +29,14 @@ public class GameController {
 	EventDAO eventDao;
 	
 	@RequestMapping(path="profileView.do")
-	public ModelAndView viewProfilePage() {
+	public ModelAndView viewProfilePage(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		PasswordDTO passwordDTO = new PasswordDTO();
 		mv.addObject("passwordDTO", passwordDTO);
 		
+		User userUpdateGame = (User) session.getAttribute("userCurrent");
+		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
+		session.setAttribute("userCurrent", userUpdateGame);
 		mv.setViewName("WEB-INF/profilePage.jsp");
 		return mv;
 	}
