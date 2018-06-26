@@ -89,4 +89,11 @@ public class GameController {
 		
 	}
 	
+	@RequestMapping(path="viewAllUsers.do")
+	public ModelAndView showAllUsers(int id) {
+		
+		
+		return null;
+	}
+	
 }

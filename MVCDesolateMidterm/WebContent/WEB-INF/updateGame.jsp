@@ -20,6 +20,13 @@ Platform: <input type="text" name="platform" value="${game.platform.platformName
 	<input type ="hidden" name = "id" value="${game.id }"/>
 	<input type="submit" value="Update Game"/> 
 	</form>
+	<br>
+	<form action="deleteGameFromList.do">
+		<input type="submit" value="Delete Game">
+		<input type="hidden" name="gameId" value="${game.id}">
+		<input type="hidden" name="userId" value="${userCurrent.id}">
+		</form>
+		<br>
 	<a href="profileView.do">Back</a>
 </body>
 </html>

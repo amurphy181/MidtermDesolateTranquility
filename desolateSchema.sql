@@ -238,9 +238,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (1, 'PurpleFuzz', 'password', 0, 1, NULL);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (2, 'JGMoney', 'password', 0, 1, NULL);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (3, 'ASauceyBoy', 'password', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (1, 'PurpleFuzz', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (2, 'JGMoney', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (3, 'ASauceyBoy', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL);
 INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`) VALUES (4, 'admin', 'admin', 1, 1, NULL);
 
 COMMIT;

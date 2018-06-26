@@ -80,11 +80,6 @@
 		<input type="submit" value="Update Game">
 		<input type="hidden" name="id" value="${userGames.id}">
 		</form>
-		<form action="deleteGameFromList.do">
-		<input type="submit" value="Delete Game">
-		<input type="hidden" name="gameId" value="${userGames.id}">
-		<input type="hidden" name="userId" value="${userCurrent.id}">
-		</form>
 		<br>
 		</c:forEach>
 </div>
@@ -132,6 +127,11 @@
 					</div>
 </c:forEach>
 
+<c:forEach items ="${userCurrent.friendList }" var = "friend">
+${friend.userName }
+<br>
+</c:forEach>
+
 <form:form action="changePassword.do" modelAttribute="passwordDTO" method="POST">
 	Old Password  <form:input type="password" autocorrect="off" autocapitalize="none" path="oldPassword"/><br>
 	New Password  <form:input type="password" autocorrect="off" autocapitalize="none" path="newPassword"/><br>
@@ -147,6 +147,11 @@ Profile Summary: <input type = "text" name = "blurb"><br>
 <h5>Limit 140 characters</h5>
 <input type = "hidden" name = "id" value = "${userCurrent.id }">
 <input type="submit" value="Set Summary" > <br>
+</form>
+
+<form action="viewAllUsers.do">
+<input type = "hidden" name = "id" value = "${userCurrent.id }">
+<input type = "submit" value= "Find Friends">
 </form>
 </body>
 </html>

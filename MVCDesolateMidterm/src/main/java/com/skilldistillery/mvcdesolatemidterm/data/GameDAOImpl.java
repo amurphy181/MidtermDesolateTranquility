@@ -105,15 +105,29 @@ public class GameDAOImpl implements GameDAO {
 		return removedGame;
 	}
 	
-//remember to move this function to user later
+//remember to move all functions below this line to user later
 //I want this function to allow users to add friends to their list. I don't want them to add themselves.
 //Do I want to view a list of all users to add or a search? lets have this just be a basic add.
 	@Override
 	public User addUserToList(int userId, int friendId) {
 		User user = em.find(User.class, userId);
 		User friend = em.find(User.class, friendId);
-		user.ad
+		user.addFriend(friend);
 		return friend;
+	}
+	@Override
+	public User removeUserFromList(int userId, int friendId) {
+		User user = em.find(User.class, userId);
+		User friend = em.find(User.class, friendId);
+		user.removeFriend(friend);
+		return friend;
+	}
+	
+	@Override
+	public List<User> showAllUsers(){
+		String query = "select u from User u";
+		List<User> allUsers = em.createQuery(query, User.class).getResultList();
+		return allUsers;
 	}
 	
 }
