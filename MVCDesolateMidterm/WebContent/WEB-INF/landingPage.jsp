@@ -250,11 +250,11 @@
 <!--       BODY OF MESSAGE MODAL -->
       <div class="modal-body">
       
-      	<c:forEach items="${event.messages }" var="message">
+      	<%-- <c:forEach items="${event.messages }" var="message">
 								
         <p>	${message.user.userName}: ${message.content}<br></p>
 							
-			</c:forEach>
+			</c:forEach> --%>
       </div>
       
       

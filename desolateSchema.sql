@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(500) NOT NULL,
   `sender_id` INT(11) NOT NULL,
-  `time_sent` DATETIME NOT NULL,
+  `time_sent` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `event_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `FK_MESSAGE_TO_EVENT_ID_idx` (`event_id` ASC),
@@ -259,5 +259,15 @@ START TRANSACTION;
 USE `midtermproject`;
 INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (1, 1, DEFAULT, 1, DEFAULT, NULL, 1);
 INSERT INTO `event` (`id`, `game_id`, `start_date`, `creator_id`, `status`, `location`, `visibility`) VALUES (2, 3, '2018-07-04 13:00:00', 3, DEFAULT, 'Alex\'s Murder Dungeon', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `midtermproject`;
+INSERT INTO `message` (`id`, `content`, `sender_id`, `time_sent`, `event_id`) VALUES (1, 'Hello World', 1, NULL, 1);
 
 COMMIT;

@@ -1,7 +1,6 @@
 package com.skilldistillery.jpadesolatemidterm.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -25,7 +25,8 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
-	@Column(name="sender_id")
+	@OneToOne
+	@JoinColumn(name="sender_id")
 	private User user;
 
 	
