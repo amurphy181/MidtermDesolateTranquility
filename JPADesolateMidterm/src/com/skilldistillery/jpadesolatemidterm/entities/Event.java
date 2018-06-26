@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -41,6 +42,36 @@ public class Event {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany(mappedBy = "events", cascade=CascadeType.PERSIST)
 	private List<User> users;
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "event")
+	private List<Message> messages;
+	
+	
+	
+	//add and remove lists
+	
+	
+	public void addMessage(Message message) {
+		if(messages == null) messages = new ArrayList<>();
+		
+		if(!messages.contains(message)) {
+			messages.add(message);
+			if(message.getEvent() != null) {
+				message.getEvent().getMessages().remove(message);
+			}
+			
+			message.setEvent(this);
+		}
+	}
+	
+	public void removeGame(Message message) {
+		message.setEvent(null);
+		if(messages != null) {
+			messages.remove(message);
+		}
+	}
+	
 
 	
 	public void addUser(User user) {
@@ -124,6 +155,14 @@ public class Event {
 	
 	
 
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
 
 	@Override
 	public int hashCode() {

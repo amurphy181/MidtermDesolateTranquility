@@ -114,6 +114,22 @@ public class GameController {
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
+	@RequestMapping(path="sendRequest.do")
+	public ModelAndView sendFriendRequest(int userId, int friendId, RedirectAttributes flash, String message) {
+		ModelAndView mv = new ModelAndView();
+		gameDao.sendFriendRequest(userId, message, friendId);
+		User friend = userDao.findUserByUserID(friendId);
+		flash.addFlashAttribute("sentRequest", friend);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	@RequestMapping(path="acceptRequest.do")
+	public ModelAndView acceptFriendRequest(int userId, int friendId, RedirectAttributes flash) {
+		ModelAndView mv = new ModelAndView();
+
+		return mv;
+	}
+	
 	
 	
 }

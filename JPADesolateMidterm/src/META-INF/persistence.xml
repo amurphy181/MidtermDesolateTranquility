@@ -14,6 +14,7 @@
     <class>com.skilldistillery.jpadesolatemidterm.entities.Message</class>
     <class>com.skilldistillery.jpadesolatemidterm.entities.Platform</class>
     <class>com.skilldistillery.jpadesolatemidterm.entities.User</class>
+    <class>com.skilldistillery.jpadesolatemidterm.entities.Friends</class>
 
 
 
