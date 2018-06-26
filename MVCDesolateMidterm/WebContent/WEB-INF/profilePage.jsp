@@ -176,7 +176,7 @@
 		<div class="panel-body">
 			<div class="media">
 				<a class="media-left" href="#fake"> <img alt=""
-					class="media-object img-rounded" src="http://placehold.it/64x64">
+					class="media-object img-rounded" src="${userCurrent.picURL }">
 				</a>
 
 
