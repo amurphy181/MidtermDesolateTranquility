@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -204,12 +204,27 @@
 							<h4 class="media-heading">${event.game.title }</h4>
 							<p>	<c:if test="${empty event.location }">
 								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
+								 - <fmt:formatDate pattern="hh:mm" value="${event.startDate}" /> 
 								</c:if>
 		
 		 
 								<c:if test="${not empty event.location}">
 								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
-								</c:if></p>
+								 - <fmt:formatDate pattern="hh:mm" value="${event.startDate}" /> 
+								</c:if><br>
+								
+								<!-- ADMIN BUTTON TO DEACTIVATE ON LANDING PAGE -->
+								
+								<c:if test="${userCurrent.admin}">
+								
+										<form action="deactivateEvent.do" method="POST">
+										<input type="submit" class="btn btn-primary" value="Deactivate Event" /> <input
+										type="hidden" name="id" value="${event.id }" />
+										</form>
+
+																
+								</c:if>
+								</p>
 							<ul class="nav nav-pills nav-pills-custom">
 								<li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
