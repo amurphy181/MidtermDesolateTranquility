@@ -212,6 +212,10 @@
 								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
 								 - <fmt:formatDate pattern="hh:mm" value="${event.startDate}" /> 
 								</c:if><br>
+								<c:forEach items="${event.users }" var="user">
+								
+								${user.userName} 
+								</c:forEach>
 								
 								<!-- ADMIN BUTTON TO DEACTIVATE ON LANDING PAGE -->
 								
@@ -226,7 +230,7 @@
 								</c:if>
 								</p>
 							<ul class="nav nav-pills nav-pills-custom">
-								<li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
+								<li><a href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}"><span class="glyphicon glyphicon-share-alt"></span></a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
