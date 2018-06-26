@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `admin` TINYINT NOT NULL DEFAULT 0,
   `status` TINYINT NOT NULL DEFAULT 1,
   `profile_summary` VARCHAR(140) NULL,
-  `picture_url` VARCHAR(200) NULL,
+  `picture_url` VARCHAR(200) NOT NULL DEFAULT 'https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face-2-prints.jpg',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
@@ -244,10 +244,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `midtermproject`;
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (1, 'PurpleFuzz', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, NULL);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (2, 'JGMoney', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, NULL);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (3, 'ASauceyBoy', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, NULL);
-INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (4, 'admin', '$2a$10$F/0pBXG4tKRleSTCm3tfyeMhlWF8osLd826GJ0i67XD3kUo6zSZ.a', 1, 1, NULL, NULL);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (1, 'PurpleFuzz', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (2, 'JGMoney', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (3, 'ASauceyBoy', '$2a$10$i0eYFjeW5XaQeMH8qu7vwumuGGXhL8CvE5isg2lIhTl3wa513NJ6O', 0, 1, NULL, DEFAULT);
+INSERT INTO `user` (`id`, `name`, `password`, `admin`, `status`, `profile_summary`, `picture_url`) VALUES (4, 'admin', '$2a$10$F/0pBXG4tKRleSTCm3tfyeMhlWF8osLd826GJ0i67XD3kUo6zSZ.a', 1, 1, NULL, DEFAULT);
 
 COMMIT;
 
