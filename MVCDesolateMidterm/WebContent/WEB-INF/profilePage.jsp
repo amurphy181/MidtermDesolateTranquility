@@ -96,9 +96,9 @@
 				</div>
 <form action="addGameToList.do" method="POST">
 	<%-- Error messages --%>
-	Game:<input name="game"/>
+	Game:<input name="game"/><br>
 	Platform:<input name = "platform" value= "${platform.id }"/>
-	<input type = "hidden" name = "id" value = "${userCurrent.id }">
+	<input type = "hidden" name = "id" value = "${userCurrent.id }"><br>
 	<input type="submit" value="Add Game" > <br>
 </form>
 <h2>Joined Events</h2>
