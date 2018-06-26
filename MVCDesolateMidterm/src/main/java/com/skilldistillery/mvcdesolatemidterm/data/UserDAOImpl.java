@@ -44,6 +44,7 @@ public class UserDAOImpl implements UserDAO {
 	public User create(User user) {
 		String encodedPassword = encoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		user.setStatus(true);
 
 		em.persist(user);
 		em.flush();
