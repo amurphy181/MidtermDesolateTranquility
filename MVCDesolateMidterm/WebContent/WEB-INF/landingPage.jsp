@@ -191,6 +191,8 @@
 				
 								<c:forEach items="${events }" var="event">
 				<c:if test="${event.visibility == 1 }">
+					<c:if test="${event.status}">
+					
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake">
@@ -218,6 +220,7 @@
 					</div>
 					</div>
 				
+					</c:if>
 					</c:if>
 				</c:forEach>
 
