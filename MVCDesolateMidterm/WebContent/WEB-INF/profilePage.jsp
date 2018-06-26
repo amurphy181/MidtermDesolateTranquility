@@ -73,6 +73,8 @@
 </c:if>
 <c:if test="${not empty friend}"><h3>${friend.userName } was added to your friends list</h3>
 </c:if>
+<c:if test="${not empty byefriend}"><h3>${byefriend.userName } was removed from your friends list</h3>
+</c:if>
 <p>${userCurrent.summary }</p>
 
 <c:forEach items="${userCurrent.games }" var="userGames">
@@ -98,6 +100,17 @@
 	<input type = "hidden" name = "id" value = "${userCurrent.id }"><br>
 	<input type="submit" value="Add Game" > <br>
 </form>
+<h2>Friends</h2>
+<hr>
+<c:forEach items="${userCurrent.friendList }" var="friend">
+		${friend.userName }
+		<form action="deleteFriend.do">
+		<input type="submit" value="Remove Friend">
+		<input type="hidden" name="friendId" value="${friend.id}">
+		<input type="hidden" name="userId" value="${userCurrent.id}">
+		</form>
+		<br>
+		</c:forEach>
 <h2>Joined Events</h2>
 <c:forEach items = "${userCurrent.events }" var="event">
 
