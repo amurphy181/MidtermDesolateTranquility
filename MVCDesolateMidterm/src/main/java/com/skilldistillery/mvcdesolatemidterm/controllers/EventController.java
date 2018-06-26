@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
+import com.skilldistillery.jpadesolatemidterm.entities.Message;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 import com.skilldistillery.mvcdesolatemidterm.data.EventDAO;
 import com.skilldistillery.mvcdesolatemidterm.data.GameDAO;
@@ -48,6 +50,14 @@ public class EventController {
 
 		mv.addObject("event", eventLink);
 		mv.setViewName("WEB-INF/adminPage.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="postMessage.do")
+	public ModelAndView addGameToUserList(int eventId, int userId, String messageContent, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Message m = daoEvent.addMessage(messageContent, userId, eventId);
+		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}
 	

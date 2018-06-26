@@ -25,12 +25,22 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
+	@Column(name="sender_id")
+	private User user;
 
 	
 	
 	
 	//getters setters
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -58,6 +68,8 @@ public class Message {
 	public int getId() {
 		return id;
 	}
+
+
 
 	@Override
 	public int hashCode() {

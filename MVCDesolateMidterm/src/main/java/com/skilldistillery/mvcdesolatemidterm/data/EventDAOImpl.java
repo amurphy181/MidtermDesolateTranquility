@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
+import com.skilldistillery.jpadesolatemidterm.entities.Message;
 import com.skilldistillery.jpadesolatemidterm.entities.Platform;
 import com.skilldistillery.jpadesolatemidterm.entities.User;
 
@@ -164,6 +165,25 @@ public class EventDAOImpl implements EventDAO {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Message addMessage(String messageContent, int userId, int eventId) {
+		
+		Event eventToAddMessageTo = em.find(Event.class, eventId);
+		
+		Message m = new Message();
+		m.setContent(messageContent);
+		m.setEvent(eventToAddMessageTo);
+		m.setUser(em.find(User.class, userId));
+			
+		em.persist(m);
+		
+		
+		eventToAddMessageTo.addMessage(m);
+		em.flush();
+
+		return m;
 	}
 	
 
