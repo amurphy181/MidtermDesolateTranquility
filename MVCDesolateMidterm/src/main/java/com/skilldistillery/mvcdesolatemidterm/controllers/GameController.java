@@ -35,7 +35,8 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		PasswordDTO passwordDTO = new PasswordDTO();
 		mv.addObject("passwordDTO", passwordDTO);
-
+		List<User> allUsers = gameDao.showAllUsers();
+		mv.addObject("allUsers", allUsers);
 		User userUpdateGame = (User) session.getAttribute("userCurrent");
 		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
 		session.setAttribute("userCurrent", userUpdateGame);

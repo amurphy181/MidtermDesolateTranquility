@@ -387,10 +387,20 @@
 							<h4>
 								<p>Follow the link to see all users</p>
 							</h4>
-							<form action="viewAllUsers.do">
-								<input type="hidden" name="id" value="${userCurrent.id }">
-								<input type="submit" value="Find Friends">
-							</form>
+							<c:forEach items="${allUsers}" var="user">
+								<c:if test="${!userFriendList.contains(user)}">
+									<c:if test="${user.id != userCurrent.id }">
+${user.userName }
+<br>
+										<form action="sendRequest.do">
+											Message: <input type="text" name="message"> <input
+												type="hidden" name="friendId" value="${user.id}"> <input
+												type="hidden" name="userId" value="${userCurrent.id}">
+											<input type="submit" value="Add Friend">
+										</form>
+									</c:if>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="modal-footer">
