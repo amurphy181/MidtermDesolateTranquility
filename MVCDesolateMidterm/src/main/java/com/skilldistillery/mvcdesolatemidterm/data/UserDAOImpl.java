@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO {
 		String encodedPassword = encoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 		user.setStatus(true);
+		user.setPictureURL("https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face-2-prints.jpg");
 
 		em.persist(user);
 		em.flush();
