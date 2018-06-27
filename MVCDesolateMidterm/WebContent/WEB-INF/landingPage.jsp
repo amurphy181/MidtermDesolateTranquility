@@ -110,7 +110,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<a href="#"><img class="img-responsive" alt="" src="${userCurrent.pictureURL }" width="175" height="175"></a>
+					<a href="profileView.do"><img class="img-responsive" alt="" src="${userCurrent.pictureURL }" width="175" height="175"></a>
 					<div class="row">
 						<div class="col-xs-3">
 							<h5>
@@ -161,7 +161,7 @@
 					<div class="media">
 					
 						<a class="media-left" href="#fake">
-							<img alt="" class="media-object img-rounded" src="http://placehold.it/35x35">
+							<img alt="" class="media-object img-rounded" src="${userCurrent.pictureURL }" height="35" width ="35">
 						</a>
 						
 					
@@ -196,7 +196,7 @@
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake">
-							<img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+							<img alt="" class="media-object img-rounded" src="${event.creator.pictureURL }" width="64" height="64">
 						</a>
 					
 					
