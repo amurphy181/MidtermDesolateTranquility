@@ -115,6 +115,18 @@ public class EventController {
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}
+	@RequestMapping(path = "userRemoveEvent.do")
+	public ModelAndView userRemoveEvent(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		daoEvent.deactivateEvent(eventId);
+		session.setAttribute("event", eventId);
+
+		mv.setViewName("redirect:landingPage.do");
+		return mv;
+	}
+	
+	
+	
 	
 	
 	
