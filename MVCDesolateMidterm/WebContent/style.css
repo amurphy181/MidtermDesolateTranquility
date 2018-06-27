@@ -27,6 +27,7 @@
 }
 
 
+
 body{
 	background-color: #F0FFFF;
 }
@@ -52,4 +53,26 @@ div.panel-heading{
 .panel-info{
 	border:1px lightgrey solid;
 }
+
+.list-unstyled li:nth-child(even) img{
+	background-color:lightcyan;
+	border: lightgrey solid 1px;
+	border-radius:10px;
+}
+.list-unstyled li:nth-child(odd) img{
+	background-color:lightcyan;
+	border: lightgrey solid 1px;
+	border-radius:10px;
+}
+
+.list-unstyled li:nth-child(even) {
+	background-color:lightcyan;
+	border: lightgrey solid 1px;
+	border-radius:15px;
+}
+.list-unstyled li:nth-child(odd) {
+	background-color:lightgray;
+	border: lightgrey solid 1px;
+	border-radius:15px;
+	
 
