@@ -168,7 +168,7 @@
 								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
 								</c:if>
 								<c:if test="${fn:contains(event.users, userCurrent)}">							
-								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
+								<li><button onclick=location.href="leaveEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Leave</button></li>
 								</c:if>
 								<li><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal${event.id }">Comments</button></li>
 							</ul>
