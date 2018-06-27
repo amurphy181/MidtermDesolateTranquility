@@ -119,6 +119,7 @@ public class GameDAOImpl implements GameDAO {
 		User user = em.find(User.class, userId);
 		User friend = em.find(User.class, friendId);
 		user.addFriend(friend);
+		friend.addFriend(user);
 		em.flush();
 		return friend;
 	}
@@ -167,10 +168,14 @@ public class GameDAOImpl implements GameDAO {
 		return request;
 	}
 	
+	
+	
+	
+	
 	@Override
 	public List<User> findUserFriendList(int userId){
-		String query = "select f.friend.id from Friend f where f.user.id = :id and f.accepted = 1";
-		List<Integer> friendIds = em.createQuery(query, Integer.class).setParameter("id", userId).getResultList();
+		String query = "select f.friend.id from Friend f where (f.user.id = :id or f.friend.id = :id2) and f.accepted = 1";
+		List<Integer> friendIds = em.createQuery(query, Integer.class).setParameter("id", userId).setParameter("id2", userId).getResultList();
 		List<User> friendsList = new ArrayList<>();
 		for (Integer id : friendIds) {
 			friendsList.add(em.find(User.class, id));
