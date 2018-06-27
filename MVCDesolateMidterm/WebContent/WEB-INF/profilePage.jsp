@@ -68,6 +68,7 @@
 						<div class="media-body">
 							<h1>Hello Hello ${request.id }</h1>
 							<c:if test="${request.friend.id == userCurrent.id}">
+								<p>${request.message }</p>
 								<form action="acceptFriendRequest.do" method="POST">
 									<input type="submit" value="Accept Request"> <input
 										type="hidden" name="requestId" value="${request.id}">
@@ -96,10 +97,10 @@
 								<h3>Summary could not be changed. Limit 140 characters.</h3>
 							</c:if>
 							<c:if test="${not empty friend}">
-								<h3>${friend.userName }wasaddedtoyourfriends list</h3>
+								<h3>${friend.userName } was added to your friends list</h3>
 							</c:if>
 							<c:if test="${not empty byefriend}">
-								<h3>${byefriend.userName }wasremovedfromyourfriends list</h3>
+								<h3>${byefriend.userName } was removed from your friends list</h3>
 							</c:if>
 
 							<!-- Trigger the modal with a button -->
