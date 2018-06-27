@@ -252,10 +252,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="setProfilePicture.do", method = RequestMethod.POST)
-	public ModelAndView setProfilePicture(String picURL, int userId, HttpSession session) {
+	public ModelAndView setProfilePicture(String picURL, int userId, HttpSession session, RedirectAttributes flash) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(userId);
-		userDao.setProfilePicture(userId, picURL);
+		if(userDao.setProfilePicture(userId, picURL)) {
+			boolean updated = true;
+			System.out.println("$$$ %% $$$ did we pass through?" );
+			flash.addFlashAttribute("Profile Picture Updated", updated);
+		} else {
+			boolean updated = false;
+			flash.addFlashAttribute("Profile Picture Remains the Same", updated);
+		}
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
