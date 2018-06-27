@@ -35,9 +35,12 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		PasswordDTO passwordDTO = new PasswordDTO();
 		mv.addObject("passwordDTO", passwordDTO);
-
+		List<User> allUsers = gameDao.showAllUsers();
+		mv.addObject("allUsers", allUsers);
 		User userUpdateGame = (User) session.getAttribute("userCurrent");
+		List<Friend> requestList = gameDao.listFriendRequestsForUser(userUpdateGame.getId());
 		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
+		mv.addObject("requestList", requestList);
 		session.setAttribute("userCurrent", userUpdateGame);
 		List<User> friendList = gameDao.findUserFriendList(userUpdateGame.getId());
 		System.out.println(friendList.size());
@@ -132,7 +135,8 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.sendFriendRequest(userId, message, friendId);
 		flash.addFlashAttribute("requestSent", request);
-		mv.addObject("request", request);
+//		flash.addFlashAttribute("request", request);
+//		mv.addObject("request", request);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
@@ -142,7 +146,16 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.findFriendRequest(requestId);
 		request = gameDao.acceptFriendRequest(request);
-		mv.addObject("request", null);
+//		List<User> friendList = gameDao.findUserFriendList(request.getUser().getId());
+//		session.setAttribute("userFriendList", friendList);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	@RequestMapping(path = "denyRequest.do")
+	public ModelAndView denyFriendRequest(int requestId, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Friend request = gameDao.findFriendRequest(requestId);
+		boolean deleted = gameDao.denyFriendRequest(request);
 //		List<User> friendList = gameDao.findUserFriendList(request.getUser().getId());
 //		session.setAttribute("userFriendList", friendList);
 		mv.setViewName("redirect:profileView.do");
