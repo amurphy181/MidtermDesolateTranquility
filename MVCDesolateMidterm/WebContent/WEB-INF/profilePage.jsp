@@ -368,6 +368,7 @@
 				</form>
 				<br>
 			</c:forEach>
+			
 			<!-- Trigger the find friends modal -->
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 				data-target="#findFriends">Find Friends</button>
