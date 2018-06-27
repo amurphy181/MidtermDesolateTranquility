@@ -51,7 +51,7 @@
 	</div>
 	<div class="container-fluid col-12">
 		<div class="col-sm-6">
-			<h1>${userCurrent.userName }'sProfile</h1>
+			<h1>${userCurrent.userName }'s Profile</h1>
 			<c:forEach items="${requestList }" var="request">
 
 				<p>${request.user.userName }</p>
@@ -93,7 +93,7 @@
 				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
 			</c:if>
 			<c:if test="${not empty alreadyFriend}">
-				<h3>${alreadyFriend.userName }isalreadyafriend or has a pending
+				<h3>${alreadyFriend.userName }isalreadyafriendor has a pending
 					request</h3>
 			</c:if>
 			<div class="panel panel-info">
@@ -110,7 +110,7 @@
 
 
 							<!-- Trigger the modal with a button -->
-							<button type="button" class="btn btn-info btn-lg"
+							<button type="button" class="btn btn-info btn-md"
 								data-toggle="modal" data-target="#myModal">New Profile
 								Picture</button>
 
@@ -255,7 +255,7 @@
 							<p></p>
 							<div>
 								<!-- Trigger the profile summary modal with a button -->
-								<button type="button" class="btn btn-info btn-lg"
+								<button type="button" class="btn btn-info btn-md"
 									data-toggle="modal" data-target="#profileSummaryModal">Set
 									Profile Summary</button>
 
@@ -292,7 +292,7 @@
 							<p></p>
 							<div>
 								<!-- Trigger the change password modal -->
-								<button type="button" class="btn btn-info btn-lg"
+								<button type="button" class="btn btn-info btn-md"
 									data-toggle="modal" data-target="#changePassword">Change
 									Password</button>
 
@@ -349,7 +349,7 @@
 			<div class="friendBlock">
 				<h2>Friends</h2>
 				<!-- Trigger the find friends modal -->
-				<button type="button" class="btn btn-info btn-lg"
+				<button type="button" class="btn btn-info btn-md"
 					data-toggle="modal" data-target="#findFriends">Find
 					Friends</button>
 
@@ -407,55 +407,53 @@ ${user.userName }
 		</div>
 
 		<div class="col-sm-6">
-			<h1>
-				Games and Events
-				</h1>
-
-				
+			<h1>Games and Events</h1>
 
 
 
-				<h2>Joined Events</h2>
-				<c:forEach items="${userCurrent.events }" var="event">
-
-					<div class="panel-body">
-						<div class="media">
-							<a class="media-left" href="#fake"> <img alt=""
-								class="media-object img-rounded"
-								src="${userCurrent.pictureURL }" height="100" width="100">
-							</a>
 
 
-							<div class="media-body">
-								<h4 class="media-heading">${event.game.title }</h4>
-								<p>
-									<c:if test="${empty event.location }">
+			<h2>Joined Events</h2>
+			<c:forEach items="${userCurrent.events }" var="event">
+
+				<div class="panel-body">
+					<div class="media">
+						<a class="media-left" href="#fake"> <img alt=""
+							class="media-object img-rounded" src="${userCurrent.pictureURL }"
+							height="100" width="100">
+						</a>
+
+
+						<div class="media-body">
+							<h4 class="media-heading">${event.game.title }</h4>
+							<p>
+								<c:if test="${empty event.location }">
 								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
-									</c:if>
+								</c:if>
 
 
-									<c:if test="${not empty event.location}">
+								<c:if test="${not empty event.location}">
 								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
-									</c:if>
-								</p>
-								<ul class="nav nav-pills nav-pills-custom">
-									<li><a href="#"><span
-											class="glyphicon glyphicon-share-alt"></span></a></li>
-									<li><a href="#"><span
-											class="glyphicon glyphicon-retweet"></span></a></li>
-									<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-									<li><a href="#"><span
-											class="glyphicon glyphicon-option-horizontal"></span></a></li>
-								</ul>
-							</div>
+								</c:if>
+							</p>
+							<ul class="nav nav-pills nav-pills-custom">
+								<li><a href="#"><span
+										class="glyphicon glyphicon-share-alt"></span></a></li>
+								<li><a href="#"><span
+										class="glyphicon glyphicon-retweet"></span></a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+								<li><a href="#"><span
+										class="glyphicon glyphicon-option-horizontal"></span></a></li>
+							</ul>
 						</div>
 					</div>
-				</c:forEach>
+				</div>
+			</c:forEach>
 
-				<div>
-					<h2>Games on File</h2>
-					<!-- Trigger the find friends modal -->
-				<button type="button" class="btn btn-info btn-lg"
+			<div>
+				<h2>Games on File</h2>
+				<!-- Trigger the find friends modal -->
+				<button type="button" class="btn btn-info btn-md"
 					data-toggle="modal" data-target="#addGame">Add Game</button>
 
 				<!-- Modal -->
@@ -489,19 +487,19 @@ ${user.userName }
 
 				</div>
 				<p></p>
-					<c:forEach items="${userCurrent.games }" var="userGames">
+				<c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
 		${userGames.platform.platformName }
 		<form action="updateGame.do">
-							<input type="submit" value="Update Game"> <input
-								type="hidden" name="id" value="${userGames.id}">
-						</form>
-						<br>
-					</c:forEach>
+						<input type="submit" value="Update Game"> <input
+							type="hidden" name="id" value="${userGames.id}">
+					</form>
+					<br>
+				</c:forEach>
 
 
-				</div>
-				<p></p>
+			</div>
+			<p></p>
 		</div>
 
 
