@@ -97,7 +97,7 @@
 
 					<a href="logout.do">
 				<button class="btn btn-primary" type="submit" aria-label="Left Align">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Logout
+				 Logout
 				</button>
 					</a>
 			</div>
@@ -230,9 +230,7 @@
 								</c:if>
 								</p>
 							<ul class="nav nav-pills nav-pills-custom">
-								<li><a href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}"><span class="glyphicon glyphicon-share-alt"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
 								<li><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal${event.id }">Comments</button></li>
 							</ul>
 						</div>
