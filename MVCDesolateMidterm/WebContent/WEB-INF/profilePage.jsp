@@ -258,14 +258,13 @@
 	<h2>Friends</h2>
 	<hr>
 	<c:forEach items="${userFriendList}" var="friend">
-		<c:if test="${friend.id != userCurrent.id }">
+		
 		${friend.userName }
 		<form action="deleteFriend.do">
 			<input type="submit" value="Remove Friend"> <input
 				type="hidden" name="friendId" value="${friend.id}"> <input
 				type="hidden" name="userId" value="${userCurrent.id}">
 		</form>
-		</c:if>
 		<br>
 	</c:forEach>
 	<h2>Joined Events</h2>
