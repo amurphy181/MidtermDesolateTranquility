@@ -60,7 +60,7 @@
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake"> <img alt=""
-							class="media-object img-rounded" src="http://placehold.it/64x64">
+							class="media-object img-rounded" src="${userCurrent.pictureURL }" width="175" height="175" >
 						</a>
 
 
@@ -127,6 +127,16 @@
 														src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
 														width="200" height="200" />
 												</button>
+												
+												<input type="hidden" name="userId"
+													value="${userCurrent.id }"> <input type="hidden"
+													name="picURL"
+													value="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg">
+												<button>
+													<img
+														src="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg"
+														width="200" height="200" />
+												</button>
 											</form>
 
 										</div>
@@ -182,7 +192,7 @@
 		<div class="panel-body">
 			<div class="media">
 				<a class="media-left" href="#fake"> <img alt=""
-					class="media-object img-rounded" src="${userCurrent.picURL }">
+					class="media-object img-rounded" src="${userCurrent.pictureURL }">
 				</a>
 
 

@@ -22,6 +22,6 @@ public interface UserDAO {
 	public boolean activateAdmin(int id);
 	public boolean setNewPassword(int id, String newPassword);
 	public boolean setProfileBlurb(int id, String blurb);
-	public void setProfilePicture(int id, String picURL);
+	public boolean setProfilePicture(int id, String picURL);
 
 }

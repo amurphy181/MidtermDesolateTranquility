@@ -110,7 +110,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<a href="#"><img class="img-responsive" alt="" src="http://placehold.it/800x500"></a>
+					<a href="#"><img class="img-responsive" alt="" src="${userCurrent.pictureURL }" width="175" height="175"></a>
 					<div class="row">
 						<div class="col-xs-3">
 							<h5>
