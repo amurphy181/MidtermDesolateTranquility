@@ -100,6 +100,9 @@ public class GameController {
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 
+		
+		
+		
 	}
 
 	@RequestMapping(path = "viewAllUsers.do")
