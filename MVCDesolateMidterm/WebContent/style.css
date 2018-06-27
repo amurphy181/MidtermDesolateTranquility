@@ -53,3 +53,15 @@ div.panel-heading{
 	border:1px lightgrey solid;
 }
 
+
+.list-unstyled li:nth-child(even) div{
+	background-color:lightgray !important;
+	 border: lightgrey solid 1px;
+	border-radius:15px;
+}
+.list-unstyled li:nth-child(odd) div{
+	background-color:lightcyan !important;
+	 border: lightgrey solid 1px;
+	border-radius:15px;
+	
+

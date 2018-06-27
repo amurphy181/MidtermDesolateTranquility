@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="twitter.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
 <title>Games List</title>
 </head>
 <body>
@@ -249,12 +249,21 @@
       </div>
 <!--       BODY OF MESSAGE MODAL -->
       <div class="modal-body">
-      
+ 
+      <ul class="list-unstyled">
       	 <c:forEach items="${event.messages }" var="message">
-								
-        <p>	${message.user.userName}: ${message.content}<br></p>
-							
+			<li><div>
+				<div class="media">
+  <img class="align-self-start mr-3" src="${message.user.pictureURL }" height="35" width="35" alt="Generic placeholder image">
+</div>
+  <div class="media-body">
+    
+    <p><b>${message.user.userName}:</b> ${message.content}</p>
+  </div></div>
+
+				</li>			
 			</c:forEach>
+			</ul>
       </div>
       
       
