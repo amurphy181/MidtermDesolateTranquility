@@ -250,7 +250,7 @@
 								<br>
 								<div>
 									<!-- Trigger the profile summary modal with a button -->
-									<button type="button" class="btn btn-info btn-lg" border="10px"
+									<button type="button" class="btn btn-info btn-lg" 
 										data-toggle="modal" data-target="#profileSummaryModal">Set
 										Profile Summary</button>
 
