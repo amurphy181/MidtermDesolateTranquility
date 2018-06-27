@@ -11,7 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="twitter.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Profile Page</title>
 </head>
@@ -53,60 +53,64 @@
 		</div>
 	</div>
 	<div class="container-fluid col-12">
-		<h1>${userCurrent.userName }'s Profile</h1>
 		<div class="col-sm-6">
-			<h3>Events List</h3>
+			<h1>${userCurrent.userName }'sProfile</h1>
+			<c:forEach items="${requestList }" var="request">
+
+				<p>${request.user.userName }</p>
+				<p>${request.message }</p>
+				<p>${request.timestamp }</p>
+				<form action="acceptFriendRequest.do" method="POST">
+					<input type="submit" value="Accept Request"> <input
+						type="hidden" name="requestId" value="${request.id}">
+				</form>
+				<form action="denyRequest.do" method="POST">
+					<input type="submit" value="Deny Request"> <input
+						type="hidden" name="requestId" value="${request.id}">
+				</form>
+			</c:forEach>
+			<c:if test="${not empty addedGame}">
+				<h3>${addedGame.title } for ${addedGame.platform.platformName }
+					was added to your list.</h3>
+			</c:if>
+			<c:if test="${not empty requestSent}">
+				<h3>Request sent to ${requestSent.friend.userName }</h3>
+			</c:if>
+			<c:if test="${not empty removedGame}">
+				<h3>${removedGame.title }for
+					${removedGame.platform.platformName } was removed from your list.</h3>
+			</c:if>
+			<c:if test="${not empty success}">
+				<h3>Password Successfully Changed</h3>
+			</c:if>
+			<c:if test="${not empty SummaryUpdated}">
+				<h3>Profile Summary Set</h3>
+			</c:if>
+			<c:if test="${not empty SummaryNotUpdated}">
+				<h3>Summary could not be changed. Limit 140 characters.</h3>
+			</c:if>
+			<c:if test="${not empty friend}">
+				<h3>${friend.userName }wasaddedtoyourfriendslist</h3>
+			</c:if>
+			<c:if test="${not empty byefriend}">
+				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
+			</c:if>
+			<c:if test="${not empty alreadyFriend}">
+				<h3>${alreadyFriend.userName }isalready a friend or has a
+					pending request</h3>
+			</c:if>
 			<div class="panel panel-info">
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake"> <img alt=""
 							class="media-object img-rounded" src="${userCurrent.pictureURL }"
-							width="175" height="175">
+							width="200" height="200">
 						</a>
 
 
-						<div class="media-body">
-							<c:forEach items="${requestList }" var="request">
 
-								<p>${request.user.userName }</p>
-								<p>${request.message }</p>
-								<p>${request.timestamp }</p>
-								<form action="acceptFriendRequest.do" method="POST">
-									<input type="submit" value="Accept Request"> <input
-										type="hidden" name="requestId" value="${request.id}">
-								</form>
-								<form action="denyRequest.do" method="POST">
-									<input type="submit" value="Deny Request"> <input
-										type="hidden" name="requestId" value="${request.id}">
-								</form>
-							</c:forEach>
-							<c:if test="${not empty addedGame}">
-								<h3>${addedGame.title }for
-									${addedGame.platform.platformName } was added to your list.</h3>
-							</c:if>
-							<c:if test="${not empty requestSent}">
-								<h3>Request sent to ${requestSent.friend.userName }</h3>
-							</c:if>
-							<c:if test="${not empty removedGame}">
-								<h3>${removedGame.title }for
-									${removedGame.platform.platformName } was removed from your
-									list.</h3>
-							</c:if>
-							<c:if test="${not empty success}">
-								<h3>Password Successfully Changed</h3>
-							</c:if>
-							<c:if test="${not empty SummaryUpdated}">
-								<h3>Profile Summary Set</h3>
-							</c:if>
-							<c:if test="${not empty SummaryNotUpdated}">
-								<h3>Summary could not be changed. Limit 140 characters.</h3>
-							</c:if>
-							<c:if test="${not empty friend}">
-								<h3>${friend.userName }wasaddedtoyourfriendslist</h3>
-							</c:if>
-							<c:if test="${not empty byefriend}">
-								<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
-							</c:if>
+						<div class="media-body">
+
 
 							<!-- Trigger the modal with a button -->
 							<button type="button" class="btn btn-info btn-lg"
@@ -289,7 +293,54 @@
 								</div>
 							</div>
 							<p></p>
+							<div>
+								<!-- Trigger the change password modal -->
+								<button type="button" class="btn btn-info btn-lg"
+									data-toggle="modal" data-target="#changePassword">Change
+									Password</button>
 
+								<!-- Modal -->
+
+
+								<div id="changePassword" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Change Your Password</h4>
+											</div>
+											<div class="modal-body">
+												<h4>
+													<p></p>
+												</h4>
+												<form:form action="changePassword.do"
+													modelAttribute="passwordDTO" method="POST">
+	Old Password  <form:input type="password" autocorrect="off"
+														autocapitalize="none" path="oldPassword" />
+													<br>
+	New Password  <form:input type="password" autocorrect="off"
+														autocapitalize="none" path="newPassword" />
+													<br>
+													<p class="button">
+														<input type="submit" value="Change Password">
+													</p>
+													<br>
+													<input type="hidden" name="id" value="${userCurrent.id }">
+													<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
+													<form:errors path="newPassword">That's literally the same password...</form:errors>
+												</form:form>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
 
 							<p>${userCurrent.summary }</p>
 
@@ -298,165 +349,162 @@
 					</div>
 				</div>
 			</div>
+			<div class="friendBlock">
+				<h2>Friends</h2>
+				<!-- Trigger the find friends modal -->
+				<button type="button" class="btn btn-info btn-lg"
+					data-toggle="modal" data-target="#findFriends">Find
+					Friends</button>
 
-		</div>
-		<div class="col-sm-6">
-		<form action="addGameToList.do" method="POST">
-			<%-- Error messages --%>
-			Game:<input name="game" /><br> Platform:<input name="platform"
-				value="${platform.id }" /> <input type="hidden" name="id"
-				value="${userCurrent.id }"><br> <input type="submit"
-				value="Add Game"> <br>
-		</form>
-		<h2>Friends</h2>
-		<hr>
-		<c:forEach items="${userFriendList}" var="friend">
+				<!-- Modal -->
+				<div id="findFriends" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Find new friends</h4>
+							</div>
+							<div class="modal-body">
+								<h4>
+									<p>Follow the link to see all users</p>
+								</h4>
+								<c:forEach items="${allUsers}" var="user">
+									<c:if test="${!userFriendList.contains(user)}">
+										<c:if test="${user.id != userCurrent.id }">
+${user.userName }
+<br>
+											<form action="sendRequest.do">
+												Message: <input type="text" name="message"> <input
+													type="hidden" name="friendId" value="${user.id}"> <input
+													type="hidden" name="userId" value="${userCurrent.id}">
+												<input type="submit" value="Add Friend">
+											</form>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="clearBody"></div>
+			<div>
+				<c:forEach items="${userFriendList}" var="friend">
 		
 		${friend.userName }
 		<form action="deleteFriend.do">
-				<input type="submit" value="Remove Friend"> <input
-					type="hidden" name="friendId" value="${friend.id}"> <input
-					type="hidden" name="userId" value="${userCurrent.id}">
-			</form>
-			<br>
-		</c:forEach>
-		</div>
-		<h2>Joined Events</h2>
-		<c:forEach items="${userCurrent.events }" var="event">
-
-			<div class="panel-body">
-				<div class="media">
-					<a class="media-left" href="#fake"> <img alt=""
-						class="media-object img-rounded" src="${userCurrent.pictureURL }">
-					</a>
-
-
-					<div class="media-body">
-						<h4 class="media-heading">${event.game.title }</h4>
-						<p>
-							<c:if test="${empty event.location }">
-								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
-							</c:if>
-
-
-							<c:if test="${not empty event.location}">
-								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
-							</c:if>
-						</p>
-						<ul class="nav nav-pills nav-pills-custom">
-							<li><a href="#"><span
-									class="glyphicon glyphicon-share-alt"></span></a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-retweet"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-option-horizontal"></span></a></li>
-						</ul>
-					</div>
-				</div>
+						<input type="submit" value="Remove Friend"> <input
+							type="hidden" name="friendId" value="${friend.id}"> <input
+							type="hidden" name="userId" value="${userCurrent.id}">
+					</form>
+					<br>
+				</c:forEach>
 			</div>
-		</c:forEach>
+		</div>
 
-		<div>
-			<h2>Games on File</h2>
-			<c:forEach items="${userCurrent.games }" var="userGames">
+		<div class="col-sm-6">
+			<h1>
+				Games and Events
+				</h2>
+
+				<!-- Trigger the find friends modal -->
+				<button type="button" class="btn btn-info btn-lg"
+					data-toggle="modal" data-target="#addGame">Add Games</button>
+
+				<!-- Modal -->
+				<div id="addGame" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add a Game</h4>
+							</div>
+							<div class="modal-body">
+								<h4>
+									<p>Add a game to your collection</p>
+								</h4>
+								<form action="addGameToList.do" method="POST">
+									<%-- Error messages --%>
+									Game:<input name="game" /><br> Platform:<input
+										name="platform" value="${platform.id }" /> <input
+										type="hidden" name="id" value="${userCurrent.id }"><br>
+									<input type="submit" value="Add Game"> <br>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<h2>Joined Events</h2>
+				<c:forEach items="${userCurrent.events }" var="event">
+
+					<div class="panel-body">
+						<div class="media">
+							<a class="media-left" href="#fake"> <img alt=""
+								class="media-object img-rounded"
+								src="${userCurrent.pictureURL }">
+							</a>
+
+
+							<div class="media-body">
+								<h4 class="media-heading">${event.game.title }</h4>
+								<p>
+									<c:if test="${empty event.location }">
+								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
+									</c:if>
+
+
+									<c:if test="${not empty event.location}">
+								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
+									</c:if>
+								</p>
+								<ul class="nav nav-pills nav-pills-custom">
+									<li><a href="#"><span
+											class="glyphicon glyphicon-share-alt"></span></a></li>
+									<li><a href="#"><span
+											class="glyphicon glyphicon-retweet"></span></a></li>
+									<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+									<li><a href="#"><span
+											class="glyphicon glyphicon-option-horizontal"></span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+				<div>
+					<h2>Games on File</h2>
+					<c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
 		${userGames.platform.platformName }
 		<form action="updateGame.do">
-					<input type="submit" value="Update Game"> <input
-						type="hidden" name="id" value="${userGames.id}">
-				</form>
-				<br>
-			</c:forEach>
-			
-			<!-- Trigger the find friends modal -->
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-				data-target="#findFriends">Find Friends</button>
+							<input type="submit" value="Update Game"> <input
+								type="hidden" name="id" value="${userGames.id}">
+						</form>
+						<br>
+					</c:forEach>
 
-			<!-- Modal -->
-			<div id="findFriends" class="modal fade" role="dialog">
-				<div class="modal-dialog">
 
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Find new friends</h4>
-						</div>
-						<div class="modal-body">
-							<h4>
-								<p>Follow the link to see all users</p>
-							</h4>
-							<c:forEach items="${allUsers}" var="user">
-								<c:if test="${!userFriendList.contains(user)}">
-									<c:if test="${user.id != userCurrent.id }">
-${user.userName }
-<br>
-										<form action="sendRequest.do">
-											Message: <input type="text" name="message"> <input
-												type="hidden" name="friendId" value="${user.id}"> <input
-												type="hidden" name="userId" value="${userCurrent.id}">
-											<input type="submit" value="Add Friend">
-										</form>
-									</c:if>
-								</c:if>
-							</c:forEach>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
 				</div>
-
-			</div>
+				<p></p>
 		</div>
-		<p></p>
 
-		<div><!-- Trigger the find friends modal -->
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-			data-target="#changePassword">Change Password</button>
-
-		<!-- Modal -->
-
-		
-			<div id="changePassword" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Change Your Password</h4>
-						</div>
-						<div class="modal-body">
-							<h4>
-								<p></p>
-							</h4>
-							<form:form action="changePassword.do"
-								modelAttribute="passwordDTO" method="POST">
-	Old Password  <form:input type="password" autocorrect="off"
-									autocapitalize="none" path="oldPassword" />
-								<br>
-	New Password  <form:input type="password" autocorrect="off"
-									autocapitalize="none" path="newPassword" />
-								<br>
-								<p class="button">
-									<input type="submit" value="Change Password">
-								</p>
-								<br>
-								<input type="hidden" name="id" value="${userCurrent.id }">
-								<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
-								<form:errors path="newPassword">That's literally the same password...</form:errors>
-							</form:form>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
 
 	</div>
 	<p></p>

@@ -136,11 +136,17 @@ public class GameController {
 	public ModelAndView sendFriendRequest(int userId, int friendId, RedirectAttributes flash, String message,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Friend request = gameDao.sendFriendRequest(userId, message, friendId);
-		flash.addFlashAttribute("requestSent", request);
+		if (gameDao.duplicateFriendRequestChecker(userId, friendId)) {
+			Friend request = gameDao.sendFriendRequest(userId, message, friendId);
+			flash.addFlashAttribute("requestSent", request);
+			
+		} else {
+			User friend = userDao.findUserByUserID(friendId);
+			flash.addFlashAttribute("alreadyFriend", friend);
+		}
+		mv.setViewName("redirect:profileView.do");
 //		flash.addFlashAttribute("request", request);
 //		mv.addObject("request", request);
-		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
 

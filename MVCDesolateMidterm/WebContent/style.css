@@ -26,7 +26,14 @@
 	border-radius:15px;
 }
 
+.friendBlock{
+	display:inline-block;
+	float:left;
+}
 
+.clearBody{
+	clear:both
+}
 
 body{
 	background-color: #F0FFFF;
