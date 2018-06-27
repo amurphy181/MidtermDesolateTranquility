@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `admin` TINYINT NOT NULL DEFAULT 0,
   `status` TINYINT NOT NULL DEFAULT 1,
   `profile_summary` VARCHAR(140) NULL,
-  `picture_url` VARCHAR(200) NOT NULL DEFAULT 'https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face-2-prints.jpg',
+  `picture_url` VARCHAR(5000) NOT NULL DEFAULT 'https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face-2-prints.jpg',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
