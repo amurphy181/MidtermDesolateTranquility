@@ -124,7 +124,7 @@
 				<c:forEach items="${events }" var="event">
 				<c:if test="${event.visibility == 1 }">
 				<c:if test="${event.status}">
-				<c:if test="${fn:contains(userCurrent.friendList, event.creator) || userCurrent.admin}">
+				<c:if test="${fn:contains(userCurrent.friendList, event.creator) || userCurrent.admin || event.creator == userCurrent}">
 					
 				<div class="panel-body">
 					<div class="media">
@@ -134,20 +134,21 @@
 					
 					
 						<div class="media-body">
-							<h4 class="media-heading">${event.game.title }</h4>
+							<h4 class="media-heading">${event.game.title }  <h6><fmt:formatDate pattern="MMM dd hh:mm a" value="${event.startDate}" /></h6></h4>
 							<p>	<c:if test="${empty event.location }">
 								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
-								 - <fmt:formatDate pattern="hh:mm" value="${event.startDate}" /> 
+								
 								</c:if>
 		
 		 
 								<c:if test="${not empty event.location}">
 								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
-								 - <fmt:formatDate pattern="hh:mm" value="${event.startDate}" /> 
 								</c:if><br>
+								
+								
 								<c:forEach items="${event.users }" var="user">
 								
-								${user.userName} 
+								<h6>${user.userName} has joined!</h6> 
 								</c:forEach>
 								
 								<!-- ADMIN BUTTON TO DEACTIVATE ON LANDING PAGE -->
@@ -163,7 +164,12 @@
 								</c:if>
 								</p>
 							<ul class="nav nav-pills nav-pills-custom">
+								<c:if test="${!fn:contains(event.users, userCurrent)}">							
 								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
+								</c:if>
+								<c:if test="${fn:contains(event.users, userCurrent)}">							
+								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
+								</c:if>
 								<li><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal${event.id }">Comments</button></li>
 							</ul>
 						</div>
