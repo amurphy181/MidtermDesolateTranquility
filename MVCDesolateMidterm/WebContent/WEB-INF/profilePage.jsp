@@ -52,251 +52,255 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
-		<h1>${userCurrent.userName }'sProfile</h1>
-		<div>
-			<div class="col-sm-6">
-				<h3>Events List</h3>
-				<div class="panel panel-info">
-					<div class="panel-body">
-						<div class="media">
-							<a class="media-left" href="#fake"> <img alt=""
-								class="media-object img-rounded"
-								src="${userCurrent.pictureURL }" width="175" height="175">
-							</a>
+	<div class="container-fluid col-12">
+		<h1>${userCurrent.userName }'s Profile</h1>
+		<div class="col-sm-6">
+			<h3>Events List</h3>
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<div class="media">
+						<a class="media-left" href="#fake"> <img alt=""
+							class="media-object img-rounded" src="${userCurrent.pictureURL }"
+							width="175" height="175">
+						</a>
 
 
-							<div class="media-body">
-								<c:if test="${not empty request }">
-									<c:if test="${request.friend.id == userCurrent.id}">
-										<p>${request.message }</p>
-										<form action="acceptFriendRequest.do" method="POST">
-											<input type="submit" value="Accept Request"> <input
-												type="hidden" name="requestId" value="${request.id}">
-										</form>
-									</c:if>
-								</c:if>
-								<c:if test="${not empty addedGame}">
-									<h3>${addedGame.title }for
-										${addedGame.platform.platformName } was added to your list.</h3>
-								</c:if>
-								<c:if test="${not empty requestSent}">
-									<h3>Request sent to ${requestSent.friend.userName }</h3>
-								</c:if>
-								<c:if test="${not empty removedGame}">
-									<h3>${removedGame.title }for
-										${removedGame.platform.platformName } was removed from your
-										list.</h3>
-								</c:if>
-								<c:if test="${not empty success}">
-									<h3>Password Successfully Changed</h3>
-								</c:if>
-								<c:if test="${not empty SummaryUpdated}">
-									<h3>Profile Summary Set</h3>
-								</c:if>
-								<c:if test="${not empty SummaryNotUpdated}">
-									<h3>Summary could not be changed. Limit 140 characters.</h3>
-								</c:if>
-								<c:if test="${not empty friend}">
-									<h3>${friend.userName }wasaddedtoyourfriendslist</h3>
-								</c:if>
-								<c:if test="${not empty byefriend}">
-									<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
-								</c:if>
+						<div class="media-body">
+							<c:forEach items="${requestList }" var="request">
 
-								<!-- Trigger the modal with a button -->
+								<p>${request.user.userName }</p>
+								<p>${request.message }</p>
+								<p>${request.timestamp }</p>
+								<form action="acceptFriendRequest.do" method="POST">
+									<input type="submit" value="Accept Request"> <input
+										type="hidden" name="requestId" value="${request.id}">
+								</form>
+								<form action="denyRequest.do" method="POST">
+									<input type="submit" value="Deny Request"> <input
+										type="hidden" name="requestId" value="${request.id}">
+								</form>
+							</c:forEach>
+							<c:if test="${not empty addedGame}">
+								<h3>${addedGame.title }for
+									${addedGame.platform.platformName } was added to your list.</h3>
+							</c:if>
+							<c:if test="${not empty requestSent}">
+								<h3>Request sent to ${requestSent.friend.userName }</h3>
+							</c:if>
+							<c:if test="${not empty removedGame}">
+								<h3>${removedGame.title }for
+									${removedGame.platform.platformName } was removed from your
+									list.</h3>
+							</c:if>
+							<c:if test="${not empty success}">
+								<h3>Password Successfully Changed</h3>
+							</c:if>
+							<c:if test="${not empty SummaryUpdated}">
+								<h3>Profile Summary Set</h3>
+							</c:if>
+							<c:if test="${not empty SummaryNotUpdated}">
+								<h3>Summary could not be changed. Limit 140 characters.</h3>
+							</c:if>
+							<c:if test="${not empty friend}">
+								<h3>${friend.userName }wasaddedtoyourfriendslist</h3>
+							</c:if>
+							<c:if test="${not empty byefriend}">
+								<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
+							</c:if>
+
+							<!-- Trigger the modal with a button -->
+							<button type="button" class="btn btn-info btn-lg"
+								data-toggle="modal" data-target="#myModal">New Profile
+								Picture</button>
+
+							<!-- Modal -->
+							<div id="myModal" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Choose a new profile picture</h4>
+										</div>
+										<div class="modal-body row">
+											<h4>
+												<p>Pick a new profile picture</p>
+											</h4>
+											<!-- container for a 3 x 3 box of pictures -->
+											<div class="row">
+												<!-- column 1 -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg">
+														<button>
+															<img
+																src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg">
+														<button>
+															<img
+																src="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg"
+																width="120" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426"
+																width="100" height="100" />
+														</button>
+													</form>
+												</div>
+
+												<!-- second column -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722"
+																width="100" height="115" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519"
+																width="100" height="110" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg">
+														<button>
+															<img
+																src="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg"
+																width="115" height="100" />
+														</button>
+													</form>
+												</div>
+
+												<!-- column three -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg">
+														<button>
+															<img
+																src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no">
+														<button>
+															<img
+																src="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg">
+														<button>
+															<img
+																src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<p></p>
+							<div>
+								<!-- Trigger the profile summary modal with a button -->
 								<button type="button" class="btn btn-info btn-lg"
-									data-toggle="modal" data-target="#myModal">New Profile
-									Picture</button>
+									data-toggle="modal" data-target="#profileSummaryModal">Set
+									Profile Summary</button>
 
 								<!-- Modal -->
-								<div id="myModal" class="modal fade" role="dialog">
+								<div id="profileSummaryModal" class="modal fade" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Choose a new profile picture</h4>
+												<h4 class="modal-title">Set your profile summary below</h4>
 											</div>
-											<div class="modal-body row">
+											<div class="modal-body">
 												<h4>
-													<p>Pick a new profile picture</p>
+													<p>Tell us about yourself</p>
 												</h4>
-												<!-- container for a 3 x 3 box of pictures -->
-												<div class="row">
-													<!-- column 1 -->
-													<div class="col-sm-4">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg">
-															<button>
-																<img
-																	src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg">
-															<button>
-																<img
-																	src="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg"
-																	width="120" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426"
-																	width="100" height="100" />
-															</button>
-														</form>
-													</div>
-
-													<!-- second column -->
-													<div class="col-sm-4">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722"
-																	width="100" height="115" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519"
-																	width="100" height="110" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg">
-															<button>
-																<img
-																	src="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg"
-																	width="115" height="100" />
-															</button>
-														</form>
-													</div>
-
-													<!-- column three -->
-													<div class="col-sm-4">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg">
-															<button>
-																<img
-																	src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no">
-															<button>
-																<img
-																	src="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg">
-															<button>
-																<img
-																	src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-													</div>
-												</div>
-
-											</div>
-
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
+												<form action="setProfileBlurb.do" method="POST">
+													Profile Summary: <input type="text" name="blurb"><br>
+													<h5>Limit 140 characters</h5>
+													<input type="hidden" name="id" value="${userCurrent.id }">
+													<input type="submit" value="Set Summary"> <br>
+												</form>
 											</div>
 										</div>
-
-									</div>
-								</div>
-								<br>
-								<div>
-									<!-- Trigger the profile summary modal with a button -->
-									<button type="button" class="btn btn-info btn-lg" 
-										data-toggle="modal" data-target="#profileSummaryModal">Set
-										Profile Summary</button>
-
-									<!-- Modal -->
-									<div id="profileSummaryModal" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-
-											<!-- Modal content-->
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Set your profile summary below</h4>
-												</div>
-												<div class="modal-body">
-													<h4>
-														<p>Pick a new profile picture</p>
-													</h4>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-											</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
 										</div>
-
 									</div>
+
 								</div>
-
-								<p>${userCurrent.summary }</p>
-
-								<c:forEach items="${userCurrent.games }" var="userGames">
-		${userGames.title }
-		${userGames.platform.platformName }
-		<form action="updateGame.do">
-										<input type="submit" value="Update Game"> <input
-											type="hidden" name="id" value="${userGames.id}">
-									</form>
-									<br>
-								</c:forEach>
 							</div>
+							<p></p>
+
+
+							<p>${userCurrent.summary }</p>
+
+
 						</div>
 					</div>
 				</div>
-
 			</div>
+
 		</div>
+		<div class="col-sm-6">
 		<form action="addGameToList.do" method="POST">
 			<%-- Error messages --%>
 			Game:<input name="game" /><br> Platform:<input name="platform"
@@ -316,6 +320,7 @@
 			</form>
 			<br>
 		</c:forEach>
+		</div>
 		<h2>Joined Events</h2>
 		<c:forEach items="${userCurrent.events }" var="event">
 
@@ -352,36 +357,98 @@
 			</div>
 		</c:forEach>
 
+		<div>
+			<h2>Games on File</h2>
+			<c:forEach items="${userCurrent.games }" var="userGames">
+		${userGames.title }
+		${userGames.platform.platformName }
+		<form action="updateGame.do">
+					<input type="submit" value="Update Game"> <input
+						type="hidden" name="id" value="${userGames.id}">
+				</form>
+				<br>
+			</c:forEach>
+			
+			<!-- Trigger the find friends modal -->
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+				data-target="#findFriends">Find Friends</button>
 
+			<!-- Modal -->
+			<div id="findFriends" class="modal fade" role="dialog">
+				<div class="modal-dialog">
 
-		<form:form action="changePassword.do" modelAttribute="passwordDTO"
-			method="POST">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Find new friends</h4>
+						</div>
+						<div class="modal-body">
+							<h4>
+								<p>Follow the link to see all users</p>
+							</h4>
+							<form action="viewAllUsers.do">
+								<input type="hidden" name="id" value="${userCurrent.id }">
+								<input type="submit" value="Find Friends">
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<p></p>
+
+		<div><!-- Trigger the find friends modal -->
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			data-target="#changePassword">Change Password</button>
+
+		<!-- Modal -->
+
+		
+			<div id="changePassword" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Change Your Password</h4>
+						</div>
+						<div class="modal-body">
+							<h4>
+								<p></p>
+							</h4>
+							<form:form action="changePassword.do"
+								modelAttribute="passwordDTO" method="POST">
 	Old Password  <form:input type="password" autocorrect="off"
-				autocapitalize="none" path="oldPassword" />
-			<br>
+									autocapitalize="none" path="oldPassword" />
+								<br>
 	New Password  <form:input type="password" autocorrect="off"
-				autocapitalize="none" path="newPassword" />
-			<br>
-			<p class="button">
-				<input type="submit" value="Change Password">
-			</p>
-			<br>
-			<input type="hidden" name="id" value="${userCurrent.id }">
-			<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
-			<form:errors path="newPassword">That's literally the same password...</form:errors>
-		</form:form>
+									autocapitalize="none" path="newPassword" />
+								<br>
+								<p class="button">
+									<input type="submit" value="Change Password">
+								</p>
+								<br>
+								<input type="hidden" name="id" value="${userCurrent.id }">
+								<form:errors path="oldPassword">Mmmm that wasn't your old password</form:errors>
+								<form:errors path="newPassword">That's literally the same password...</form:errors>
+							</form:form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
 
-		<form action="setProfileBlurb.do" method="POST">
-			Profile Summary: <input type="text" name="blurb"><br>
-			<h5>Limit 140 characters</h5>
-			<input type="hidden" name="id" value="${userCurrent.id }"> <input
-				type="submit" value="Set Summary"> <br>
-		</form>
+			</div>
+		</div>
 
-		<form action="viewAllUsers.do">
-			<input type="hidden" name="id" value="${userCurrent.id }"> <input
-				type="submit" value="Find Friends">
-		</form>
 	</div>
+	<p></p>
 </body>
 </html>
