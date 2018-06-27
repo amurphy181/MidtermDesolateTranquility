@@ -40,4 +40,6 @@ public interface GameDAO {
 
 	boolean denyFriendRequest(Friend request);
 
+	boolean duplicateFriendRequestChecker(int userId, int friendId);
+
 }

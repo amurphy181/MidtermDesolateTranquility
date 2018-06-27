@@ -33,11 +33,26 @@ public class UserDAOImpl implements UserDAO {
 		boolean added = false;
 		if (!managedEvent.getUsers().contains(user)) {
 			managedEvent.addUser(addUser);
+			addUser.addEvent(managedEvent);
 			added = true;
 		}
 		
 		
 		return added;
+	}
+	@Override
+	public boolean leaveEvent(User user, Event event) {
+		Event managedEvent = em.find(Event.class, event.getId());
+		User removeUser = em.find(User.class, user.getId());
+		boolean removed = false;
+		if (!managedEvent.getUsers().contains(user)) {
+			managedEvent.removeUser(removeUser);
+			removeUser.removeEvent(managedEvent);
+			removed = true;
+		}
+		
+		
+		return removed;
 	}
 	
 	@Override

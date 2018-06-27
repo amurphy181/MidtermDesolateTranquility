@@ -23,5 +23,6 @@ public interface UserDAO {
 	public boolean setNewPassword(int id, String newPassword);
 	public boolean setProfileBlurb(int id, String blurb);
 	public boolean setProfilePicture(int id, String picURL);
+	boolean leaveEvent(User user, Event event);
 
 }

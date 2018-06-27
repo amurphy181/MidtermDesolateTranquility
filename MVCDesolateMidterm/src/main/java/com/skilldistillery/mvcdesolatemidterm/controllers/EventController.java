@@ -81,6 +81,19 @@ public class EventController {
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}
+	@RequestMapping(path ="leaveEvent.do")
+	public ModelAndView leaveEvent(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User removeUserFromEvent = daoUser.findUserByUserID(userId);
+		Event eventToLeave = daoEvent.findEventByEventID(eventId);
+		daoUser.leaveEvent(removeUserFromEvent, eventToLeave);
+		removeUserFromEvent = daoUser.findUserByUserID(userId);
+		session.setAttribute("userCurrent", removeUserFromEvent);
+		mv.setViewName("redirect:landingPage.do");
+		return mv;
+	}
+	
+	
 	
 	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
 	public ModelAndView deactivateEvent(HttpSession session, int id) {
