@@ -74,7 +74,7 @@
 						<div class="col-xs-4">
 							<h5>
 								<small>REQUESTS</small><br>
-								<a href="#">${fn:length(userCurrent.friendList)}</a>
+								<a href="profileView.do">${fn:length(userCurrent.requests)}</a>
 							</h5>
 						</div>
 						<div class="col-xs-5">
@@ -124,7 +124,7 @@
 				<c:forEach items="${events }" var="event">
 				<c:if test="${event.visibility == 1 }">
 				<c:if test="${event.status}">
-				<c:if test="${fn:contains(userCurrent.friendList, event.creator) || userCurrent.admin || event.creator == userCurrent}">
+				<c:if test="${fn:contains(userCurrent.friendList, event.creator) || userCurrent.admin || event.creator.id == userCurrent.id}">
 					
 				<div class="panel-body">
 					<div class="media">
