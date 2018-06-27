@@ -1,6 +1,11 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -68,10 +73,21 @@ public class UserDAOImpl implements UserDAO {
 	}
 	@Override
 	public List<Event> listAllEvents() {
+		Date now = new Date();
 		String query = "select e from Event e";
 		List<Event> eventList = em.createQuery(query, Event.class).getResultList();	
+		eventList.sort(Comparator.comparing(o -> o.getStartDate()));
+		Collections.reverse(eventList);
 		for (Event event : eventList) {
+			Long eventMilli = event.getStartDate().getTime();
+			Long nowMilli = now.getTime();
+			
+			if(nowMilli - eventMilli > (12 * 60 * 60 * 1000))
+				event.setStatus(false);
 		}
+		
+		
+
 		
 		return eventList;
 	}
