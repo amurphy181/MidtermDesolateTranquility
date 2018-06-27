@@ -34,11 +34,11 @@ public class User {
 	private String summary;
 	@Column(name="picture_url")
 	private String pictureURL;
+	
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy= "user")
 	private List<Friend> requests;
-	
-	
-	
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
