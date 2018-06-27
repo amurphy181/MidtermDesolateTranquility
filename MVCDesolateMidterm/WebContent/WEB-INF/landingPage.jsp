@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,60 +17,7 @@
 <title>Games List</title>
 </head>
 <body>
-	<%-- <h1>See Who's Playing</h1>
-	
-	<!-- testing to see if the user is an administrator -->
-	<c:if test="${userCurrent.admin == 1}">
-		<h3>Current user is admin</h3>
-		<a href = "adminPage.do">Admin Page</a>
-	</c:if>
-	<c:if test="${userCurrent.admin == 0 }">
-		<h3>Current user is not the admin</h3>
-	</c:if>
-	
-	<p>You are logged in as ${userCurrent.userName }</p>
-<div class="mainDisplay">
-	<c:forEach items="${events }" var="event">
-		<br>
-		<c:if test="${event.visibility == 1 }">
-		
-		
-		<c:if test="${empty event.location }">
-		${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
-		</c:if>
-		
-		 
-		<c:if test="${not empty event.location}">
-		${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
-		</c:if>
-		
 
-		<br>
-		<c:if test="${not empty event.users }">
-		with <c:forEach items="${event.users }" var="user">
-		${user.userName }
-		</c:forEach>
-		</c:if>
-	<form action="joinEvent.do" method="GET">
-	<input type = "hidden" name = "userId" value = "${userCurrent.id }">
-	<input type = "hidden" name = "eventId" value = "${event.id }">
-	<input type="submit" value="Join" > <br>
-	</form>
-		</c:if>
-	</c:forEach>
-	</div>
-	<br>
-<form action="createEvent.do" method="POST">
-	Error messages
-	Game:<input name="game"/>
-	Platform:<input name = "platform" value= "${platform.id }"/>
-	Location:<input name="location"/>
-	<input type = "hidden" name = "id" value = "${userCurrent.id }">
-	<input type="submit" value="Add Event" > <br>
-</form>
-
-<a href="welcome.do">Home</a>
-<a href="profileView.do">Profile</a> --%>
 
 <!-- NAVBAR -->
 <div class="navbar navbar-default navbar-static-top">
@@ -110,52 +59,35 @@
 		<div class="col-sm-3">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<a href="profileView.do"><img class="img-responsive" alt="" src="${userCurrent.pictureURL }" width="175" height="175"></a>
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="profileView.do"><img class="img-responsive" alt="" src="${userCurrent.pictureURL }" width="175" height="175"></a>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-xs-3">
 							<h5>
-								<small>TWEETS</small>
-								<a href="#">1,545</a>
+								<small>GAMES</small><br>
+								<a href="#">${fn:length(userCurrent.games)}</a>
 							</h5>
 						</div>
 						<div class="col-xs-4">
 							<h5>
-								<small>FOLLOWING</small>
-								<a href="#">251</a>
+								<small>REQUESTS</small><br>
+								<a href="#">${fn:length(userCurrent.friendList)}</a>
 							</h5>
 						</div>
 						<div class="col-xs-5">
 							<h5>
-								<small>FOLLOWERS</small>
-								<a href="#">153</a>
+								<small>EVENTS</small><br>
+								<a href="#">${fn:length(userCurrent.createdEvents)}</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="panel panel-default panel-custom">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Trends
-						<small><a href="#">ciao</a></small>
-					</h3>
-				</div>
-
-				<div class="panel-body">
-					<ul class="list-unstyled">
-						<li><a href="#">#Cras justo odio</a></li>
-						<li><a href="#">#Dapibus ac facilisis in</a></li>
-						<li><a href="#">#Morbi leo risus</a></li>
-						<li><a href="#">#Porta ac consectetur ac</a></li>
-						<li><a href="#">#Vestibulum at eros</a></li>
-						<li><a href="#">#Vestibulum at eros</a></li>
-						<li><a href="#">#Vestibulum at eros</a></li>
-					</ul>
-				</div>
-			</div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-md-6">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="media">
@@ -175,7 +107,7 @@
 								<input type="text" name="location" class="form-control" id="search2" aria-describedby="search" placeholder="location (optional)">
 								<input type = "hidden" name = "id" value = "${userCurrent.id }">
 								</i>
-							<input type="submit" class="button1" value="Post" > <br>
+							<input type="submit" class="btn btn-primary" value="Post" > <br>
 
 						
 								</form>
@@ -189,9 +121,10 @@
 				
 				<!-- LISTING OUT EVENTS ON PAGE -->
 				
-								<c:forEach items="${events }" var="event">
+				<c:forEach items="${events }" var="event">
 				<c:if test="${event.visibility == 1 }">
-					<c:if test="${event.status}">
+				<c:if test="${event.status}">
+				<c:if test="${fn:contains(userCurrent.friendList, event.creator)}">
 					
 				<div class="panel-body">
 					<div class="media">
@@ -276,6 +209,7 @@
 
   </div>
 </div>
+					</c:if>
 					</c:if>
 					</c:if>
 				</c:forEach>

@@ -53,6 +53,7 @@ public class EventDAOImpl implements EventDAO {
 		createdEvent.setStartDate(new Date());
 		createdEvent.setVisibility(1);
 		createdEvent.addUser(creator);
+		createdEvent.setStatus(true);
 		System.out.println(createdEvent.getUsers().get(0));
 		
 		
