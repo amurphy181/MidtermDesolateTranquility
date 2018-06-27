@@ -124,7 +124,7 @@
 				<c:forEach items="${events }" var="event">
 				<c:if test="${event.visibility == 1 }">
 				<c:if test="${event.status}">
-				<c:if test="${fn:contains(userCurrent.friendList, event.creator)}">
+				<c:if test="${fn:contains(userCurrent.friendList, event.creator) || userCurrent.admin}">
 					
 				<div class="panel-body">
 					<div class="media">
