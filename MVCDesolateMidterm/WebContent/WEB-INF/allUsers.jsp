@@ -10,6 +10,7 @@
 </head>
 <body>
 <c:forEach items = "${allUsers}" var = "user">
+<c:if test="${!userFriendList.contains(user)}">
 <c:if test="${user.id != userCurrent.id }">
 ${user.userName }
 <br>
@@ -19,6 +20,7 @@ ${user.userName }
 	<input type="hidden" name="userId" value="${userCurrent.id}">
 	<input type="submit" value="Add Friend">
 </form>
+</c:if>
 	</c:if>
 </c:forEach>
 
