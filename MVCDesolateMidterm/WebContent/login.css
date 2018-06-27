@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body {
+	text-align: center;
+	background-color: #F0FFFF;
+}
+.login {
+	text-align: center;
+}
+.register{
+	text-align: center;
+}
+.photo{
+	height: 240px;
+	width: 240px;
+	align-self: center;
+}
