@@ -34,7 +34,7 @@
 					</c:if>
 				</ul>
 				<div class="navbar-form navbar-right">
-					<div class="form-group has-feedback">
+					<div class="form-group has-feedback"style:"float:left">
 						<input type="text" class="form-control-nav" id="search"
 							aria-describedby="search1"> <span
 							class="glyphicon glyphicon-search form-control-feedback"
@@ -43,10 +43,7 @@
 
 					<a href="logout.do">
 						<button class="btn btn-primary" type="submit"
-							aria-label="Left Align">
-							<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							</span> Logout
-						</button>
+							aria-label="Left Align">Logout</button>
 					</a>
 				</div>
 			</div>
@@ -70,7 +67,7 @@
 				</form>
 			</c:forEach>
 			<c:if test="${not empty addedGame}">
-				<h3>${addedGame.title } for ${addedGame.platform.platformName }
+				<h3>${addedGame.title }for${addedGame.platform.platformName }
 					was added to your list.</h3>
 			</c:if>
 			<c:if test="${not empty requestSent}">
@@ -96,8 +93,8 @@
 				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
 			</c:if>
 			<c:if test="${not empty alreadyFriend}">
-				<h3>${alreadyFriend.userName }isalready a friend or has a
-					pending request</h3>
+				<h3>${alreadyFriend.userName }isalreadyafriend or has a pending
+					request</h3>
 			</c:if>
 			<div class="panel panel-info">
 				<div class="panel-body">
@@ -412,42 +409,9 @@ ${user.userName }
 		<div class="col-sm-6">
 			<h1>
 				Games and Events
-				</h2>
+				</h1>
 
-				<!-- Trigger the find friends modal -->
-				<button type="button" class="btn btn-info btn-lg"
-					data-toggle="modal" data-target="#addGame">Add Games</button>
-
-				<!-- Modal -->
-				<div id="addGame" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add a Game</h4>
-							</div>
-							<div class="modal-body">
-								<h4>
-									<p>Add a game to your collection</p>
-								</h4>
-								<form action="addGameToList.do" method="POST">
-									<%-- Error messages --%>
-									Game:<input name="game" /><br> Platform:<input
-										name="platform" value="${platform.id }" /> <input
-										type="hidden" name="id" value="${userCurrent.id }"><br>
-									<input type="submit" value="Add Game"> <br>
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-
-				</div>
+				
 
 
 
@@ -458,7 +422,7 @@ ${user.userName }
 						<div class="media">
 							<a class="media-left" href="#fake"> <img alt=""
 								class="media-object img-rounded"
-								src="${userCurrent.pictureURL }">
+								src="${userCurrent.pictureURL }" height="100" width="100">
 							</a>
 
 
@@ -490,6 +454,41 @@ ${user.userName }
 
 				<div>
 					<h2>Games on File</h2>
+					<!-- Trigger the find friends modal -->
+				<button type="button" class="btn btn-info btn-lg"
+					data-toggle="modal" data-target="#addGame">Add Game</button>
+
+				<!-- Modal -->
+				<div id="addGame" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add a Game</h4>
+							</div>
+							<div class="modal-body">
+								<h4>
+									<p>Add a game to your collection</p>
+								</h4>
+								<form action="addGameToList.do" method="POST">
+									<%-- Error messages --%>
+									Game:<input name="game" /><br> Platform:<input
+										name="platform" value="${platform.id }" /> <input
+										type="hidden" name="id" value="${userCurrent.id }"><br>
+									<input type="submit" value="Add Game"> <br>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+				<p></p>
 					<c:forEach items="${userCurrent.games }" var="userGames">
 		${userGames.title }
 		${userGames.platform.platformName }
