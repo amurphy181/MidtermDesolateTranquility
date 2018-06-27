@@ -66,13 +66,14 @@
 
 
 						<div class="media-body">
-							<h1>Hello Hello ${request.id }</h1>
-							<c:if test="${request.friend.id == userCurrent.id}">
-								<p>${request.message }</p>
-								<form action="acceptFriendRequest.do" method="POST">
-									<input type="submit" value="Accept Request"> <input
-										type="hidden" name="requestId" value="${request.id}">
-								</form>
+							<c:if test="${not empty request }">
+								<c:if test="${request.friend.id == userCurrent.id}">
+									<p>${request.message }</p>
+									<form action="acceptFriendRequest.do" method="POST">
+										<input type="submit" value="Accept Request"> <input
+											type="hidden" name="requestId" value="${request.id}">
+									</form>
+								</c:if>
 							</c:if>
 							<c:if test="${not empty addedGame}">
 								<h3>${addedGame.title }for
@@ -96,10 +97,10 @@
 								<h3>Summary could not be changed. Limit 140 characters.</h3>
 							</c:if>
 							<c:if test="${not empty friend}">
-								<h3>${friend.userName }wasaddedto your friends list</h3>
+								<h3>${friend.userName }wasaddedtoyour friends list</h3>
 							</c:if>
 							<c:if test="${not empty byefriend}">
-								<h3>${byefriend.userName }wasremovedfrom your friends list</h3>
+								<h3>${byefriend.userName }wasremovedfromyour friends list</h3>
 							</c:if>
 
 							<!-- Trigger the modal with a button -->
@@ -117,123 +118,121 @@
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">Choose a new profile picture</h4>
 										</div>
-										<div class="modal-body">
+										<div class="modal-body row">
 											<h4>
 												<p>Pick a new profile picture</p>
 											</h4>
 											<!-- container for a 3 x 3 box of pictures -->
-											<div class="container col-sm-12">
-												<div class="row">
-													<!-- column 1 -->
-													<div class="col-sm">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg">
-															<button>
-																<img
-																	src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg">
-															<button>
-																<img
-																	src="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg"
-																	width="120" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426"
-																	width="100" height="100" />
-															</button>
-														</form>
-													</div>
+											<div class="row">
+												<!-- column 1 -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg">
+														<button>
+															<img
+																src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg">
+														<button>
+															<img
+																src="http://digitalspyuk.cdnds.net/17/29/980x490/landscape-1500370357-1.jpg"
+																width="120" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/9/95/Bobs-Burgers-Wiki_Archer_Bob_01a.png/revision/latest?cb=20160712225426"
+																width="100" height="100" />
+														</button>
+													</form>
+												</div>
 
-													<!-- second column -->
-													<div class="col-sm">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722"
-																	width="100" height="115" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519">
-															<button>
-																<img
-																	src="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519"
-																	width="100" height="110" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg">
-															<button>
-																<img
-																	src="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg"
-																	width="115" height="100" />
-															</button>
-														</form>
-													</div>
+												<!-- second column -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/archer/images/b/b9/Pam_Poovey.png/revision/latest?cb=20141013063722"
+																width="100" height="115" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519">
+														<button>
+															<img
+																src="https://vignette.wikia.nocookie.net/arresteddevelopment/images/6/60/Season_4_Poster_-_Tobias_F%C3%BCnke_01.jpg/revision/latest?cb=20130521213519"
+																width="100" height="110" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg">
+														<button>
+															<img
+																src="https://cdn.history.com/sites/2/2015/04/HITH-10-Things-Vladimir-Lenin-A.jpeg"
+																width="115" height="100" />
+														</button>
+													</form>
+												</div>
 
-													<!-- column three -->
-													<div class="col-sm">
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg">
-															<button>
-																<img
-																	src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no">
-															<button>
-																<img
-																	src="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no"
-																	width="100" height="100" />
-															</button>
-														</form>
-														<form action="setProfilePicture.do" method="POST">
-															<input type="hidden" name="userId"
-																value="${userCurrent.id }"> <input type="hidden"
-																name="picURL"
-																value="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg">
-															<button>
-																<img
-																	src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg"
-																	width="100" height="100" />
-															</button>
-														</form>
-													</div>
+												<!-- column three -->
+												<div class="col-sm-4">
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg">
+														<button>
+															<img
+																src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no">
+														<button>
+															<img
+																src="https://yt3.ggpht.com/a-/ACSszfEJZY7Bc6tR_sFLpFlEqLOkPmIx9fvUO7to=s900-mo-c-c0xffffffff-rj-k-no"
+																width="100" height="100" />
+														</button>
+													</form>
+													<form action="setProfilePicture.do" method="POST">
+														<input type="hidden" name="userId"
+															value="${userCurrent.id }"> <input type="hidden"
+															name="picURL"
+															value="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg">
+														<button>
+															<img
+																src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/fred-jones-whats-new-scooby-doo-96.jpg"
+																width="100" height="100" />
+														</button>
+													</form>
 												</div>
 											</div>
 

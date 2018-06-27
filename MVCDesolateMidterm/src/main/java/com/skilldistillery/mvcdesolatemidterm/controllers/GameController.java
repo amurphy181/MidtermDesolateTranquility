@@ -132,7 +132,7 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.sendFriendRequest(userId, message, friendId);
 		flash.addFlashAttribute("requestSent", request);
-		session.setAttribute("request", request);
+		mv.addObject("request", request);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
@@ -142,7 +142,7 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.findFriendRequest(requestId);
 		request = gameDao.acceptFriendRequest(request);
-		session.removeAttribute("request");
+		mv.addObject("request", null);
 //		List<User> friendList = gameDao.findUserFriendList(request.getUser().getId());
 //		session.setAttribute("userFriendList", friendList);
 		mv.setViewName("redirect:profileView.do");
