@@ -158,17 +158,18 @@
 										<form action="deactivateEvent.do" method="POST">
 										<input type="submit" class="btn btn-primary" value="Deactivate Event" /> <input
 										type="hidden" name="id" value="${event.id }" />
-										</form>
-
-																
+										</form>															
 								</c:if>
 								</p>
 							<ul class="nav nav-pills nav-pills-custom">
-								<c:if test="${!fn:contains(event.users, userCurrent)}">							
+								<c:if test="${!fn:contains(event.users, userCurrent) && !(userCurrent.id == event.creator.id)}">							
 								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
 								</c:if>
-								<c:if test="${fn:contains(event.users, userCurrent)}">							
+								<c:if test="${fn:contains(event.users, userCurrent) && !(userCurrent.id == event.creator.id)}">							
 								<li><button onclick=location.href="leaveEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Leave</button></li>
+								</c:if>
+								<c:if test="${userCurrent.id == event.creator.id}">							
+								<li><button onclick=location.href="userRemoveEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Done Playing?</button></li>
 								</c:if>
 								<li><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal${event.id }">Comments</button></li>
 							</ul>
