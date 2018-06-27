@@ -225,13 +225,16 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean setProfilePicture(int id, String picURL) {
 		User userPicUpdate = em.find(User.class, id);
+		System.out.println(userPicUpdate.getPictureURL());
 		
 		if (picURL.equals(userPicUpdate.getPictureURL())) {
 			em.flush();
 			return false;
 		} else {
+			
 			userPicUpdate.setPictureURL(picURL);
 			System.out.println("#*#*#*# setting pictureURL before the flush");
+			
 			System.out.println(userPicUpdate.getPictureURL());
 			em.persist(userPicUpdate);
 			em.flush();

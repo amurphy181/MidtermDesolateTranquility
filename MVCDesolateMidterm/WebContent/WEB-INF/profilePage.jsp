@@ -52,7 +52,7 @@
 			</div>
 		</div>
 	</div>
-	<h1>${userCurrent.userName }'s profile</h1>
+	<h1>${userCurrent.userName }'sprofile</h1>
 	<div>
 		<div class="col-sm-6">
 			<h3>Events List</h3>
@@ -60,21 +60,26 @@
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake"> <img alt=""
-							class="media-object img-rounded" src="${userCurrent.pictureURL }" width="175" height="175" >
+							class="media-object img-rounded" src="${userCurrent.pictureURL }"
+							width="175" height="175">
 						</a>
 
 
 						<div class="media-body">
-<h1>Hello Hello ${request.id }</h1>
+							<h1>Hello Hello ${request.id }</h1>
 							<c:if test="${request.friend.id == userCurrent.id}">
 								<form action="acceptFriendRequest.do" method="POST">
-								<input type = "submit" value= "Accept Request">
-								<input type = "hidden" name = "requestId" value= "${request.id}">
-								</form> 
+									<input type="submit" value="Accept Request"> <input
+										type="hidden" name="requestId" value="${request.id}">
+								</form>
 							</c:if>
 							<c:if test="${not empty addedGame}">
 								<h3>${addedGame.title }for
 									${addedGame.platform.platformName } was added to your list.</h3>
+							</c:if>
+							<c:if test="${not empty requestSent}">
+								<h3>Request sent to ${requestSent.friend.userName }
+									</h3>
 							</c:if>
 							<c:if test="${not empty removedGame}">
 								<h3>${removedGame.title }for
@@ -91,10 +96,10 @@
 								<h3>Summary could not be changed. Limit 140 characters.</h3>
 							</c:if>
 							<c:if test="${not empty friend}">
-								<h3>${friend.userName }wasaddedtoyour friends list</h3>
+								<h3>${friend.userName }wasaddedtoyourfriends list</h3>
 							</c:if>
 							<c:if test="${not empty byefriend}">
-								<h3>${byefriend.userName }wasremovedfromyour friends list</h3>
+								<h3>${byefriend.userName }wasremovedfromyourfriends list</h3>
 							</c:if>
 
 							<!-- Trigger the modal with a button -->
@@ -127,7 +132,8 @@
 														src="https://www.thewrap.com/sites/default/wp-content/uploads/files/snarf.jpg"
 														width="200" height="200" />
 												</button>
-												
+											</form>
+											<form action="setProfilePicture.do" method="POST">
 												<input type="hidden" name="userId"
 													value="${userCurrent.id }"> <input type="hidden"
 													name="picURL"
@@ -149,7 +155,6 @@
 
 								</div>
 							</div>
-
 							<p>${userCurrent.summary }</p>
 
 							<c:forEach items="${userCurrent.games }" var="userGames">
