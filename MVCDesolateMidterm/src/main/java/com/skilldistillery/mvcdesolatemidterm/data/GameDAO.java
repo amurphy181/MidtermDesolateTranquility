@@ -36,4 +36,8 @@ public interface GameDAO {
 
 	List<User> findUserFriendList(int userId);
 
+	List<Friend> listFriendRequestsForUser(int userId);
+
+	boolean denyFriendRequest(Friend request);
+
 }

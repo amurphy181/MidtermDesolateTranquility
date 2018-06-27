@@ -134,11 +134,11 @@ public class GameDAOImpl implements GameDAO {
 	// removes
 	@Override
 	public User removeUserFromFriendList(int userId, int friendId) {
-		String query = "select f from Friend f where f.user.id = :userId and f.friend.id= :friendId";
+		String query = "select f from Friend f where (f.user.id = :userId and f.friend.id= :friendId and f.accepted = 1) or (f.user.id = :friendId2 and f.friend.id = :userId2 and accepted = 1)";
 		List<Friend> friendList = em.createQuery(query, Friend.class).setParameter("userId", userId)
-				.setParameter("friendId", friendId).getResultList();
+				.setParameter("friendId", friendId).setParameter("userId2", userId).setParameter("friendId2", friendId).getResultList();
 		for (Friend friend2 : friendList) {
-			friend2.setAccepted(false);
+			gameDao.denyFriendRequest(friend2);
 		}
 		User friend = em.find(User.class, friendId);
 		return friend;
@@ -198,5 +198,19 @@ public class GameDAOImpl implements GameDAO {
 		return friendsList;
 
 	}
-
+	@Override
+	public List<Friend> listFriendRequestsForUser(int userId){
+		String query = "select f from Friend f where f.friend.id = :userId and f.accepted = 0";
+		List<Friend> friendRequests = em.createQuery(query, Friend.class).setParameter("userId", userId).getResultList();
+		
+		
+		return friendRequests;
+	}
+	@Override
+	public boolean denyFriendRequest(Friend request) {
+		Friend managed = em.find(Friend.class, request.getId());
+		em.remove(managed);
+		em.flush();
+		return true;
+	}
 }
