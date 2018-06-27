@@ -106,7 +106,7 @@ public class UserDAOImpl implements UserDAO {
 		boolean unique = true;
 		List<User> allUsers = em.createQuery(query, User.class).getResultList();
 		for (User user : allUsers) {
-			if(user.getUserName().equals(userName)) {
+			if(user.getUserName().equalsIgnoreCase(userName)) {
 				unique = false;
 			}
 		}
@@ -156,7 +156,7 @@ public class UserDAOImpl implements UserDAO {
 		User confirmed = null;
 		List<User> allUsers = em.createQuery(query, User.class).getResultList();
 		for (User user : allUsers) {
-			if (user.getUserName().equals(userName)) {
+			if (user.getUserName().equalsIgnoreCase(userName)) {
 				confirmed = em.find(User.class, user.getId());
 			}
 		}
