@@ -34,4 +34,6 @@ public interface GameDAO {
 
 	Friend findFriendRequest(int requestId);
 
+	List<User> findUserFriendList(int userId);
+
 }

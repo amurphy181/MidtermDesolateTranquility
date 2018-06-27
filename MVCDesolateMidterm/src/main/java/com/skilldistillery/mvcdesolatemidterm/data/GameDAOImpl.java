@@ -1,12 +1,12 @@
 package com.skilldistillery.mvcdesolatemidterm.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -165,6 +165,21 @@ public class GameDAOImpl implements GameDAO {
 		Friend request = em.find(Friend.class, requestId);
 		
 		return request;
+	}
+	
+	@Override
+	public List<User> findUserFriendList(int userId){
+		String query = "select f.friend.id from Friend f where f.user.id = :id and f.accepted = 1";
+		List<Integer> friendIds = em.createQuery(query, Integer.class).setParameter("id", userId).getResultList();
+		List<User> friendsList = new ArrayList<>();
+		for (Integer id : friendIds) {
+			friendsList.add(em.find(User.class, id));
+		}
+		if (friendsList.size() > 0) {
+		System.out.println(friendsList.get(0).getUserName());
+		}
+		return friendsList;
+				
 	}
 	
 }

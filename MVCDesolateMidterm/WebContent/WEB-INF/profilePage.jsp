@@ -167,7 +167,7 @@
 	</form>
 	<h2>Friends</h2>
 	<hr>
-	<c:forEach items="${userCurrent.friendList }" var="friend">
+	<c:forEach items="${userFriendList}" var="friend">
 		${friend.userName }
 		<form action="deleteFriend.do">
 			<input type="submit" value="Remove Friend"> <input
@@ -211,10 +211,7 @@
 		</div>
 	</c:forEach>
 
-	<c:forEach items="${userCurrent.friendList }" var="friend">
-${friend.userName }
-<br>
-	</c:forEach>
+
 
 	<form:form action="changePassword.do" modelAttribute="passwordDTO"
 		method="POST">

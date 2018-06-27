@@ -39,6 +39,8 @@ public class GameController {
 		User userUpdateGame = (User) session.getAttribute("userCurrent");
 		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
 		session.setAttribute("userCurrent", userUpdateGame);
+		List<User> friendList = gameDao.findUserFriendList(userUpdateGame.getId());
+		session.setAttribute("userFriendList", friendList);
 		mv.setViewName("WEB-INF/profilePage.jsp");
 		return mv;
 	}
@@ -131,7 +133,6 @@ public class GameController {
 		Friend request = gameDao.sendFriendRequest(userId, message, friendId);
 		System.out.println("============ sent Request");
 		User friend = userDao.findUserByUserID(friendId);
-		
 		session.setAttribute("request", request);
 		mv.setViewName("redirect:profileView.do");
 		System.out.println("===========out of method");
