@@ -117,7 +117,10 @@ public class EventController {
 	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
 	public ModelAndView reactivateEvent(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
+		
+		
 		daoEvent.reactivateEvent(id);
+	
 		session.setAttribute("event", id);
 		mv.setViewName("redirect:adminPage.do");
 		return mv;

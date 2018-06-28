@@ -10,14 +10,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="twitter.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Games List</title>
+<title>Admin Page</title>
 </head>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+
 <body>
 
 <div class="navbar navbar-default navbar-static-top">
@@ -95,12 +92,7 @@
 										<input type="submit" class="btn btn-primary" value="Activate Event" /> <input
 										type="hidden" name="id" value="${event.id }" />
 										</form>
-							<ul class="nav nav-pills nav-pills-custom">
-								<li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
-							</ul>
+
 						</div>
 					</div>
 					</div>

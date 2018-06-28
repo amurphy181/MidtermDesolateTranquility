@@ -74,7 +74,7 @@
 						<div class="col-xs-4">
 							<h5>
 								<small>REQUESTS</small><br>
-								<a href="profileView.do">${fn:length(userCurrent.requests)}</a>
+								<a href="profileView.do">${fn:length(userCurrent.friendList)}</a>
 							</h5>
 						</div>
 						<div class="col-xs-5">
