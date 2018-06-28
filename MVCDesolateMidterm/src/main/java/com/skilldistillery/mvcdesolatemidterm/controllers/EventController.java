@@ -67,6 +67,15 @@ public class EventController {
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
+	@RequestMapping(path = "postMessage3.do")
+	public ModelAndView postMessageFromAdmin(int eventId, String messageContent, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User user = (User) session.getAttribute("userCurrent");
+		int userId = user.getId();
+		daoEvent.addMessage(messageContent, userId, eventId);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+	}
 
 	@RequestMapping(path = "joinEvent.do")
 	public ModelAndView joinEvent(int userId, int eventId, HttpSession session) {
