@@ -214,7 +214,6 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			String encryptedPassword = encoder.encode(newPassword);
 			managedUser.setPassword(encryptedPassword);
-
 			return true;
 		}
 	}
