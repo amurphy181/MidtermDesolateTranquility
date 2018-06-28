@@ -145,6 +145,14 @@ public class EventController {
 		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}
+	@RequestMapping(path = "deactivateEvent2.do", method = RequestMethod.POST)
+	public ModelAndView deactivateEvent2(HttpSession session, int id) {
+		ModelAndView mv = new ModelAndView();
+		daoEvent.deactivateEvent(id);
+		session.setAttribute("event", id);
+		mv.setViewName("redirect:landingPage.do");
+		return mv;
+	}
 
 	@RequestMapping(path = "reactivateEvent.do", method = RequestMethod.POST)
 	public ModelAndView reactivateEvent(HttpSession session, int id) {

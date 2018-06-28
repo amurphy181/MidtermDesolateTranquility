@@ -155,7 +155,7 @@
 								
 								<c:if test="${userCurrent.admin}">
 								
-										<form action="deactivateEvent.do" method="POST">
+										<form action="deactivateEvent2.do" method="POST">
 										<input type="submit" class="btn btn-primary" value="Deactivate Event" /> <input
 										type="hidden" name="id" value="${event.id }" />
 										</form>															
