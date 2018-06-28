@@ -93,7 +93,7 @@
 				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
 			</c:if>
 			<c:if test="${not empty alreadyFriend}">
-				<h3>${alreadyFriend.userName }isalreadyafriendorhas a pending
+				<h3>${alreadyFriend.userName }isalreadyafriendorhasa pending
 					request</h3>
 			</c:if>
 			<div class="panel panel-info">
@@ -389,15 +389,42 @@ ${user.userName }
 				</div>
 			</div>
 			<div class="clearBody"></div>
+			<br>
 			<div>
 				<c:forEach items="${userFriendList}" var="friend">
 		
 		${friend.userName }
-		<form action="deleteFriend.do">
-						<input type="submit" value="Remove Friend"> <input
-							type="hidden" name="friendId" value="${friend.id}"> <input
-							type="hidden" name="userId" value="${userCurrent.id}">
-					</form>
+		<!-- remove friend modal tester -->
+
+					<!-- Trigger the delete friend modal -->
+					<button type="button" class="btn btn-info btn-md"
+						data-toggle="modal" data-target="#deleteFriend">Remove Friend</button>
+
+					<!-- Modal -->
+					<div id="deleteFriend" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to remove this friend?</h4>
+								</div>
+								<div class="modal-body">
+									<form action="deleteFriend.do">
+										<input type="submit" value="Remove Friend"> <input
+											type="hidden" name="friendId" value="${friend.id}"> <input
+											type="hidden" name="userId" value="${userCurrent.id}">
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
 					<br>
 				</c:forEach>
 			</div>
@@ -487,7 +514,6 @@ ${user.userName }
 				<c:forEach items="${userCurrent.games }" var="userGames">
 						${userGames.title }
 						${userGames.platform.platformName }
-						<!-- new code test -->
 
 					<!-- Trigger the update games modal -->
 					<button type="button" class="btn btn-info btn-md"
@@ -505,17 +531,17 @@ ${user.userName }
 								</div>
 								<div class="modal-body">
 									<form action="updateGameInfo.do" method="POST">
-										Title:<input type="text" name="title" value="${userGames.title }" />
-										Platform: <input type="text" name="platform"
-											value="${userGames.platform.platformName}" /><br> <input
-											type="hidden" name="id" value="${userGames.id }" /> <input
+										Title:<input type="text" name="title"
+											value="${userGames.title }" /> Platform: <input type="text"
+											name="platform" value="${userGames.platform.platformName}" /><br>
+										<input type="hidden" name="id" value="${userGames.id }" /> <input
 											type="submit" value="Update Game" />
 									</form>
 									<br>
 									<form action="deleteGameFromList.do">
 										<input type="submit" value="Delete Game"> <input
-											type="hidden" name="gameId" value="${userGames.id}"> <input
-											type="hidden" name="userId" value="${userCurrent.id}">
+											type="hidden" name="gameId" value="${userGames.id}">
+										<input type="hidden" name="userId" value="${userCurrent.id}">
 									</form>
 								</div>
 							</div>
