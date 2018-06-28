@@ -56,10 +56,11 @@
 		<div class="col-sm-6">
 			<h1>${userCurrent.userName }'s Profile</h1>
 			<c:forEach items="${requestList }" var="request">
-
-				<p>${request.user.userName }</p>
-				<p>${request.message }</p>
-				<p>${request.timestamp }</p>
+			<div class="friendRequest">
+				<p><h4>${request.user.userName } wants to be your friend!</h4></p>
+				<p><h5>${request.message }</h5></p>
+				<p><h6><fmt:formatDate pattern="MMM dd hh:mm a" value="${request.timestamp}" /></h6></p>
+				</div>
 				<form action="acceptFriendRequest.do" method="POST">
 					<button class="btn btn-info btn-md"> Accept Request</button>
 					<input type="hidden" name="requestId" value="${request.id}">
@@ -464,7 +465,7 @@
 				<div class="panel-body">
 					<div class="media">
 						<a class="media-left" href="#fake"> <img alt=""
-							class="media-object img-rounded" src="${userCurrent.pictureURL }"
+							class="media-object img-rounded" src="${event.creator.pictureURL }"
 							height="100" width="100">
 						</a>
 
