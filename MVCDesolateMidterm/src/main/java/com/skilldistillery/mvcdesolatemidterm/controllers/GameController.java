@@ -43,7 +43,6 @@ public class GameController {
 		mv.addObject("requestList", requestList);
 		session.setAttribute("userCurrent", userUpdateGame);
 		List<User> friendList = gameDao.findUserFriendList(userUpdateGame.getId());
-		System.out.println(friendList.size());
 		session.setAttribute("userFriendList", friendList);
 		mv.setViewName("WEB-INF/profilePage.jsp");
 		return mv;
@@ -54,7 +53,6 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Game updateGame = gameDao.findGameById(id);
 		mv.addObject("game", updateGame);
-
 		mv.setViewName("WEB-INF/updateGame.jsp");
 		return mv;
 	}
@@ -68,10 +66,8 @@ public class GameController {
 		Game updatedGame = eventDao.checkGameUnique(title, updatePlatform);
 		int userId = userUpdateGame.getId();
 		updatedGame = gameDao.updateGame(id, updatedGame, userId);
-		System.out.println("============= updatedGame===========");
 		userUpdateGame = userDao.findUserByUserID(userUpdateGame.getId());
 		session.setAttribute("userCurrent", userUpdateGame);
-
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
@@ -83,7 +79,6 @@ public class GameController {
 		Game addedGame = gameDao.addUserGame(id, game, platform);
 		User updateGamesList = userDao.findUserByUserID(id);
 		flash.addFlashAttribute("addedGame", addedGame);
-		System.out.println(addedGame.getTitle());
 		session.setAttribute("userCurrent", updateGamesList);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
@@ -96,13 +91,9 @@ public class GameController {
 		flash.addFlashAttribute("removedGame", removedGame);
 		User userUpdateGame = userDao.findUserByUserID(userId);
 		session.setAttribute("userCurrent", userUpdateGame);
-
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 
-		
-		
-		
 	}
 
 	@RequestMapping(path = "viewAllUsers.do")
@@ -139,14 +130,12 @@ public class GameController {
 		if (gameDao.duplicateFriendRequestChecker(userId, friendId)) {
 			Friend request = gameDao.sendFriendRequest(userId, message, friendId);
 			flash.addFlashAttribute("requestSent", request);
-			
+
 		} else {
 			User friend = userDao.findUserByUserID(friendId);
 			flash.addFlashAttribute("alreadyFriend", friend);
 		}
 		mv.setViewName("redirect:profileView.do");
-//		flash.addFlashAttribute("request", request);
-//		mv.addObject("request", request);
 		return mv;
 	}
 
@@ -155,18 +144,15 @@ public class GameController {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.findFriendRequest(requestId);
 		request = gameDao.acceptFriendRequest(request);
-//		List<User> friendList = gameDao.findUserFriendList(request.getUser().getId());
-//		session.setAttribute("userFriendList", friendList);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}
+
 	@RequestMapping(path = "denyRequest.do")
 	public ModelAndView denyFriendRequest(int requestId, RedirectAttributes flash, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Friend request = gameDao.findFriendRequest(requestId);
-		boolean deleted = gameDao.denyFriendRequest(request);
-//		List<User> friendList = gameDao.findUserFriendList(request.getUser().getId());
-//		session.setAttribute("userFriendList", friendList);
+		gameDao.denyFriendRequest(request);
 		mv.setViewName("redirect:profileView.do");
 		return mv;
 	}

@@ -26,10 +26,10 @@ public class EventDAOImpl implements EventDAO {
 	EventDAO eventDao;
 	@Autowired
 	GameDAO gameDao;
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Event show(int id) {
 		return em.find(Event.class, id);
@@ -44,7 +44,6 @@ public class EventDAOImpl implements EventDAO {
 		Game eventGame = eventDao.checkGameUnique(game, eventPlatform);
 		eventDao.createGame(eventGame);
 		gameDao.addUserGame(id, game, platform);
-		
 
 		Event createdEvent = new Event();
 		createdEvent.setGame(eventGame);
@@ -54,9 +53,7 @@ public class EventDAOImpl implements EventDAO {
 		createdEvent.setVisibility(1);
 		createdEvent.addUser(creator);
 		createdEvent.setStatus(true);
-		System.out.println(createdEvent.getUsers().get(0));
-		
-		
+
 		em.persist(createdEvent);
 		em.flush();
 		return createdEvent;
@@ -65,8 +62,8 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public Platform createPlatform(Platform platform) {
 		if (em.find(Platform.class, platform.getId()) == null) {
-		em.persist(platform);
-		em.flush();
+			em.persist(platform);
+			em.flush();
 		}
 
 		return platform;
@@ -124,40 +121,33 @@ public class EventDAOImpl implements EventDAO {
 
 		return checkPlatform;
 	}
-	
+
 	@Override
 	public Event findEventByEventID(int id) {
 		Event found = em.find(Event.class, id);
-		
+
 		return found;
 	}
 
-
 	@Override
 	public boolean deactivateEvent(int id) {
-		System.out.println("+++++++++++" + id);
 		Event eventToDeactivate = em.find(Event.class, id);
-		System.out.println("ID: " + id);
 		eventToDeactivate.setStatus(false);
 		em.flush();
-		
-		if(em.find(Event.class, eventToDeactivate.getId()).equals(false)) {
-			System.out.println(eventToDeactivate);
+
+		if (em.find(Event.class, eventToDeactivate.getId()).equals(false)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean reactivateEvent(int id) {
-		System.out.println("+++++++++++ " + id + " reactivate");
 		Event eventToReactivate = em.find(Event.class, id);
-		System.out.println("ID: " + id);
 		eventToReactivate.setStatus(true);
 		em.flush();
-		
-		if(em.find(Event.class, eventToReactivate.getId()).equals(true)) {
-			System.out.println(eventToReactivate);
+
+		if (em.find(Event.class, eventToReactivate.getId()).equals(true)) {
 			return true;
 		}
 		return false;
@@ -165,25 +155,18 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public Message addMessage(String messageContent, int userId, int eventId) {
-		System.out.println(userId);
 		Event eventToAddMessageTo = em.find(Event.class, eventId);
-		
+
 		Message m = new Message();
 		m.setContent(messageContent);
 		m.setEvent(eventToAddMessageTo);
 		m.setUser(em.find(User.class, userId));
-		
-		System.out.println("**************");
-		System.out.println(m.getUser());
-		
-			
+
+
 		em.persist(m);
 		em.flush();
 
 		return m;
 	}
-
-
-	
 
 }

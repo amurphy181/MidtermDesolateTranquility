@@ -53,7 +53,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- PROFILE PIC AND INFO UNDERNEATH -->
 <div class="container">
 	<div class="row">
 		<div class="col-sm-3">
@@ -96,7 +96,7 @@
 							<img alt="" class="media-object img-rounded" src="${userCurrent.pictureURL }" height="35" width ="35">
 						</a>
 						
-					
+					<!-- USER EVENT CREATION / INPUT -->
 						<div class="media-body">
 							<div class="form-group has-feedback">
 							<form action="createEvent.do" method="POST">
@@ -202,7 +202,7 @@
 				</li>			
 			</c:forEach>
 			</ul>
-      </div>
+      		</div>
       
       
       <div class="modal-footer">
@@ -220,128 +220,13 @@
 					</c:if>
 					</c:if>
 				</c:forEach>
-				
-
-
-						
-						<div class="panel-body">
-					<div class="media">
-						<a class="media-left" href="#fake">
-							<img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
-						</a>
-						
-						<div class="media-body">
-							<h4 class="media-heading">Media heading</h4>
-							<p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
-							<ul class="nav nav-pills nav-pills-custom">
-								<li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
-							</ul>
-						</div>
-
-					</div>
-
-
-
-
-				</div>
 			</div>
-
-			<br>
-			<br>
 			<br>
 
 
-<!-- 			<div class="panel panel-default">
-				<div class="panel-heading">Prova</div>
-				<div class="panel-body">
-					<ul class="nav nav-pills">
-						<li role="presentation" class="active"><a href="#">Home</a></li>
-						<li role="presentation"><a href="#">Profile</a></li>
-						<li role="presentation"><a href="#">Messages</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> -->
 
-<!-- 		<div class="col-sm-3">
-			<div class="panel panel-default panel-custom">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Who to follow
-						<small><a href="#">Refresh</a> ● <a href="#">View all</a></small>
-					</h3>
-				</div>
-				<div class="panel-body">
-					<div class="media">
-						<div class="media-left">
-							<img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Nome e cognome</h4>
-							<a href="#" class="btn btn-default btn-xs">
-								+
-								<span class="glyphicon glyphicon-user"></span>
-								Follow
-							</a>
-						</div>
-					</div>
-					<div class="media">
-						<div class="media-left">
-							<img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Nome e cognome</h4>
-							<a href="#" class="btn btn-default btn-xs">
-								+
-								<span class="glyphicon glyphicon-user"></span>
-								Follow
-							</a>
-						</div>
-					</div>
-					<div class="media">
-						<div class="media-left">
-							<img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Nome e cognome</h4>
-							<a href="#" class="btn btn-default btn-xs">
-								+
-								<span class="glyphicon glyphicon-user"></span>
-								Follow
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<a href="www.google.it">
-						<span class="glyphicon glyphicon-user"></span>
-						Find people you know
-					</a>
-				</div>
-			</div>
-			<div class="well well-sm">
-				<ul class="list-inline">
-					<li>© 2015 Twitter</li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Help</a></li>
-					<li><a href="#">Terms</a></li>
-					<li><a href="#">Privacy</a></li>
-					<li><a href="#">Cookies</a></li>
-					<li><a href="#">Ads info</a></li>
-					<li><a href="#">Brand</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Status</a></li>
-					<li><a href="#">Apps</a></li>
-					<li><a href="#">Jobs</a></li>
-					<li><a href="#">Advertise</a></li>
-					<li><a href="#">Businesses</a></li>
-					<li><a href="#">Media</a></li>
-					<li><a href="#">Developers</a></li>
-				</ul>
-			</div> -->
+	<!-- <span class="glyphicon glyphicon-user"></span> -->
+			
 		</div> 
 	</div>
 </div>

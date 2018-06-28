@@ -55,7 +55,7 @@ public class GameDAOImpl implements GameDAO {
 		return containGame;
 	}
 
-	// This long ass method removes the original game from the list of user games.
+	// This long method removes the original game from the list of user games.
 	// Then the new game to be updated is checked against the database. if the exact
 	// game and platform combo exists that game is returned. Otherwise a new game is
 	// created and added to the db and user list
@@ -219,7 +219,6 @@ public class GameDAOImpl implements GameDAO {
 		String query = "select f from Friend f where (f.user.id = :userId and f.friend.id= :friendId) or (f.user.id = :friendId2 and f.friend.id = :userId2)";
 		List<Friend> friendList = em.createQuery(query, Friend.class).setParameter("userId", userId)
 				.setParameter("friendId", friendId).setParameter("userId2", userId).setParameter("friendId2", friendId).getResultList();
-		System.out.println(friendList.size());
 		if (friendList.isEmpty()) {
 		check = true;
 		}
