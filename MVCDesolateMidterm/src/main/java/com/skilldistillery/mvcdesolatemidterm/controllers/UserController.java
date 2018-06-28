@@ -43,7 +43,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		User userLogin = userDao.findUserByUsername(user.getUserName());
 
-		if (userLogin != null) {
+		if (userLogin != null && userLogin.isStatus() == true) {
 			if (userDao.passwordConfirmation(userLogin, user.getPassword())) {
 
 				loggedIn = true;
