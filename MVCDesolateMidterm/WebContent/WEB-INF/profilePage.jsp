@@ -172,7 +172,7 @@
 												</div>
 												</div>
 												<div class="row">
-
+													<br>
 												<!-- second column -->
 												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
@@ -215,6 +215,7 @@
 													</div>
 												</div>
 												<div class="row">
+												<br>
 												<!-- column three -->
 												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
