@@ -89,6 +89,18 @@ public class EventController {
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}
+	@RequestMapping(path = "joinEvent2.do")
+	public ModelAndView joinEventAdminPage(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User addUserToEvent = daoUser.findUserByUserID(userId);
+		Event eventToJoin = daoEvent.findEventByEventID(eventId);
+		daoGame.joinEventAddGame(userId, eventToJoin.getGame());
+		daoUser.joinEvent(addUserToEvent, eventToJoin);
+		addUserToEvent = daoUser.findUserByUserID(userId);
+		session.setAttribute("userCurrent", addUserToEvent);
+		mv.setViewName("redirect:adminPage.do");
+		return mv;
+	}
 
 	@RequestMapping(path = "leaveEvent.do")
 	public ModelAndView leaveEvent(int userId, int eventId, HttpSession session) {
@@ -111,6 +123,17 @@ public class EventController {
 		removeUserFromEvent = daoUser.findUserByUserID(userId);
 		session.setAttribute("userCurrent", removeUserFromEvent);
 		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	@RequestMapping(path = "leaveEvent3.do")
+	public ModelAndView leaveEventFromAdmin(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User removeUserFromEvent = daoUser.findUserByUserID(userId);
+		Event eventToLeave = daoEvent.findEventByEventID(eventId);
+		daoUser.leaveEvent(removeUserFromEvent, eventToLeave);
+		removeUserFromEvent = daoUser.findUserByUserID(userId);
+		session.setAttribute("userCurrent", removeUserFromEvent);
+		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}
 	
@@ -150,6 +173,14 @@ public class EventController {
 		daoEvent.deactivateEvent(eventId);
 		session.setAttribute("event", eventId);
 		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	@RequestMapping(path = "userRemoveEvent3.do")
+	public ModelAndView userRemoveEventFromAdminPage(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		daoEvent.deactivateEvent(eventId);
+		session.setAttribute("event", eventId);
+		mv.setViewName("redirect:adminPage.do");
 		return mv;
 	}
 	
