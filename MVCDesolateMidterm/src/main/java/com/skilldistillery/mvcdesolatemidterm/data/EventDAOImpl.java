@@ -145,6 +145,8 @@ public class EventDAOImpl implements EventDAO {
 	public boolean reactivateEvent(int id) {
 		Event eventToReactivate = em.find(Event.class, id);
 		eventToReactivate.setStatus(true);
+		Date startDate = new Date();
+		eventToReactivate.setStartDate(startDate);
 		em.flush();
 
 		if (em.find(Event.class, eventToReactivate.getId()).equals(true)) {
