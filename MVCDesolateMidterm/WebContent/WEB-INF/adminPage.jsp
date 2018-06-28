@@ -46,7 +46,7 @@
 
 							<a href="logout.do">
 				<button class="btn btn-primary" type="submit" aria-label="Left Align">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Logout
+					   Logout
 				</button>
 					</a>
 			</div>
