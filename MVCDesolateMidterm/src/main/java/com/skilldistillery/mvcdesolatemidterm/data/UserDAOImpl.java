@@ -77,11 +77,11 @@ public class UserDAOImpl implements UserDAO {
 		List<Event> eventList = em.createQuery(query, Event.class).getResultList();
 		eventList.sort(Comparator.comparing(o -> o.getStartDate()));
 		Collections.reverse(eventList);
-		//checking milli seconds since 1970 for current datetime and event datetime to see if the event is 12 hours old. ... seriously.  
+		//Checking milli seconds since 1970... seriously
 		for (Event event : eventList) {
 			Long eventMilli = event.getStartDate().getTime();
 			Long nowMilli = now.getTime();
-
+		//Seeing if it has been 12 hours of milliseconds, if so, deactivates
 			if (nowMilli - eventMilli > (12 * 60 * 60 * 1000))
 				event.setStatus(false);
 		}
