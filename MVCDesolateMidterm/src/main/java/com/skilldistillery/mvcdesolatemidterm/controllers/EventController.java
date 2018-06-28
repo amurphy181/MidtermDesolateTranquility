@@ -58,6 +58,15 @@ public class EventController {
 		mv.setViewName("redirect:landingPage.do");
 		return mv;
 	}
+	@RequestMapping(path = "postMessage2.do")
+	public ModelAndView postMessageFromProfile(int eventId, String messageContent, RedirectAttributes flash, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User user = (User) session.getAttribute("userCurrent");
+		int userId = user.getId();
+		daoEvent.addMessage(messageContent, userId, eventId);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
 
 	@RequestMapping(path = "joinEvent.do")
 	public ModelAndView joinEvent(int userId, int eventId, HttpSession session) {
@@ -84,6 +93,18 @@ public class EventController {
 		return mv;
 	}
 
+	@RequestMapping(path = "leaveEvent2.do")
+	public ModelAndView leaveEventFromProfile(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User removeUserFromEvent = daoUser.findUserByUserID(userId);
+		Event eventToLeave = daoEvent.findEventByEventID(eventId);
+		daoUser.leaveEvent(removeUserFromEvent, eventToLeave);
+		removeUserFromEvent = daoUser.findUserByUserID(userId);
+		session.setAttribute("userCurrent", removeUserFromEvent);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	
 	@RequestMapping(path = "deactivateEvent.do", method = RequestMethod.POST)
 	public ModelAndView deactivateEvent(HttpSession session, int id) {
 		ModelAndView mv = new ModelAndView();
@@ -111,4 +132,13 @@ public class EventController {
 		return mv;
 	}
 
+	@RequestMapping(path = "userRemoveEvent2.do")
+	public ModelAndView userRemoveEventFromProfile(int userId, int eventId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		daoEvent.deactivateEvent(eventId);
+		session.setAttribute("event", eventId);
+		mv.setViewName("redirect:profileView.do");
+		return mv;
+	}
+	
 }

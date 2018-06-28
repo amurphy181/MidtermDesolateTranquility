@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -439,6 +442,7 @@ ${user.userName }
 
 			<h2>Joined Events</h2>
 			<c:forEach items="${userCurrent.events }" var="event">
+							<c:if test="${event.status}">
 
 				<div class="panel-body">
 					<div class="media">
@@ -454,24 +458,70 @@ ${user.userName }
 								<c:if test="${empty event.location }">
 								${event.creator.userName } is playing ${event.game.title} on ${event.game.platform.platformName }<br>
 								</c:if>
-
+								
 
 								<c:if test="${not empty event.location}">
 								${event.creator.userName } is playing ${event.game.title} at ${event.location }<br>
 								</c:if>
 							</p>
 							<ul class="nav nav-pills nav-pills-custom">
-								<li><a href="#"><span
-										class="glyphicon glyphicon-share-alt"></span></a></li>
-								<li><a href="#"><span
-										class="glyphicon glyphicon-retweet"></span></a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-								<li><a href="#"><span
-										class="glyphicon glyphicon-option-horizontal"></span></a></li>
+								<c:if test="${!fn:contains(event.users, userCurrent) && !(userCurrent.id == event.creator.id)}">							
+								<li><button onclick=location.href="joinEvent.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Join</button></li>
+								</c:if>
+								<c:if test="${fn:contains(event.users, userCurrent) && !(userCurrent.id == event.creator.id)}">							
+								<li><button onclick=location.href="leaveEvent2.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Leave</button></li>
+								</c:if>
+								<c:if test="${userCurrent.id == event.creator.id}">							
+								<li><button onclick=location.href="userRemoveEvent2.do?userId=${userCurrent.id }&eventId=${event.id}" type="button" class="btn btn-info btn-sm" >Done Playing?</button></li>
+								</c:if>
+								<li><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal${event.id }">Comments</button></li>
+							
 							</ul>
 						</div>
 					</div>
 				</div>
+				<div id="myModal${event.id }" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">${event.game.title }</h4>
+      </div>
+<!--       BODY OF MESSAGE MODAL -->
+      <div class="modal-body">
+ 
+      <ul class="list-unstyled">
+      	 <c:forEach items="${event.messages }" var="message">
+			<li><div>
+				<div class="media">
+  <img class="align-self-start mr-3" src="${message.user.pictureURL }" height="35" width="35" alt="Generic placeholder image">
+</div>
+  <div class="media-body">
+    
+    <p><b>${message.user.userName}:</b> ${message.content}</p>
+  </div></div>
+
+				</li>			
+			</c:forEach>
+			</ul>
+      		</div>
+      
+      
+      <div class="modal-footer">
+     <div class="row"> <form action="postMessage2.do" method="POST"><i>
+      <input type="text" name="messageContent" class="form-control" id="search2" aria-describedby="search" placeholder="message"></i>
+        <input type="submit" class="btn btn-info btn-md" ><input type="hidden" name="eventId" value="${event.id }" type="hidden" name="user" value="${userCurrent }"  />
+        </form>
+        <button type="button" class="btn btn-info btn-md" data-dismiss="modal">Close</button>
+     </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</c:if>
 			</c:forEach>
 
 			<div>
@@ -512,15 +562,17 @@ ${user.userName }
 				</div>
 				<p></p>
 				<c:forEach items="${userCurrent.games }" var="userGames">
-						${userGames.title }
-						${userGames.platform.platformName }
+				<div>
+						<%-- ${userGames.title }
+						${userGames.platform.platformName } --%>
 
 					<!-- Trigger the update games modal -->
 					<button type="button" class="btn btn-info btn-md"
-						data-toggle="modal" data-target="#updateGame">Update Game</button>
+						data-toggle="modal" data-target="#updateGame${userGames.id}">${userGames.title }
+						${userGames.platform.platformName } -- Update?</button>
 
 					<!-- Modal -->
-					<div id="updateGame" class="modal fade" role="dialog">
+					<div id="updateGame${userGames.id}" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 
 							<!-- Modal content-->
@@ -554,6 +606,7 @@ ${user.userName }
 					</div>
 					<br>
 					<br>
+					</div>
 				</c:forEach>
 
 

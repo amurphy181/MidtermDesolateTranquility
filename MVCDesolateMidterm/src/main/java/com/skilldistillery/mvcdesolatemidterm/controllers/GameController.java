@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.skilldistillery.jpadesolatemidterm.entities.Event;
 import com.skilldistillery.jpadesolatemidterm.entities.Friend;
 import com.skilldistillery.jpadesolatemidterm.entities.Game;
 import com.skilldistillery.jpadesolatemidterm.entities.PasswordDTO;
@@ -34,6 +35,9 @@ public class GameController {
 	public ModelAndView viewProfilePage(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		PasswordDTO passwordDTO = new PasswordDTO();
+		List<Event> eventList = userDao.listAllEvents();
+		session.setAttribute("events", eventList);
+		
 		mv.addObject("passwordDTO", passwordDTO);
 		List<User> allUsers = gameDao.showAllUsers();
 		mv.addObject("allUsers", allUsers);
@@ -60,6 +64,9 @@ public class GameController {
 	@RequestMapping(path = "updateGameInfo.do", method = RequestMethod.POST)
 	public ModelAndView updateGamePage(int id, String platform, String title, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(id + " " + platform + " " + title);
+		
 		User userUpdateGame = (User) session.getAttribute("userCurrent");
 		Platform updatePlatform = eventDao.checkPlatformUnique(platform);
 		eventDao.createPlatform(updatePlatform);
