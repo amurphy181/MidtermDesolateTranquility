@@ -106,7 +106,7 @@
 							width="200" height="200">
 						</a>
 
-
+						<!-- PICK PROFILE PIC -->
 
 						<div class="media-body">
 
@@ -295,13 +295,13 @@
 													<button class="btn btn-info btn-md">Set Summary</button> <br>
 												</form>
 											</div>
-										</div>
+										
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Close</button>
 										</div>
 									</div>
-
+									</div>
 								</div>
 							</div>
 							<p></p>
@@ -329,10 +329,10 @@
 												</h4>
 												<form:form action="changePassword.do"
 													modelAttribute="passwordDTO" method="POST">
-	Old Password  <form:input type="password" autocorrect="off"
+									Old Password  <form:input type="password" autocorrect="off"
 														autocapitalize="none" path="oldPassword" />
 													<br>
-	New Password  <form:input type="password" autocorrect="off"
+									New Password  <form:input type="password" autocorrect="off"
 														autocapitalize="none" path="newPassword" />
 													<br>
 													<p class="button">
@@ -344,10 +344,10 @@
 													<form:errors path="newPassword">That's literally the same password...</form:errors>
 												</form:form>
 											</div>
-										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Close</button>
+										</div>
 										</div>
 									</div>
 
@@ -382,8 +382,8 @@
 								<c:forEach items="${allUsers}" var="user">
 									<c:if test="${!userFriendList.contains(user)}">
 										<c:if test="${user.id != userCurrent.id }">
-${user.userName }
-<br>
+											<h4>${user.userName }</h4>
+												<br>
 
 											<form action="sendRequest.do">
 												Message: <input type="text" name="message">
@@ -394,20 +394,17 @@ ${user.userName }
 															Add Friend
 														</button>
 											</form><br>
-														
-													<%-- type="hidden" name="friendId" value="${user.id}"> <input
-													type="hidden" name="userId" value="${userCurrent.id}">
-												<input type="button" class="btn btn-info btn-md" value="Add Friend"> --%>
+								
 										</c:if>
 									</c:if><br>
 								</c:forEach>
 							</div>
-						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 						</div>
 					</div>
+						</div>
 
 				</div>
 			</div>
@@ -440,12 +437,12 @@ ${user.userName }
 											type="hidden" name="userId" value="${userCurrent.id}">
 									</form>
 								</div>
-							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 							</div>
 						</div>
+							</div>
 
 					</div>
 					<br><br>
@@ -566,18 +563,18 @@ ${user.userName }
 								</h4>
 								<form action="addGameToList.do" method="POST">
 									<%-- Error messages --%>
-									Game:<input name="game" /><br> Platform:<input
+									Game:   <input name="game" /><br> Platform:<input
 										name="platform" value="${platform.id }" /> <input
 										type="hidden" name="id" value="${userCurrent.id }"><br>
 									<button class="btn btn-info btn-md">Add Game</button> <br>
 								</form>
 							</div>
-						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 						</div>
 					</div>
+						</div>
 
 				</div>
 				<p></p>
@@ -614,11 +611,11 @@ ${user.userName }
 											type="hidden" name="gameId" value="${userGames.id}">
 										<input type="hidden" name="userId" value="${userCurrent.id}">
 									</form>
-								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
+								</div>
 							</div>
 						</div>
 
