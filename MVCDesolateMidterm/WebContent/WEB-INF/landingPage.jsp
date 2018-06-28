@@ -219,7 +219,6 @@
 </div>
 					</c:if>
 					</c:if>
-					</c:if>
 				</c:forEach>
 			</div>
 			<br>
