@@ -54,30 +54,30 @@
 	</div>
 	<div class="container-fluid col-12">
 		<div class="col-sm-6">
-			<h1>${userCurrent.userName }'sProfile</h1>
+			<h1>${userCurrent.userName }'s Profile</h1>
 			<c:forEach items="${requestList }" var="request">
 
 				<p>${request.user.userName }</p>
 				<p>${request.message }</p>
 				<p>${request.timestamp }</p>
 				<form action="acceptFriendRequest.do" method="POST">
-					<input type="submit" value="Accept Request"> <input
-						type="hidden" name="requestId" value="${request.id}">
-				</form>
+					<button class="btn btn-info btn-md"> Accept Request</button>
+					<input type="hidden" name="requestId" value="${request.id}">
+				</form><br>
 				<form action="denyRequest.do" method="POST">
-					<input type="submit" value="Deny Request"> <input
+					<button class="btn btn-info btn-md">Deny Request</button> <input
 						type="hidden" name="requestId" value="${request.id}">
 				</form>
 			</c:forEach>
 			<c:if test="${not empty addedGame}">
-				<h3>${addedGame.title }for${addedGame.platform.platformName }
+				<h3>${addedGame.title } for ${addedGame.platform.platformName }
 					was added to your list.</h3>
 			</c:if>
 			<c:if test="${not empty requestSent}">
 				<h3>Request sent to ${requestSent.friend.userName }</h3>
 			</c:if>
 			<c:if test="${not empty removedGame}">
-				<h3>${removedGame.title }for
+				<h3>${removedGame.title } for
 					${removedGame.platform.platformName } was removed from your list.</h3>
 			</c:if>
 			<c:if test="${not empty success}">
@@ -90,14 +90,13 @@
 				<h3>Summary could not be changed. Limit 140 characters.</h3>
 			</c:if>
 			<c:if test="${not empty friend}">
-				<h3>${friend.userName }wasaddedtoyourfriendslist</h3>
+				<h3>${friend.userName } was added to your friends list</h3>
 			</c:if>
 			<c:if test="${not empty byefriend}">
-				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
+				<h3>${byefriend.userName } was removed from your friends list</h3>
 			</c:if>
 			<c:if test="${not empty alreadyFriend}">
-				<h3>${alreadyFriend.userName }isalreadyafriendorhasa pending
-					request</h3>
+				<h3>${alreadyFriend.userName } is already a friend or has a pending request</h3>
 			</c:if>
 			<div class="panel panel-info">
 				<div class="panel-body">
@@ -114,11 +113,11 @@
 
 							<!-- Trigger the modal with a button -->
 							<button type="button" class="btn btn-info btn-md"
-								data-toggle="modal" data-target="#myModal">New Profile
+								data-toggle="modal" data-target="#pictureChooser">New Profile
 								Picture</button>
 
 							<!-- Modal -->
-							<div id="myModal" class="modal fade" role="dialog">
+							<div id="pictureChooser" class="modal fade" role="dialog">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -127,10 +126,8 @@
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">Choose a new profile picture</h4>
 										</div>
-										<div class="modal-body row">
-											<h4>
-												<p>Pick a new profile picture</p>
-											</h4>
+									
+										<div class="modal-body">
 											<!-- container for a 3 x 3 box of pictures -->
 											<div class="row">
 												<!-- column 1 -->
@@ -146,6 +143,8 @@
 																width="100" height="100" />
 														</button>
 													</form>
+													</div>
+												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -157,6 +156,8 @@
 																width="120" height="100" />
 														</button>
 													</form>
+													</div>
+											<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -169,6 +170,8 @@
 														</button>
 													</form>
 												</div>
+												</div>
+												<div class="row">
 
 												<!-- second column -->
 												<div class="col-sm-4">
@@ -183,6 +186,8 @@
 																width="100" height="115" />
 														</button>
 													</form>
+												</div>
+												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -194,6 +199,8 @@
 																width="100" height="110" />
 														</button>
 													</form>
+												</div>
+												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -205,21 +212,24 @@
 																width="115" height="100" />
 														</button>
 													</form>
+													</div>
 												</div>
-
+												<div class="row">
 												<!-- column three -->
 												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
 															name="picURL"
-															value="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg">
+															value="https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face">
 														<button>
 															<img
-																src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/220px-CheHigh.jpg"
+																src="https://ctl.s6img.com/society6/img/tMR7zIQiWAu0X61keq7sDb1iBJA/w_700/prints/~artwork/s6-0069/a/28296935_4974427/~~/one-punch-man-saitama-face"
 																width="100" height="100" />
 														</button>
 													</form>
+												</div>
+												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -231,6 +241,8 @@
 																width="100" height="100" />
 														</button>
 													</form>
+												</div>
+												<div class="col-sm-4">
 													<form action="setProfilePicture.do" method="POST">
 														<input type="hidden" name="userId"
 															value="${userCurrent.id }"> <input type="hidden"
@@ -242,7 +254,6 @@
 																width="100" height="100" />
 														</button>
 													</form>
-												</div>
 											</div>
 
 										</div>
@@ -252,7 +263,7 @@
 												data-dismiss="modal">Close</button>
 										</div>
 									</div>
-
+									</div>
 								</div>
 							</div>
 							<p></p>
@@ -280,7 +291,7 @@
 													Profile Summary: <input type="text" name="blurb"><br>
 													<h5>Limit 140 characters</h5>
 													<input type="hidden" name="id" value="${userCurrent.id }">
-													<input type="submit" value="Set Summary"> <br>
+													<button class="btn btn-info btn-md">Set Summary</button> <br>
 												</form>
 											</div>
 										</div>
@@ -324,7 +335,7 @@
 														autocapitalize="none" path="newPassword" />
 													<br>
 													<p class="button">
-														<input type="submit" value="Change Password">
+														<button class="btn btn-info btn-md">Change Password</button>
 													</p>
 													<br>
 													<input type="hidden" name="id" value="${userCurrent.id }">
@@ -342,7 +353,7 @@
 								</div>
 							</div>
 
-							<p>${userCurrent.summary }</p>
+							<h5>${userCurrent.summary }</h5>
 
 
 						</div>
@@ -372,14 +383,22 @@
 										<c:if test="${user.id != userCurrent.id }">
 ${user.userName }
 <br>
+
 											<form action="sendRequest.do">
-												Message: <input type="text" name="message"> <input
-													type="hidden" name="friendId" value="${user.id}"> <input
+												Message: <input type="text" name="message">
+											<input type="hidden" name="friendId"
+															value="${user.id }"> <input type="hidden" name="userId" 
+															value="${userCurrent.id }">
+														<button class="btn btn-info btn-md">
+															Add Friend
+														</button>
+											</form><br>
+														
+													<%-- type="hidden" name="friendId" value="${user.id}"> <input
 													type="hidden" name="userId" value="${userCurrent.id}">
-												<input type="submit" value="Add Friend">
-											</form>
+												<input type="button" class="btn btn-info btn-md" value="Add Friend"> --%>
 										</c:if>
-									</c:if>
+									</c:if><br>
 								</c:forEach>
 							</div>
 						</div>
@@ -396,15 +415,15 @@ ${user.userName }
 			<div>
 				<c:forEach items="${userFriendList}" var="friend">
 		
-		${friend.userName }
+		<h4>${friend.userName }</h4>
 		<!-- remove friend modal tester -->
 
 					<!-- Trigger the delete friend modal -->
 					<button type="button" class="btn btn-info btn-md"
-						data-toggle="modal" data-target="#deleteFriend">Remove Friend</button>
+						data-toggle="modal" data-target="#deleteFriend${friend.id }">Remove Friend</button>
 
 					<!-- Modal -->
-					<div id="deleteFriend" class="modal fade" role="dialog">
+					<div id="deleteFriend${friend.id }" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 
 							<!-- Modal content-->
@@ -415,7 +434,7 @@ ${user.userName }
 								</div>
 								<div class="modal-body">
 									<form action="deleteFriend.do">
-										<input type="submit" value="Remove Friend"> <input
+										<button class="btn btn-info btn-md">Remove Friend</button> <input
 											type="hidden" name="friendId" value="${friend.id}"> <input
 											type="hidden" name="userId" value="${userCurrent.id}">
 									</form>
@@ -428,7 +447,7 @@ ${user.userName }
 						</div>
 
 					</div>
-					<br>
+					<br><br>
 				</c:forEach>
 			</div>
 		</div>
@@ -549,7 +568,7 @@ ${user.userName }
 									Game:<input name="game" /><br> Platform:<input
 										name="platform" value="${platform.id }" /> <input
 										type="hidden" name="id" value="${userCurrent.id }"><br>
-									<input type="submit" value="Add Game"> <br>
+									<button class="btn btn-info btn-md">Add Game</button> <br>
 								</form>
 							</div>
 						</div>
@@ -568,8 +587,8 @@ ${user.userName }
 
 					<!-- Trigger the update games modal -->
 					<button type="button" class="btn btn-info btn-md"
-						data-toggle="modal" data-target="#updateGame${userGames.id}">${userGames.title }
-						${userGames.platform.platformName } -- Update?</button>
+						data-toggle="modal" data-target="#updateGame${userGames.id}">Update: ${userGames.title }
+						${userGames.platform.platformName }</button>
 
 					<!-- Modal -->
 					<div id="updateGame${userGames.id}" class="modal fade" role="dialog">
@@ -586,12 +605,11 @@ ${user.userName }
 										Title:<input type="text" name="title"
 											value="${userGames.title }" /> Platform: <input type="text"
 											name="platform" value="${userGames.platform.platformName}" /><br>
-										<input type="hidden" name="id" value="${userGames.id }" /> <input
-											type="submit" value="Update Game" />
+										<input type="hidden" name="id" value="${userGames.id }" /> <button class="btn btn-info btn-md">Update Game</button>
 									</form>
 									<br>
 									<form action="deleteGameFromList.do">
-										<input type="submit" value="Delete Game"> <input
+										<button class="btn btn-info btn-md">Delete Game</button> <input
 											type="hidden" name="gameId" value="${userGames.id}">
 										<input type="hidden" name="userId" value="${userCurrent.id}">
 									</form>
