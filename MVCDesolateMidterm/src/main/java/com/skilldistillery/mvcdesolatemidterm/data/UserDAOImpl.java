@@ -239,7 +239,7 @@ public class UserDAOImpl implements UserDAO {
 			em.flush();
 			return false;
 		} else {
-
+			userPicUpdate.setPictureURL(picURL);
 			em.persist(userPicUpdate);
 			em.flush();
 			return true;
