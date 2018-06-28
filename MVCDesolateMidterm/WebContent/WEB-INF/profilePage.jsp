@@ -26,7 +26,7 @@
 							class="glyphicon glyphicon-home"></span> Home</a></li>
 
 					<li><a href="profileView.do"><span
-							class="glyphicon glyphicon-envelope"></span> Profile</a></li>
+							class="glyphicon glyphicon-user"></span> Profile</a></li>
 					<c:if test="${userCurrent.admin}">
 
 						<li><a href="adminPage.do"><span

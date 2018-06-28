@@ -29,7 +29,7 @@
 				</li>
 				
 				<li>
-					<a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+					<a href="profileView.do"><span class="glyphicon glyphicon-user"></span> Profile</a>
 				</li>
 					<c:if test="${userCurrent.admin}">
 
@@ -52,32 +52,7 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-	<!-- cycle through the events and be able to link over to the page in order to delete -->
-
-	<%-- <c:forEach items="${events }" var="event">
-		<br>
-		<a href="getEventId.do?fid=${event.id }">Status: ${event.status }</a>
-		${event.location }<br>
-		${event.game.title}<br>
-		${event.game.platform }<br>
-		${event.status }
-		${event.users.userName }<br>
-		<form action="deactivateEvent.do" method="POST">
-			<input type="submit" value="Deactivate Event" /> <input
-				type="hidden" name="id" value="${event.id }" />
-		</form>
-
-		<form action="reactivateEvent.do" method="POST">
-			<input type="submit" value="Reactivate Event" /> <input
-				type="hidden" name="id" value="${event.id }" />
-		</form>
-
-		<br>
-	</c:forEach> --%>
-	
-		
+</div>		
 		<div class="col-sm-6">
 			<h3>Events List</h3>
 			<div class="panel panel-info">				

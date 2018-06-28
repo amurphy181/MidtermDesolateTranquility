@@ -29,7 +29,7 @@
 				</li>
 				
 				<li>
-					<a href="profileView.do"><span class="glyphicon glyphicon-envelope"></span> Profile</a>
+					<a href="profileView.do"><span class="glyphicon glyphicon-user"></span> Profile</a>
 				</li>
 					<c:if test="${userCurrent.admin}">
 
@@ -206,11 +206,12 @@
       
       
       <div class="modal-footer">
-      <form action="postMessage.do" method="POST"><i>
-      <input type="text" name="messageContent" class="form-control" id="search2" aria-describedby="search" placeholder="message">
-        <input type="submit" class="btn btn-default" ><input type="hidden" name="eventId" value="${event.id }" type="hidden" name="user" value="${userCurrent }"  />
-        </i></form>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     <div class="row"> <form action="postMessage.do" method="POST"><i>
+      <input type="text" name="messageContent" class="form-control" id="search2" aria-describedby="search" placeholder="message"></i>
+        <input type="submit" class="btn btn-info btn-md" ><input type="hidden" name="eventId" value="${event.id }" type="hidden" name="user" value="${userCurrent }"  />
+        </form>
+        <button type="button" class="btn btn-info btn-md" data-dismiss="modal">Close</button>
+     </div>
       </div>
     </div>
 
@@ -222,10 +223,6 @@
 				</c:forEach>
 			</div>
 			<br>
-
-
-
-	<!-- <span class="glyphicon glyphicon-user"></span> -->
 			
 		</div> 
 	</div>
