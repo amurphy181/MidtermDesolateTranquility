@@ -51,7 +51,7 @@
 	</div>
 	<div class="container-fluid col-12">
 		<div class="col-sm-6">
-			<h1>${userCurrent.userName }'s Profile</h1>
+			<h1>${userCurrent.userName }'sProfile</h1>
 			<c:forEach items="${requestList }" var="request">
 
 				<p>${request.user.userName }</p>
@@ -93,7 +93,7 @@
 				<h3>${byefriend.userName }wasremovedfromyourfriendslist</h3>
 			</c:if>
 			<c:if test="${not empty alreadyFriend}">
-				<h3>${alreadyFriend.userName }isalreadyafriendor has a pending
+				<h3>${alreadyFriend.userName }isalreadyafriendorhas a pending
 					request</h3>
 			</c:if>
 			<div class="panel panel-info">
@@ -364,9 +364,6 @@
 								<h4 class="modal-title">Find new friends</h4>
 							</div>
 							<div class="modal-body">
-								<h4>
-									<p>Follow the link to see all users</p>
-								</h4>
 								<c:forEach items="${allUsers}" var="user">
 									<c:if test="${!userFriendList.contains(user)}">
 										<c:if test="${user.id != userCurrent.id }">
@@ -452,7 +449,7 @@ ${user.userName }
 
 			<div>
 				<h2>Games on File</h2>
-				<!-- Trigger the find friends modal -->
+				<!-- Trigger the add games modal -->
 				<button type="button" class="btn btn-info btn-md"
 					data-toggle="modal" data-target="#addGame">Add Game</button>
 
@@ -488,12 +485,48 @@ ${user.userName }
 				</div>
 				<p></p>
 				<c:forEach items="${userCurrent.games }" var="userGames">
-		${userGames.title }
-		${userGames.platform.platformName }
-		<form action="updateGame.do">
-						<input type="submit" value="Update Game"> <input
-							type="hidden" name="id" value="${userGames.id}">
-					</form>
+						${userGames.title }
+						${userGames.platform.platformName }
+						<!-- new code test -->
+
+					<!-- Trigger the update games modal -->
+					<button type="button" class="btn btn-info btn-md"
+						data-toggle="modal" data-target="#updateGame">Update Game</button>
+
+					<!-- Modal -->
+					<div id="updateGame" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Update Game</h4>
+								</div>
+								<div class="modal-body">
+									<form action="updateGameInfo.do" method="POST">
+										Title:<input type="text" name="title" value="${userGames.title }" />
+										Platform: <input type="text" name="platform"
+											value="${userGames.platform.platformName}" /><br> <input
+											type="hidden" name="id" value="${userGames.id }" /> <input
+											type="submit" value="Update Game" />
+									</form>
+									<br>
+									<form action="deleteGameFromList.do">
+										<input type="submit" value="Delete Game"> <input
+											type="hidden" name="gameId" value="${userGames.id}"> <input
+											type="hidden" name="userId" value="${userCurrent.id}">
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+					<br>
 					<br>
 				</c:forEach>
 
