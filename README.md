@@ -3,6 +3,15 @@
 ### Group Members
 Joseph DiBiasi, Jared Groves, Alex Murphy
 
+## AWS Information
+
+link: http://18.188.17.166:8080/MVCDesolateMidterm/
+
+To gain instant access and reactivate events for viewing the existing Admin account can be used. 
+
+username: admin
+password: admin
+
 ## Why this project?
 
 We started this problem aiming to solve a problem familiar to gaming-inclined people everywhere: when looking for friends to play games with online, how do you know what they are playing and on what platform? There are ways to do this in each of the game platform silos - Steam on PC, Xbox Live, PSN for Playstation - but these do not speak with each other in a way that would allow one to see what friends are playing across the board.
