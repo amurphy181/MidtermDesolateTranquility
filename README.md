@@ -10,6 +10,7 @@ link: http://18.188.17.166:8080/MVCDesolateMidterm/
 To gain instant access and reactivate events for viewing the existing Admin account can be used. 
 
 username: admin
+
 password: admin
 
 ## Why this project?
