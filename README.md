@@ -7,7 +7,7 @@ Joseph DiBiasi, Jared Groves, Alex Murphy
 
 link: http://18.188.17.166:8080/MVCDesolateMidterm/
 
-To gain instant access and reactivate events for viewing the existing Admin account can be used. 
+The existing Admin account can be used to gain instant access and reactivate events for viewing. 
 
 username: admin
 
